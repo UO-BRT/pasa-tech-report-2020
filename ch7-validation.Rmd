@@ -7,24 +7,75 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library("readxl")
+
+# This chapter requires the following data files:
+#plc-cuts.xlsx
+#data/item-estimates
+#data/person-estimates
+p_files <- fs::dir_ls(here::here("data", "person-estimates"))
+
+p <- map_df(p_files, read_csv, .id = "file") %>%
+  mutate(file = gsub(here::here("data", "person-estimates"), "", file),
+         grade = as.numeric(gsub(".+g(\\d?\\d).+", "\\1", file)),
+         tier = as.numeric(gsub(".+\\dt(\\d).+", "\\1", file)),
+         content = gsub(".+-(.+)\\..+", "\\1", file)) %>%
+  select(student_id, grade, tier, content, TotalScore:SEM)
+
+cuts <- read_excel(here::here("data", "cut", "plc-cuts.xlsx"))
 ```
 
-## R Markdown
+```{r, stand_error_measure}
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+cutoff <- p %>%
+  mutate(ScaleScore = round(ScaleScore)) %>%
+  group_by(tier, grade, content) %>%
+  nest() %>%
+  left_join(cuts)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+compute_sem <- function(model, c1, c2, c3) {
+  l <- list(c1, c2, c3)
+  sems <- map_dbl(l, ~predict(model, newdata = data.frame(ScaleScore = .x)))
+  data.frame(cut1_se = sems[1],
+             cut2_se = sems[2],
+             cut3_se = sems[3])
+}
 
-```{r cars}
-summary(cars)
+cut_score <- cutoff %>%
+  mutate(m = map(data, ~lm(SEM ~ poly(ScaleScore, 7), na.omit(.x))),
+         sem = pmap(list(m, cut1, cut2, cut3), compute_sem))
+
+cut_score %>%
+  select(grade:content, cut1:cut3, sem) %>%
+  unnest(sem) %>%
+  rename(cut1_cut = cut1,
+         cut2_cut = cut2,
+         cut3_cut = cut3) %>%
+  pivot_longer(starts_with("cut"),
+               names_to = c("cutt", "var"),
+               names_sep = "_",
+               values_to = "val") %>%
+  pivot_wider(names_from = var, values_from = val) %>%
+  select(-cutt)
+
+    # data = pmap(list(data, cut1, cut2, cut3),
+    #                  ~filter(..1,
+    #                         ScaleScore == ..2 |
+    #                         ScaleScore == ..3 |
+    #                         ScaleScore == ..4))
+
+tmp <- p %>%
+  filter(grade == 3 & tier == 1 & content == "ela")
+
+ggplot(tmp, aes(ScaleScore, SEM)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = "lm",
+              formula = y ~ poly(x, 7))
+
+m <- lm(SEM ~ poly(ScaleScore, 7), na.omit(tmp))
+predict(m, newdata = data.frame(ScaleScore = 286))
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
