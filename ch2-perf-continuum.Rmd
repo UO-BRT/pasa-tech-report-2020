@@ -7,24 +7,52 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(fs)
+
+# NOTE
+# This file depends on first having the following files in 
+# the data folder
+# * item-estimates/*
+# * person-estimates/*
+# where /* is all files for a grade, tier, and content area
+# e.g., g6t1-ela.csv, g3t2-math.csv, etc.
 ```
 
-## R Markdown
+## Item-Person Distributions
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r load-data, echo = FALSE}
+p <- here::here("data", "person-estimates") %>% 
+  dir_ls() %>% 
+  map_df(read_csv, .id = "f") %>% 
+  mutate(f = gsub(here::here("data", "person-estimates"), "", f),
+         grade = as.numeric(gsub("^/g(\\d\\d?).+", "\\1", f)),
+         tier = as.numeric(gsub(".+\\dt(\\d).+", "\\1", f)),
+         content = gsub(".+-(.+)\\..+", "\\1", f)) %>% 
+  select(-f) 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+i <- here::here("data", "item-estimates") %>% 
+  dir_ls() %>% 
+  map_df(read_csv, .id = "f") %>% 
+  mutate(f = gsub(here::here("data", "item-estimates"), "", f),
+         grade = as.numeric(gsub("^/g(\\d\\d?).+", "\\1", f)),
+         tier = as.numeric(gsub(".+\\dt(\\d).+", "\\1", f)),
+         content = gsub(".+-(.+)\\..+", "\\1", f)) %>% 
+  select(-f)
 
-```{r cars}
-summary(cars)
+# Note, Item E06BV4.1.1b-5 is cray and has an estimated difficulty of -730.743
+# Similarly, Item M05AT2.1.3a-9 has an estimated difficulty of 24.43927
+
+# I'm just going to eliminate them, but we should talk about this in the 
+# narrative
+
+i <- filter(i, item != "E06BV4.1.1b-5")
+
+filter(i, b_estimate > 15)
+
+library(ggdist)
+i %>% 
+  ggplot(aes(b_estimate)) +
+  stat_dots()
+
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
