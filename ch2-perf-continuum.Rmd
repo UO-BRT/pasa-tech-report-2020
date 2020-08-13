@@ -1,0 +1,101 @@
+---
+title: 'Chapter 2: Full Performance Continuum'
+author: "BRT"
+date: "8/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+library(tidyverse)
+library(fs)
+library(patchwork)
+theme_set(theme_minimal(base_size = 15) +
+            theme(plot.title.position = "plot",
+                  legend.position = "bottom"))
+
+# NOTE
+# This file depends on first having the following files in 
+# the data folder
+# * item-estimates/*
+# * person-estimates/*
+# where /* is all files for a grade, tier, and content area
+# e.g., g6t1-ela.csv, g3t2-math.csv, etc.
+```
+
+## Item-Person Distributions
+
+```{r load-data, echo = FALSE}
+p <- here::here("data", "person-estimates") %>% 
+  dir_ls() %>% 
+  map_df(read_csv, .id = "f") %>% 
+  mutate(f = gsub(here::here("data", "person-estimates"), "", f),
+         grade = as.numeric(gsub("^/g(\\d\\d?).+", "\\1", f)),
+         tier = as.numeric(gsub(".+\\dt(\\d).+", "\\1", f)),
+         content = gsub(".+-(.+)\\..+", "\\1", f)) %>% 
+  select(-f) 
+
+i <- here::here("data", "item-estimates") %>% 
+  dir_ls() %>% 
+  map_df(read_csv, .id = "f") %>% 
+  mutate(f = gsub(here::here("data", "item-estimates"), "", f),
+         grade = as.numeric(gsub("^/g(\\d\\d?).+", "\\1", f)),
+         tier = as.numeric(gsub(".+\\dt(\\d).+", "\\1", f)),
+         content = gsub(".+-(.+)\\..+", "\\1", f)) %>% 
+  select(-f)
+
+# Note, Item E06BV4.1.1b-5 is cray and has an estimated difficulty of -730.743
+# Similarly, Item M05AT2.1.3a-9 has an estimated difficulty of 24.43927
+
+# I'm just going to eliminate them, but we should talk about this in the 
+# narrative
+
+i <- filter(i, !(item %in% c("E06BV4.1.1b-5", "M05AT2.1.3a-9")))
+
+ipd <- i %>% 
+  mutate(role = "items") %>% 
+  select(grade, tier, content, role, id = item, theta = b_estimate)
+
+ppd <- p %>% 
+  mutate(role = "persons",
+         id = as.character(student_id)) %>% 
+  select(grade, tier, content, role, id, theta = Theta)
+
+pd <- bind_rows(ipd, ppd) %>% 
+  group_by(grade, tier, content) %>% 
+  nest()
+
+create_pi_plot <- function(d, grade, tier, content) {
+  color <- switch(content,
+                  "ela" = "#53ead8",
+                  "math" = "#5394ea",
+                  "science" = "#53ea7d")
+  
+  content <- ifelse(content == "ela", "ELA", stringr::str_to_title(content))
+  
+  d %>% 
+    mutate(role = stringr::str_to_title(role)) %>% 
+  ggplot(aes(theta)) +
+  # geom_density(aes(fill = role),
+  #              color = "white",
+  #              alpha = 0.7)
+  geom_histogram(aes(fill = role),
+                 color = "white") +
+  #stat_dots(aes(color = role, fill = role)) +
+  facet_wrap(~role, ncol = 1, scales = "free_y") +
+  scale_fill_manual(values = c(color, colorspace::lighten(color, 0.7))) +
+  guides(fill = "none") +
+  labs(x = "Theta",
+       y = "Counts",
+       title = glue::glue("Grade {grade} {content}: Tier {tier}"))
+}
+
+pd <- pd %>% 
+  mutate(plot = pmap(list(data, grade, tier, content), 
+                     create_pi_plot))
+
+walk(pd$plot, print)
+
+```
