@@ -13,23 +13,27 @@ require(knitr)
 require(kableExtra)
 require(car)
 require(here)
+
 # This chapter requires the following data files in a folder called /score
-#PASA Enrollment final 2020.csv
-#Scoring_ELA_Final_2020.csv
-#Scoring_Math_Final_2020.csv
-#Scoring_Science_Final_2020.csv
 
-ela <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))
+# /datastore/2020PASA_ScalingAnalysis/enrollment/PASA Enrollment final 2020.csv
 
-math <- read.csv(here::here("data", "score", "Scoring_Math_Final_2020.csv"))
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_ELA_Final_2020.csv
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Math_Final_2020.csv
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Science_Final_2020.csv
 
+# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_ELA_final.csv
+# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_Math_final.csv
+# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_Science_final.csv
+
+ela     <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))
+math    <- read.csv(here::here("data", "score", "Scoring_Math_Final_2020.csv"))
 science <- read.csv(here::here("data", "score", "Scoring_Science_Final_2020.csv"))
 
-ela2 <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))[,1:13]
+ela2     <- read.csv(here::here("data", "score", "Assessment_Scoring_Data_ELA_final.csv"))[,1:13]
+math2    <- read.csv(here::here("data", "score", "Assessment_Scoring_Data_Math_final.csv"))[,1:13]
+science2 <- read.csv(here::here("data", "score", "Assessment_Scoring_Data_Science_final.csv"))[.1:13]
 
-math2 <- read.csv(here::here("data/score/Scoring_Math_Final_2020.csv"))[,1:13]
-
-science2 <- read.csv(here::here("data/score/Scoring_Science_Final_2020.csv"))[.1:13]
 
 ela3 <- merge(ela, ela2, by = c(
   'Student_ID',
@@ -51,7 +55,7 @@ science3 <- merge(science, science2, by = c(
   'test_name',
   'Grade','Tier'))
 
-enr <- read.csv(here::here("data/score/PASA Enrollment final 2020.csv"))
+enr <- read.csv(here::here("data", "score", "PASA Enrollment final 2020.csv"))
 
 ela_enr <- merge(ela3, enr, by.x = 'Student_ID', by.y = 'PASA.Student.ID', all.x = TRUE, all.y = FALSE)
 
