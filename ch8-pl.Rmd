@@ -18,15 +18,9 @@ library(ggplot2)
 
 # This chapter requires the following data files in a folder called /score
 
-# /datastore/2020PASA_ScalingAnalysis/enrollment/PASA Enrollment final 2020.csv
-
 # /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_ELA_Final_2020.csv
 # /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Math_Final_2020.csv
 # /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Science_Final_2020.csv
-
-# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_ELA_final.csv
-# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_Math_final.csv
-# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_Science_final.csv
 
 ela     <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))
 math    <- read.csv(here::here("data", "score", "Scoring_Math_Final_2020.csv"))
