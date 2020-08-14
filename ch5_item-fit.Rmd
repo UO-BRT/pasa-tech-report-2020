@@ -1,7 +1,7 @@
 ---
 title: "Chapter 5: Item Fit"
 author: "BRT"
-date: "8/13/2020"
+date: "`r Sys.Date()`"
 output:
   html_document: default
   pdf_document: default
