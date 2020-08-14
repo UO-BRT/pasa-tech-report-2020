@@ -1,5 +1,5 @@
 ---
-title: "Chapter 8 Fairness and Accessibility"
+title: "Chapter 8: Fairness and Accessibility"
 author: "BRT"
 date: "8/10/2020"
 output: html_document
@@ -19,13 +19,13 @@ require(here)
 #Scoring_Math_Final_2020.csv
 #Scoring_Science_Final_2020.csv
 
-ela <- read.csv(here::here("data/score/Scoring_ELA_Final_2020.csv"))
+ela <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))
 
-math <- read.csv(here::here("data/score/Scoring_Math_Final_2020.csv"))
+math <- read.csv(here::here("data", "score", "Scoring_Math_Final_2020.csv"))
 
-science <- read.csv(here::here("data/score/Scoring_Science_Final_2020.csv"))
+science <- read.csv(here::here("data", "score", "Scoring_Science_Final_2020.csv"))
 
-ela2 <- read.csv(here::here("data/score/Scoring_ELA_Final_2020.csv"))[,1:13]
+ela2 <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))[,1:13]
 
 math2 <- read.csv(here::here("data/score/Scoring_Math_Final_2020.csv"))[,1:13]
 
