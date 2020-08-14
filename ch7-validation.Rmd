@@ -1,5 +1,5 @@
 ---
-title: "Chapter 7 Validation"
+title: "Chapter 7: Validation"
 author: "BRT"
 date: "8/10/2020"
 output: html_document
