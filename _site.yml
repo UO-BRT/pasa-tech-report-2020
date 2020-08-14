@@ -1,0 +1,22 @@
+name: "Pennsylvania Alternate Assessment Technical Report: 2020"
+output_dir: '.'
+navbar:
+  title: PASA 2020 TR
+  left:
+  - text: Chapter 2
+    href: ch2-perf-continuum.html
+  - text: Chapter 3
+    href: ch3-reliability.html
+  right:
+  - icon: fa-github
+    href: https://github.com/datalorax/pasa-tech-report-2020
+output:
+  html_document:
+    theme: journal
+    # css: website-custom.css
+    # includes:
+    #   in_header: header.html
+    #   after_body: footer.html
+    lib_dir: site_libs
+    self_contained: no
+

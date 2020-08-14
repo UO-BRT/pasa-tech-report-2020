@@ -1,0 +1,5 @@
+---
+title: "Pennsylvania Alternate Assessment Technical Report: 2020"
+---
+
+This website houses all the technical documentation for the Pennsylvania Alternate Assessment, 2020. [Chapter 1]() provides an overview of the assessment, while [Chapter 2](ch2-perf-continuum.html) covers data on the full performance continuum. [Chapter 3](ch3-reliability.html) covers reliability, including both marginal reliability and conditional views of reliability through the test information function. Chapter 4...
