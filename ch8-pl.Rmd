@@ -1,0 +1,330 @@
+---
+title: "Chapter 8: Proficiency Level Frequencies and Percentages"
+author: "BRT"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+require(psych)
+require(knitr)
+require(kableExtra)
+require(car)
+require(here)
+library(ggplot2)
+
+
+# This chapter requires the following data files in a folder called /score
+
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_ELA_Final_2020.csv
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Math_Final_2020.csv
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Science_Final_2020.csv
+
+ela     <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))
+math    <- read.csv(here::here("data", "score", "Scoring_Math_Final_2020.csv"))
+science <- read.csv(here::here("data", "score", "Scoring_Science_Final_2020.csv"))
+
+```
+
+# ELA
+
+```{r, eval=TRUE,echo=FALSE, results='asis'}
+
+grade <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
+tier  <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
+
+tab <- data.frame(Grade = grade, 
+                  Tier = tier,
+                  Total = NA,
+                  Emerging = NA,
+                  Novice = NA,
+                  Proficient = NA,
+                  Advanced = NA)
+
+for (i in 1:nrow(tab)) {
+  
+  sub <- ela[ela$Grade==tab[i,1] & ela$Tier==tab[i,2],]
+  
+  t <- table(sub$PLC)[c('Emerging','Novice','Proficient','Advanced')]
+  t[which(is.na(t)==TRUE)]= 0
+  p <- paste0(sprintf('%.1f',(t/sum(t))*100),'%')
+  
+  tab[i,3]   = sum(t)
+  tab[i,4:7] = paste0(t,' (',p,')')
+}
+
+
+cat(tab %>% 
+  kable(digits = 2,row.names = FALSE,align = c('c','c','r','r','r','r')) %>%
+    kable_styling(full_width = F) )
+```
+
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+
+grade <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
+tier  <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
+
+tab <- data.frame(Grade = grade, 
+                  Tier = tier,
+                  Emerging = NA,
+                  Novice = NA,
+                  Proficient = NA,
+                  Advanced = NA)
+
+for (i in 1:nrow(tab)) {
+  
+  sub <- ela[ela$Grade==tab[i,1] & ela$Tier==tab[i,2],]
+  
+  t <- table(sub$PLC)[c('Emerging','Novice','Proficient','Advanced')]
+  tab[i,3:6] = t
+}
+
+tab$Grade <- as.factor(tab$Grade)
+
+tab.L <- reshape(tab,
+                 direction ='long',
+                 varying   = colnames(tab)[3:6],
+                 v.names   = 'Perc',
+                 times     = colnames(tab)[3:6])
+
+tab.L$time <- factor(tab.L$time,
+                        levels = c('Advanced','Proficient','Novice','Emerging'),
+                        labels = c('Advanced','Proficient','Novice','Emerging'))
+
+```
+
+## Tier 1
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+ggplot(tab.L[which(tab.L$Tier==1),], 
+       aes(fill=time, y=Perc, x=Grade)) + 
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_manual(values=c("#E69F00", "#0072B2", "#009E73","#CC79A7"))+
+  scale_y_continuous(labels=scales::percent) + 
+  ylab('Percentage')+
+  labs(fill='')+
+  theme_bw()
+```
+
+## Tier 2
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+ggplot(tab.L[which(tab.L$Tier==2),], 
+       aes(fill=time, y=Perc, x=Grade)) + 
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_manual(values=c("#E69F00", "#0072B2", "#009E73","#CC79A7"))+
+  scale_y_continuous(labels=scales::percent) + 
+  ylab('Percentage')+
+  labs(fill='')+
+  theme_bw()
+
+```
+
+
+# Math
+
+```{r, eval=TRUE,echo=FALSE, results='asis'}
+
+grade <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
+tier  <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
+
+tab <- data.frame(Grade = grade, 
+                  Tier = tier,
+                  Total = NA,
+                  Emerging = NA,
+                  Novice = NA,
+                  Proficient = NA,
+                  Advanced = NA)
+
+for (i in 1:nrow(tab)) {
+  
+  sub <-  math[math$Grade==tab[i,1] & math$Tier==tab[i,2],]
+  
+  t <- table(sub$PLC)[c('Emerging','Novice','Proficient','Advanced')]
+  t[which(is.na(t)==TRUE)]= 0
+  p <- paste0(sprintf('%.1f',(t/sum(t))*100),'%')
+  
+  tab[i,3]   = sum(t,na.rm=TRUE)
+  tab[i,4:7] = paste0(t,' (',p,')')
+}
+
+
+cat(tab %>% 
+  kable(digits = 2,row.names = FALSE,align = c('c','c','r','r','r','r')) %>%
+    kable_styling(full_width = F) )
+```
+
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+
+grade <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
+tier  <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
+
+tab <- data.frame(Grade = grade, 
+                  Tier = tier,
+                  Emerging = NA,
+                  Novice = NA,
+                  Proficient = NA,
+                  Advanced = NA)
+
+for (i in 1:nrow(tab)) {
+  
+  sub <- math[math$Grade==tab[i,1] & math$Tier==tab[i,2],]
+  
+  t <- table(sub$PLC)[c('Emerging','Novice','Proficient','Advanced')]
+  tab[i,3:6] = t
+}
+
+tab$Grade <- as.factor(tab$Grade)
+
+tab.L <- reshape(tab,
+                 direction ='long',
+                 varying   = colnames(tab)[3:6],
+                 v.names   = 'Perc',
+                 times     = colnames(tab)[3:6])
+
+tab.L$time <- factor(tab.L$time,
+                        levels = c('Advanced','Proficient','Novice','Emerging'),
+                        labels = c('Advanced','Proficient','Novice','Emerging'))
+
+```
+
+
+## Tier 1
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+ggplot(tab.L[which(tab.L$Tier==1),], 
+       aes(fill=time, y=Perc, x=Grade)) + 
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_manual(values=c("#E69F00", "#0072B2", "#009E73","#CC79A7"))+
+  scale_y_continuous(labels=scales::percent) + 
+  ylab('Percentage')+
+  labs(fill='')+
+  theme_bw()
+```
+
+## Tier 2
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+ggplot(tab.L[which(tab.L$Tier==2),], 
+       aes(fill=time, y=Perc, x=Grade)) + 
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_manual(values=c("#E69F00", "#0072B2", "#009E73","#CC79A7"))+
+  scale_y_continuous(labels=scales::percent) + 
+  ylab('Percentage')+
+  labs(fill='')+
+  theme_bw()
+
+```
+
+
+# Science
+
+```{r, eval=TRUE,echo=FALSE, results='asis'}
+
+grade <- c(4,4,8,8,11,11)
+tier  <- c(1,2,1,2,1,2)
+
+tab <- data.frame(Grade = grade, 
+                  Tier = tier,
+                  Total = NA,
+                  Emerging = NA,
+                  Novice = NA,
+                  Proficient = NA,
+                  Advanced = NA)
+
+for (i in 1:nrow(tab)) {
+  
+  sub <-  science[science$Grade==tab[i,1] & science$Tier==tab[i,2],]
+  
+  t <- table(sub$PLC)[c('Emerging','Novice','Proficient','Advanced')]
+  t[which(is.na(t)==TRUE)]= 0
+  p <- paste0(sprintf('%.1f',(t/sum(t))*100),'%')
+  
+  tab[i,3]   = sum(t,na.rm=TRUE)
+  tab[i,4:7] = paste0(t,' (',p,')')
+}
+
+
+cat(tab %>% 
+  kable(digits = 2,row.names = FALSE,align = c('c','c','r','r','r','r')) %>%
+    kable_styling(full_width = F) )
+```
+
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+
+grade <- c(4,4,8,8,11,11)
+tier  <- c(1,2,1,2,1,2)
+
+tab <- data.frame(Grade = grade, 
+                  Tier = tier,
+                  Emerging = NA,
+                  Novice = NA,
+                  Proficient = NA,
+                  Advanced = NA)
+
+for (i in 1:nrow(tab)) {
+  
+  sub <- science[science$Grade==tab[i,1] & science$Tier==tab[i,2],]
+  
+  t <- table(sub$PLC)[c('Emerging','Novice','Proficient','Advanced')]
+  tab[i,3:6] = t
+}
+
+tab$Grade <- as.factor(tab$Grade)
+
+tab.L <- reshape(tab,
+                 direction ='long',
+                 varying   = colnames(tab)[3:6],
+                 v.names   = 'Perc',
+                 times     = colnames(tab)[3:6])
+
+tab.L$time <- factor(tab.L$time,
+                        levels = c('Advanced','Proficient','Novice','Emerging'),
+                        labels = c('Advanced','Proficient','Novice','Emerging'))
+
+```
+
+
+## Tier 1
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+ggplot(tab.L[which(tab.L$Tier==1),], 
+       aes(fill=time, y=Perc, x=Grade)) + 
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_manual(values=c("#E69F00", "#0072B2", "#009E73","#CC79A7"))+
+  scale_y_continuous(labels=scales::percent) + 
+  ylab('Percentage')+
+  labs(fill='')+
+  theme_bw()
+```
+
+## Tier 2
+
+```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+
+ggplot(tab.L[which(tab.L$Tier==2),], 
+       aes(fill=time, y=Perc, x=Grade)) + 
+  geom_bar(position="fill", stat="identity") +
+  scale_fill_manual(values=c("#E69F00", "#0072B2", "#009E73","#CC79A7"))+
+  scale_y_continuous(labels=scales::percent) + 
+  ylab('Percentage')+
+  labs(fill='')+
+  theme_bw()
+
+```
+
+
+
