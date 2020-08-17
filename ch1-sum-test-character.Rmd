@@ -7,11 +7,13 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(here)
 ```
-# Chapter 1 – Summary of Test Characteristics
-## Test Design and Development – JT (Formerly Chapter 1)
+
+## Test Design and Development (Formerly Chapter 1)
 PASA is designed to reflect appropriate adaptations of PA content standards (alternate eligible content – AEC) that allow students to show what they know and can do using scaled performance scores (with anchor items providing comparable forms from year to year). Across various reporting categories, the eligible content is articulated with task specifications that are then applied to two forms: (a) Tier 1 for very performing students and (b) Tier 2 for higher performing students.
 
+(image/table_reading.png)
 
 Summary of Test Specification (TS) files for ELA, Math, and Science
 
@@ -28,7 +30,7 @@ Insert Appendix 1.4 (ELA), 1.5 (Math), and 1.6 (Science)
 
 Summary of Appendices/Findings…
 
-Summary of Validity Based on Content – JT (Formerly Chapter 4)
+Summary of Validity Based on Content (Formerly Chapter 4)
 A number of dimensions are considered in the content covered across AECs. First, the type of item is organized into (a) anchor items, that facilitate form comparability from year to year, (b) Linking Tier 1 items (LT1) for low performing students assigned to this Tier, (c) Linking Tier 2 (LT2) for higher performing students assigned to this Tier, and (d) unique items (d) that are being field tested for eventual placement on the test in future years. Note that the test for each Tier includes LT1 and LT2 so that students not placed in that Tier can perform not only on the items in their assigned Tier but also take items in the Tier where they are not placed. This cross walk of items with students is important linking the two Tiers with both populations.
 
 Summary of Alternate Eligible Content (AECs) by Item Code, Content Category, and Tier
