@@ -1,0 +1,439 @@
+---
+title: "Chapter 8: Fairness and Accessibility"
+author: "BRT"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+require(psych)
+require(knitr)
+require(kableExtra)
+require(car)
+require(here)
+
+# This chapter requires the following data files in a folder called /score
+
+# /datastore/2020PASA_ScalingAnalysis/enrollment/PASA Enrollment final 2020.csv
+
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_ELA_Final_2020.csv
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Math_Final_2020.csv
+# /datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Science_Final_2020.csv
+
+# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_ELA_final.csv
+# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_Math_final.csv
+# /datastore/2020PASA_ScalingAnalysis/Assessment Scoring 2020/Assessment_Scoring_Data_Science_final.csv
+
+ela     <- read.csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv"))
+math    <- read.csv(here::here("data", "score", "Scoring_Math_Final_2020.csv"))
+science <- read.csv(here::here("data", "score", "Scoring_Science_Final_2020.csv"))
+
+ela2     <- read.csv(here::here("data", "score", "Assessment_Scoring_Data_ELA_final.csv"))[,1:13]
+math2    <- read.csv(here::here("data", "score", "Assessment_Scoring_Data_Math_final.csv"))[,1:13]
+science2 <- read.csv(here::here("data", "score", "Assessment_Scoring_Data_Science_final.csv"))[.1:13]
+
+
+ela3 <- merge(ela, ela2, by = c(
+  'Student_ID',
+  'subject',
+  'test_name',
+  'Grade',
+  'Tier'))
+
+math3 <- merge(math, math2, by = c(
+  'Student_ID',
+  'subject',
+  'test_name',
+  'Grade',
+  'Tier'))
+
+science3 <- merge(science, science2, by = c(
+  'Student_ID',
+  'subject',
+  'test_name',
+  'Grade','Tier'))
+
+enr <- read.csv(here::here("data", "score", "PASA Enrollment final 2020.csv"))
+
+ela_enr <- merge(ela3, enr, by.x = 'Student_ID', by.y = 'PASA.Student.ID', all.x = TRUE, all.y = FALSE)
+
+ela3$Gender <- factor(ela3$Gender, levels = c('F','M'), labels = c('Female','Male'))
+
+math3$Gender <- factor(math3$Gender, levels = c('F','M'),labels = c('Female','Male'))
+
+science3$Gender <- factor(science3$Gender, levels = c('F','M'),labels = c('Female','Male'))
+
+ela3$ethnicity <- factor(ela3$ethnicity, levels = c('AI','AS','B','H','M','W'), labels = c('American Indian', 'Asian', 'Black or African American',
+ 'Hispanic','Multiracial','White'))
+
+math3$ethnicity <- factor(math3$ethnicity, levels = c('AI','AS','B','H','M','W'), labels = c('American Indian','Asian','Black or African American', 'Hispanic','Multiracial','White'))
+
+science3$ethnicity <- factor(science3$ethnicity, levels = c('AI','AS','B','H','M','W'), labels = c('American Indian', 'Asian', 'Black or African American', 'Hispanic','Multiracial','White'))
+
+ela3$lep <- ifelse(ela3$lep == 0,'No', 'Yes')
+math3$lep <- ifelse(math3$lep == 0,'No', 'Yes')
+science3$lep <- ifelse(science3$lep == 0,'No', 'Yes')
+ela3$fr_lunch <- ifelse(ela3$fr_lunch == 0,'NO', 'YES')
+math3$fr_lunch <- ifelse(math3$fr_lunch == 0,'NO', 'YES')
+```
+
+# ELA
+
+## Grade x Tier x Sex
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$Gender), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 4) %>%
+  pack_rows('Grade 4', 5, 8) %>%
+  pack_rows('Grade 5', 9, 12) %>%
+  pack_rows('Grade 6', 13, 16) %>%
+  pack_rows('Grade 7', 17, 20) %>%
+  pack_rows('Grade 8', 21, 24) %>%
+  pack_rows('Grade 11', 25, 28)
+```
+
+
+## Grade x Tier x Ethnicity
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$ethnicity), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(13:84, 1:12),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Etnicity', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 12) %>%
+  pack_rows('Grade 4', 13, 24) %>%
+  pack_rows('Grade 5', 25, 36) %>%
+  pack_rows('Grade 6', 37, 48) %>%
+  pack_rows('Grade 7', 49, 60) %>%
+  pack_rows('Grade 8', 61, 72) %>%
+  pack_rows('Grade 11', 73, 84)
+```
+
+## Grade x Tier x LEP
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$lep), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:nrow(tab), 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 4) %>%
+  pack_rows('Grade 4', 5, 8) %>%
+  pack_rows('Grade 5', 9, 12) %>%
+  pack_rows('Grade 6', 13, 16) %>%
+  pack_rows('Grade 7', 17, 20) %>%
+  pack_rows('Grade 8', 21, 24) %>%
+  pack_rows('Grade 11', 25, 28)
+```
+
+## Grade x Tier x Disability
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$Disability), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(25:168, 1:24),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Disability', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 24) %>%
+  pack_rows('Grade 4', 25, 48) %>%
+  pack_rows('Grade 5', 49, 72) %>%
+  pack_rows('Grade 6', 73, 96) %>%
+  pack_rows('Grade 7', 97, 120) %>%
+  pack_rows('Grade 8', 121, 144) %>%
+  pack_rows('Grade 11', 145, 168)
+```
+
+## Grade x Tier x FRL
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$fr_lunch), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 4) %>%
+  pack_rows('Grade 4', 5, 8) %>%
+  pack_rows('Grade 5', 9, 12) %>%
+  pack_rows('Grade 6', 13, 16) %>%
+  pack_rows('Grade 7', 17, 20) %>%
+  pack_rows('Grade 8', 21, 24) %>%
+  pack_rows('Grade 11', 25, 28)
+```
+
+# Math
+
+
+## Grade x Tier x Sex
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$Gender),mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 4) %>%
+  pack_rows('Grade 4', 5, 8) %>%
+  pack_rows('Grade 5', 9, 12) %>%
+  pack_rows('Grade 6', 13, 16) %>%
+  pack_rows('Grade 7', 17, 20) %>%
+  pack_rows('Grade 8', 21, 24) %>%
+  pack_rows('Grade 11', 25, 28)
+```
+
+
+## Grade x Tier x Ethnicity
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$ethnicity), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(13:84, 1:12),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Etnicity', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 12) %>%
+  pack_rows('Grade 4', 13, 24) %>%
+  pack_rows('Grade 5', 25, 36) %>%
+  pack_rows('Grade 6', 37, 48) %>%
+  pack_rows('Grade 7', 49, 60) %>%
+  pack_rows('Grade 8', 61, 72) %>%
+  pack_rows('Grade 11', 73, 84)
+```
+
+## Grade x Tier x LEP
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$lep), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:nrow(tab), 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 4) %>%
+  pack_rows('Grade 4', 5, 8) %>%
+  pack_rows('Grade 5', 9, 12) %>%
+  pack_rows('Grade 6', 13, 16) %>%
+  pack_rows('Grade 7', 17, 20) %>%
+  pack_rows('Grade 8', 21, 24) %>%
+  pack_rows('Grade 11', 25, 28)
+```
+
+## Grade x Tier x Disability
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$Disability), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(25:168, 1:24),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Disability', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 24) %>%
+  pack_rows('Grade 4', 25, 48) %>%
+  pack_rows('Grade 5', 49, 72) %>%
+  pack_rows('Grade 6', 73, 96) %>%
+  pack_rows('Grade 7', 97, 120) %>%
+  pack_rows('Grade 8', 121, 144) %>%
+  pack_rows('Grade 11', 145, 168)
+```
+
+## Grade x Tier x FRL
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$fr_lunch), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 4) %>%
+  pack_rows('Grade 4', 5, 8) %>%
+  pack_rows('Grade 5', 9, 12) %>%
+  pack_rows('Grade 6', 13, 16) %>%
+  pack_rows('Grade 7', 17, 20) %>%
+  pack_rows('Grade 8', 21, 24) %>%
+  pack_rows('Grade 11', 25, 28)
+```
+
+# Science
+
+## Grade x Tier x Sex
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(science3$Scaled.Score,
+                  list(science3$Grade,
+                       science3$Tier,
+                       science3$Gender), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:nrow(tab), 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 4', 1, 4) %>%
+  pack_rows('Grade 8', 5, 8) %>%
+  pack_rows('Grade 11', 9, 12)
+```
+
+
+## Grade x Tier x Ethnicity
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
+
+science3 <- rbind(
+  science3,
+  data.frame(Student_ID = NA,
+             subject = NA,
+             test_name = NA,
+             Grade = 4,
+             Tier = 1,
+             Form.x = NA,
+             Summed.Score = NA,
+             No.Corr = NA,
+             No.Inc = NA,
+             No.Resp = NA,
+             Not.Attempted = NA,
+             PLC = NA,
+             Scaled.Score = NA,
+             Lower.Scale.Score = NA,
+             Upper.Scale.Score = NA,
+             StaffID = NA,
+             UserID = NA,
+             Form.y = NA,
+             Disability = NA,
+             Gender = NA,
+             ethnicity = 'American Indian',
+             lep = NA))
+
+tab <- describeBy(science3$Scaled.Score, list(science3$Grade, science3$Tier, science3$ethnicity), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(13:nrow(tab), 1:12),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Etnicity', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2,row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 4', 1, 12) %>%
+  pack_rows('Grade 8', 13, 24) %>%
+  pack_rows('Grade 11', 25, 36)
+```
+
+## Grade x Tier x LEP
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(science3$Scaled.Score, list(science3$Grade, science3$Tier, science3$lep), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:nrow(tab), 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2,row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 4', 1, 4) %>%
+  pack_rows('Grade 8', 5, 8) %>%
+  pack_rows('Grade 11', 9, 12)
+```
+
+## Grade x Tier x Disability
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
+
+tab <- describeBy(science3$Scaled.Score, list(science3$Grade, science3$Tier, science3$Disability), mat = T)
+tab <- tab[,c('group1','group2','group3','n','mean','sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(25:nrow(tab), 1:24),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier','Disability','N','Mean','SD')
+
+tab %>%
+  kable(digits = 2,row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 4', 1, 24) %>%
+  pack_rows('Grade 8', 25, 48) %>%
+  pack_rows('Grade 11', 49, 72)
+```
