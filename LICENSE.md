@@ -1,2 +1,4 @@
-
-Copyright (C) 2020 Daniel Anderson
+---
+title: License
+---
+Copyright (C) 2020 Pennsylvania Department of Education

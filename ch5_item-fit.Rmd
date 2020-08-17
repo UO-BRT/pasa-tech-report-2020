@@ -1,0 +1,126 @@
+---
+title: "Chapter 5: Item Fit"
+author: "BRT"
+date: "`r Sys.Date()`"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+
+require(knitr)
+require(kableExtra)
+require(here)
+
+#data required to run this chapter is found in /data/ifit
+
+p <- fs::dir_ls(here::here("data", "ifit"))
+
+names <- list.files(here::here("data", "ifit"))
+
+ela <- names[grep('ela',names)]
+ela <- ela[c(3:14,1:2)]
+math <- names[grep('math',names)]
+math <- math[c(3:14,1:2)]
+science <- names[grep('science',names)]
+science <- science[c(3:6,1:2)]
+```
+
+# Summary of Findings about Item Fit
+
+Text...
+
+
+
+# ELA
+
+
+```{r, eval=TRUE,echo=FALSE, results='asis'}
+ifit_e <- vector('list', length(ela)) 
+for (i in 1:length(ela)) {
+  ifit_e[[i]] = read.csv(here::here("data", "ifit", ela[i]))
+  ifit_e[[i]] = ifit_e[[i]][,c(1,2,3,5,4)]
+  colnames(ifit_e[[i]]) <- c('Item Label','S_X2','Df','p-value','RMSEA')
+  ifit_e[[i]][,4] = round(ifit_e[[i]][,4],3)
+  ifit_e[[i]][which(ifit_e[[i]][,4] < .002),4] <- 'p<.002'
+  ifit_e[[i]][,5] = round(ifit_e[[i]][,5],3)
+}
+
+
+ind1 <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
+ind2 <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
+
+for (i in 1:length(ela)) {
+  
+  cat('## Grade',ind1[i],' - Tier ',ind2[i],'\n')
+  
+  cat(ifit_e[[i]] %>% 
+  kable(digits = 2,row.names = FALSE) %>%
+    kable_styling(full_width = F) )
+}
+```
+
+# Math
+
+```{r, eval=TRUE,echo=FALSE, results='asis'}
+
+
+# setwd('B:/Outside Consulting/PASA/pasa-analyses-2020/data/ifit')
+
+ifit_m <- vector('list',length(math)) 
+
+for (i in 1:length(math)) {
+  ifit_m[[i]] = read.csv(here::here("data", "ifit", math[i]))
+  ifit_m[[i]] = ifit_m[[i]][,c(1,2,3,5,4)]
+  colnames(ifit_m[[i]]) <- c('Item Label','S_X2','Df','p-value','RMSEA')
+  ifit_m[[i]][,4] = round(ifit_m[[i]][,4],3)
+  ifit_m[[i]][which(ifit_m[[i]][,4] < .002),4] <- 'p<.002'
+  ifit_m[[i]][,5] = round(ifit_m[[i]][,5],3)
+}
+
+
+ind1 <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
+ind2 <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
+
+for (i in 1:length(math)) {
+  
+  cat('## Grade',ind1[i],' - Tier ',ind2[i],'\n')
+  
+  cat(ifit_m[[i]] %>% 
+  kable(digits = 2,row.names = FALSE) %>%
+    kable_styling(full_width = F) )
+}
+```
+
+
+# Science
+
+```{r, eval=TRUE,echo=FALSE, results='asis'}
+
+# setwd('B:/Outside Consulting/PASA/pasa-analyses-2020/data/ifit')
+
+ifit_s <- vector('list',length(science)) 
+
+for (i in 1:length(science)) {
+  ifit_s[[i]] = read.csv(here::here("data", "ifit", science[i]))
+  ifit_s[[i]] = ifit_s[[i]][,c(1,2,3,5,4)]
+  colnames(ifit_s[[i]]) <- c('Item Label','S_X2','Df','p-value','RMSEA')
+  ifit_s[[i]][,4] = round(ifit_s[[i]][,4],3)
+  ifit_s[[i]][which(ifit_s[[i]][,4] < .002),4] <- 'p<.002'
+  ifit_s[[i]][,5] = round(ifit_s[[i]][,5],3)
+}
+
+
+ind1 <- c(4,4,8,8,11,11)
+ind2 <- c(1,2,1,2,1,2)
+
+for (i in 1:length(science)) {
+  
+  cat('## Grade',ind1[i],' - Tier ',ind2[i],'\n')
+  
+  cat(ifit_s[[i]] %>% 
+  kable(digits = 2,row.names = FALSE) %>%
+    kable_styling(full_width = F) )
+}
+```
