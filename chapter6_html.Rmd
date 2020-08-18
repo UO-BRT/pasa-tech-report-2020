@@ -276,9 +276,7 @@ figs_all <- ela %>%
               mutate(subject = "Math")) %>% 
   bind_rows(select(science, student_id, grade, tier, no_corr:not_attempted)%>% 
               mutate(subject = "Science")) %>% 
-  mutate(tier = recode(tier,
-                       `1` = "Tier 1",
-                       `2` = "Tier 2")) %>% 
+  mutate(tier = paste("Tier", tier)) %>% 
   group_by(subject, grade, tier) %>% 
   nest() %>% 
   arrange(grade) %>% 
