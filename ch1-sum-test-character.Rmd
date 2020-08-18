@@ -13,7 +13,7 @@ library(here)
 ## Test Design and Development (Formerly Chapter 1)
 PASA is designed to reflect appropriate adaptations of PA content standards (alternate eligible content – AEC) that allow students to show what they know and can do using scaled performance scores (with anchor items providing comparable forms from year to year). Across various reporting categories, the eligible content is articulated with task specifications that are then applied to two forms: (a) Tier 1 for very performing students and (b) Tier 2 for higher performing students.
 
-(image/table_reading.png)
+![](image/table_reading.png)
 
 Summary of Test Specification (TS) files for ELA, Math, and Science
 
