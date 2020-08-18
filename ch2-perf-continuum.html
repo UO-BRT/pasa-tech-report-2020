@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -251,6 +254,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -258,6 +324,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -336,11 +412,45 @@ $(document).ready(function () {
 
 <div id="item-person-distributions" class="section level2">
 <h2>Item-Person Distributions</h2>
+<p>The PASA is designed to sample Alternate Eligible Content (AEC) in reading, writing, mathematics, and science in a purposeful and validated manner. AEC represent a reduction in breadth, depth, and level of complexity of the Eligible Content (EC) so that academic standards are both rigorous and appropriate for the students with the most severe cognitive disabilities while still ensuring access to the general education curriculum. PASA items, for both Tier 1 (less academically complex relative to AEC) and Tier 2 (more academically complex relative to AEC) PASA assessment-types, were scored dichotomously on a 2-point scale: 1 point awarded for a correct response and 0 points awarded for an incorrect response.</p>
+<p>In this chapter, plots of PASA item difficulty and person ability (theta) are paired and shown by grade, content area, and tier. In general, the smaller the number of correct responses for a given item on an operational test, the higher its difficulty, and thus, the higher the item’s location on the calibrated scale (as displayed in each plot). Once item locations are calibrated, the person ability estimates are measured on the same scale, and thus, can be compared to item difficulties as an indicator of how closely item difficulties match test-taker abilities for each test administered. A greater proportion of overlap between the two indicates a closer match between item difficulty and person ability, whereas less overlap indicates the opposite.</p>
+<p>Generally, the plots shown suggest that most tests had an appropriate range of item difficulties represented, from easy to difficult, with item difficulties typically ranging between -4.0 and +4.0 on the calibrated scale, and that these ranges overlapped appropriately with person ability distributions. However, two general exceptions are notable: (1) some tests showed a mismatch in item difficulty-person ability whereby the two distributions have substantial areas of non-overlap, while (2) other tests contained “outlier items” with have an estimated difficulty far below or far above the estimated person distributions.</p>
+<div id="non-overlap-in-item-person-distrbutions" class="section level3">
+<h3>Non-Overlap in Item-Person Distrbutions</h3>
+<p>Grade 3, ELA, Tier 1 is an example of the first exception to the generally appropriate ranges and overlap observed. All but a single item ranges between about -1.0 and 0.0 on the calibrated scale as compared to the person ability distribution plotted just below that ranges from approximately -2.5 to 2.0 on the same scale. In this example, about half of the students who took the Grade 3, ELA, Tier 1 test had an ability above all estimated item difficulties (except for a single outlier item at the far-high-end of the observed range in difficulty). Tests in which items were generally <em>too easy</em> relative to person ability include:</p>
+<ul>
+<li>Grade 3, ELA, Tier 1 <br></li>
+<li>Grade 3, ELA, Tier 2 <br></li>
+<li>Grade 4, Math, Tier 2 <br></li>
+<li>Grade 6, ELA, Tier 2 <br></li>
+<li>Grade 7, ELA, Tier 2 <br></li>
+<li>Grade 8, ELA, Tier 2 <br></li>
+<li>Grade 11, ELA, Tier 2</li>
+</ul>
+<p>Tests in which items were generally <em>too difficult</em> relative to person ability include:</p>
+<ul>
+<li>Grade 4, Science, Tier 1 <br></li>
+<li>Grade 8, Science Tier 1 <br></li>
+<li>Grade 11, Science, Tier 1</li>
+</ul>
+<p><strong>Recommendation:</strong> For future test administrations, these tests, and any others showing substantial non-overlap between item difficulty and person ability ranges, should likely be examined with items removed/replaced to bring the distributions closer in line with one another relative to the calibrated scale.</p>
+</div>
+<div id="outlier-items-in-item-person-distrbutions" class="section level3">
+<h3>Outlier Items in Item-Person Distrbutions</h3>
+<p>With respect to the second exception, some tests had one or more “outlier items” with an estimated difficulty far below or far above the estimated person distributions. Grade 11 Math, Tier 2 and Grade 11, ELA, Tier 1 is an example of former, in which two items have estimated item difficulties far <em>above</em> the estimated person ability range of about -2.5 to 2.5 on the calibrated scale. Grade 11, Math, Tier 2 is an example of the latter, in which two items have estimated item difficulties far <em>below</em> the estimated person ability range of about -1.75 to 1.75, For the 2019-20 academic year, some items were so far above or below the estimated person ability ranges there were eliminated from these analyses, including:</p>
+<ul>
+<li>Item E06BV4.1.1b-5 (estimated difficulty of -730.74 on the Grade 6, ELA, Tier 1 test)</li>
+<li>Item M05AT2.1.3a-9 (estimated difficulty of 24.44 on the Grade 5, Math, Tier 1 test)</li>
+</ul>
+<p><strong>Recommendation:</strong> For future test administrations, the two items removed for analyses, and other items with similarly out-of-range estimated difficulties, should likely be examined and either revised to bring them closer in line with typical person ability ranges, or discarded/replaced.</p>
 <p><img src="ch2-perf-continuum_files/figure-html/load-data-1.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-2.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-3.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-4.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-5.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-6.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-7.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-8.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-9.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-10.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-11.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-12.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-13.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-14.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-15.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-16.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-17.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-18.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-19.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-20.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-21.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-22.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-23.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-24.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-25.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-26.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-27.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-28.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-29.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-30.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-31.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-32.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-33.png" width="672" /><img src="ch2-perf-continuum_files/figure-html/load-data-34.png" width="672" /></p>
+</div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -373,6 +483,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
