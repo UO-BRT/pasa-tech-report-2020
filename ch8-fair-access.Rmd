@@ -2,12 +2,19 @@
 title: "Chapter 8: Fairness and Accessibility"
 author: "BRT"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: 
+      collapsed: false
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 
+require(tidyverse)
+require(janitor)
 require(psych)
 require(knitr)
 require(kableExtra)
@@ -81,7 +88,9 @@ math3$fr_lunch <- ifelse(math3$fr_lunch == 0,'NO', 'YES')
 
 # ELA
 
+
 ## Grade x Tier x Sex
+
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -107,6 +116,7 @@ tab %>%
 
 
 ## Grade x Tier x Ethnicity
+
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -436,4 +446,60 @@ tab %>%
   pack_rows('Grade 4', 1, 24) %>%
   pack_rows('Grade 8', 25, 48) %>%
   pack_rows('Grade 11', 49, 72)
+```
+
+# School District Participation
+
+The table below shows the participation in the 2019-2020 PASA ELA, Math, and Science content areas by school district.  
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
+
+enroll_raw <- rio::import(here("data", "score", "PASA Enrollment final 2020.csv")) %>%
+  as_tibble() %>%
+  clean_names() %>%
+  select(tested_district_code, tested_school_code, student_id = pasa_student_id)
+
+enroll <- enroll_raw %>%
+  left_join(rio::import(here("data", "score", "districts and auns.xlsx")) %>%
+  as_tibble() %>%
+  clean_names() %>%
+  rename(tested_district_code = service_provider_aun, district_name = district))
+
+ela <- read_csv(here("data", "score", "Scoring_ELA_Final_2020.csv")) %>%
+  clean_names()
+
+math <- read_csv(here("data", "score", "Scoring_Math_Final_2020.csv")) %>%
+  clean_names()
+
+science <- read_csv(here("data", "score", "Scoring_Science_Final_2020.csv")) %>%
+  clean_names()
+
+district_dta <- ela %>%
+  select(student_id, grade, tier, ela_score = scaled_score) %>%
+  left_join(select(math, student_id, math_score = scaled_score)) %>%
+  left_join(select(science, student_id, science_score = scaled_score)) %>%
+  left_join(enroll)
+
+district_table <- district_dta %>%
+  mutate(ela_tot = sum(!is.na(ela_score)),
+         math_tot = sum(!is.na(math_score)),
+         science_tot = sum(!is.na(science_score))) %>%
+  group_by(district_name) %>%
+  summarise(ela_count = sum(!is.na(ela_score)),
+            ela_pct = ela_count/unique(ela_tot)*100,
+            math_count = sum(!is.na(math_score)),
+            math_pct = math_count/unique(math_tot)*100,
+            science_count = sum(!is.na(science_score)),
+            science_pct = science_count/unique(science_tot)*100,)
+
+district_table %>%
+  janitor::adorn_totals(where = "row") %>%
+  kable(., 
+        digits = 2,
+        #booktabs = TRUE,
+        #longtable = TRUE, 
+        col.names = c("School District", rep(c("Count", "Percent"), 3)),
+        caption = "School District Participation in 2019-2020 PASA Across Content Area") %>%
+  add_header_above(c(" " = 1, "ELA" = 2, "Math" = 2, "Science" = 2)) %>%
+  kable_styling(latex_options = c("hold_position", "repeat_header"))
 ```
