@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -251,6 +254,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -258,6 +330,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -334,512 +416,237 @@ $(document).ready(function () {
 </div>
 
 
-<div id="marginal-reliability" class="section level1">
-<h1>Marginal Reliability</h1>
+<p>Marginal reliability is a measure of the overall reliability of a test, within an item response theory (IRT) framework, based on the average standard error conditioned on the range in person ability (or theta). The test information function (or TIF) conveys the precision of the test at any point in the person distribution, with the inverse representing the standard error in measurement. Thus, give this inverse relation, the larger the measurement error at a given theta value, the less information a test yields, typically, at the margins of the person distribution (e.g., extremely low or high scores on a test). The opposite is also true, the smaller the measurement error, the more information a test yields, typically, toward the center of the person distribution. Because measurement error varies across the range in theta based on the TIF, marginal reliability is calculated conditional on both theta and associated standard errors across the range in the calibrated scale. In this chapter, marginal reliability estimates are presented followed by plots of TIF by grade, content area, and tier for all tests comprising the PASA.</p>
+<div id="marginal-reliability-by-content-area-grade-and-tier" class="section level2">
+<h2>Marginal Reliability by Content Area, Grade, and Tier</h2>
+<p>Marginal reliability estimates are generally within acceptable ranges for drawing test-based inferences, with ELA and Math more reliable, on average, than Science. Overall, marginal reliability values range from 0.59 to 0.86 across all content areas, grades, and tiers. For ELA, marginal reliability ranges from 0.78 to 0.86. For Math, marginal reliability ranges from 0.71 to 0.86. And for Science, marginal reliability ranges from 0.59 to 0.74, with the lowest reliability estimated for the Grade 8, Tier 1 (0.59) and Grade 11, Tier 1 (0.64) Science tests.</p>
 <table>
 <thead>
-<tr>
-<th style="text-align:right;">
-Grade
-</th>
-<th style="text-align:right;">
-Tier
-</th>
-<th style="text-align:left;">
-Content
-</th>
-<th style="text-align:right;">
-Marginal Reliability
-</th>
+<tr class="header">
+<th align="right">Grade</th>
+<th align="right">Tier</th>
+<th align="left">Content</th>
+<th align="right">Marginal Reliability</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.87
-</td>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.87</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.83
-</td>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.83</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.75
-</td>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.75</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.78
-</td>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.78</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.85
-</td>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.85</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.85
-</td>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.85</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-science
-</td>
-<td style="text-align:right;">
-0.65
-</td>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="left">science</td>
+<td align="right">0.65</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.78
-</td>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.78</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.77
-</td>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.77</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-science
-</td>
-<td style="text-align:right;">
-0.68
-</td>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="left">science</td>
+<td align="right">0.68</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.82
-</td>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.82</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.84
-</td>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.84</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.75
-</td>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.75</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.81
-</td>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.81</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.86
-</td>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.86</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.86
-</td>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.86</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.73
-</td>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.73</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.73
-</td>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.73</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.85
-</td>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.85</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.85
-</td>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.85</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.73
-</td>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.73</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.76
-</td>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.76</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.83
-</td>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.83</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.79
-</td>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.79</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-science
-</td>
-<td style="text-align:right;">
-0.59
-</td>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="left">science</td>
+<td align="right">0.59</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.73
-</td>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.73</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.73
-</td>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.73</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-science
-</td>
-<td style="text-align:right;">
-0.74
-</td>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="left">science</td>
+<td align="right">0.74</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.83
-</td>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.83</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.78
-</td>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.78</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-science
-</td>
-<td style="text-align:right;">
-0.64
-</td>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="left">science</td>
+<td align="right">0.64</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-ela
-</td>
-<td style="text-align:right;">
-0.75
-</td>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.75</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-math
-</td>
-<td style="text-align:right;">
-0.71
-</td>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.71</td>
 </tr>
-<tr>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-science
-</td>
-<td style="text-align:right;">
-0.73
-</td>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="left">science</td>
+<td align="right">0.73</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="test-information-functions" class="section level1">
-<h1>Test information functions</h1>
+<div id="test-information-functions-by-content-area-grade-and-tier" class="section level2">
+<h2>Test Information Functions by Content Area, Grade, and Tier</h2>
+<p>Below, TIFs are plotted by content area, grade and PASA test tier. The peak (or highest point) in the TIF is the point at which test information is maximized for a given theta (or person ability) estimate. Each plot shows the theta ranges for which marginal reliability is equal to or greater than 0.80 (darker blue area under the TIF) and 0.70 (lighter blue area under the TIF) for the calibrated scale. While many PASA tests provide precise information, with a marginal reliability of at least 0.80, on either side of average person ability (theta = 0; e.g., ELA, Grade 3, Tier 1, and Math, Grade 3, Tier 1), some PASA tests provide more precise information for lower person ability ranges (theta &lt; 0), with less information provided at the higher end of the person ability distribution (e.g., ELA, Grade 3, Tier 2, and Math, Grade 3, Tier 2).</p>
 <p><img src="ch3-reliability_files/figure-html/tifs-1.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-2.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-3.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-4.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-5.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-6.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-7.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-8.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-9.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-10.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-11.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-12.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-13.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-14.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-15.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-16.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-17.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-18.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-19.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-20.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-21.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-22.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-23.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-24.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-25.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-26.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-27.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-28.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-29.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-30.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-31.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-32.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-33.png" width="672" /><img src="ch3-reliability_files/figure-html/tifs-34.png" width="672" /></p>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -872,6 +679,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
