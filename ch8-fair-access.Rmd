@@ -88,12 +88,50 @@ math3$fr_lunch <- ifelse(math3$fr_lunch == 0,'NO', 'YES')
 
 # ELA
 
+## Sex
 
-## Grade x Tier x Sex
-
+Text summarizing the female-male difference (effect sizes can be used)...
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$Gender), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
+
+eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:14){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+
+  colnames(eff)[3]="Cohen's D (Female - Male)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
+
+```
+
+### Appendix (SEX)
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$Gender), mat = T)
 tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
 tab <- tab[with(tab, order(group1, group2)),]
@@ -115,32 +153,47 @@ tab %>%
 ```
 
 
-## Grade x Tier x Ethnicity
+## Limited English Proficiency
+
+Text summarizing the No - Yes difference for LEP (effect sizes can be used)...
 
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
-tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$ethnicity), mat = T)
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$lep), mat = T)
 tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
 tab <- tab[with(tab, order(group1, group2)),]
-tab <- tab[c(13:84, 1:12),]
+tab <- tab[c(5:nrow(tab), 1:4),]
 tab <- tab[,-1]
 
-colnames(tab) <- c('Tier', 'Etnicity', 'N', 'Mean', 'SD')
+colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
 
-tab %>%
-  kable(digits = 2, row.names = FALSE) %>%
-  kable_styling(full_width = F) %>%
-  pack_rows('Grade 3', 1, 12) %>%
-  pack_rows('Grade 4', 13, 24) %>%
-  pack_rows('Grade 5', 25, 36) %>%
-  pack_rows('Grade 6', 37, 48) %>%
-  pack_rows('Grade 7', 49, 60) %>%
-  pack_rows('Grade 8', 61, 72) %>%
-  pack_rows('Grade 11', 73, 84)
+eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:14){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+  colnames(eff)[3]="Cohen's D (No - Yes)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
 ```
 
-## Grade x Tier x LEP
+### Appendix (LEP)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -164,31 +217,47 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
-## Grade x Tier x Disability
+## Free Reduced Lunch
+
+Text summarizing the No - Yes difference for FRL (effect sizes can be used)...
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
-tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$Disability), mat = T)
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$fr_lunch), mat = T)
 tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
 tab <- tab[with(tab, order(group1, group2)),]
-tab <- tab[c(25:168, 1:24),]
+tab <- tab[c(5:28, 1:4),]
 tab <- tab[,-1]
 
-colnames(tab) <- c('Tier', 'Disability', 'N', 'Mean', 'SD')
+colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
 
-tab %>%
-  kable(digits = 2, row.names = FALSE) %>%
-  kable_styling(full_width = F) %>%
-  pack_rows('Grade 3', 1, 24) %>%
-  pack_rows('Grade 4', 25, 48) %>%
-  pack_rows('Grade 5', 49, 72) %>%
-  pack_rows('Grade 6', 73, 96) %>%
-  pack_rows('Grade 7', 97, 120) %>%
-  pack_rows('Grade 8', 121, 144) %>%
-  pack_rows('Grade 11', 145, 168)
+eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:14){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+  colnames(eff)[3]="Cohen's D (No - Yes)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
+  
 ```
 
-## Grade x Tier x FRL
+### Appendix (FRL)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -212,10 +281,101 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
+
+## Disability
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$Disability), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(25:168, 1:24),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Disability', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 24) %>%
+  pack_rows('Grade 4', 25, 48) %>%
+  pack_rows('Grade 5', 49, 72) %>%
+  pack_rows('Grade 6', 73, 96) %>%
+  pack_rows('Grade 7', 97, 120) %>%
+  pack_rows('Grade 8', 121, 144) %>%
+  pack_rows('Grade 11', 145, 168)
+```
+
+
+## Ethnicity
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$ethnicity), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(13:84, 1:12),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Etnicity', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 12) %>%
+  pack_rows('Grade 4', 13, 24) %>%
+  pack_rows('Grade 5', 25, 36) %>%
+  pack_rows('Grade 6', 37, 48) %>%
+  pack_rows('Grade 7', 49, 60) %>%
+  pack_rows('Grade 8', 61, 72) %>%
+  pack_rows('Grade 11', 73, 84)
+```
+
+
 # Math
 
 
-## Grade x Tier x Sex
+## Sex
+
+
+Text summarizing the Female - Male difference (effect sizes can be used)...
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$Gender),mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
+
+eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:14){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+  colnames(eff)[3]="Cohen's D (Female - Male)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
+```
+
+### Appendix (Sex)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -237,34 +397,52 @@ tab %>%
   pack_rows('Grade 7', 17, 20) %>%
   pack_rows('Grade 8', 21, 24) %>%
   pack_rows('Grade 11', 25, 28)
+
 ```
 
 
-## Grade x Tier x Ethnicity
+## Limited English Proficiency
+
+Text summarizing the No - Yes difference for LEP (effect sizes can be used)...
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
-tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$ethnicity), mat = T)
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$lep), mat = T)
 tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
 tab <- tab[with(tab, order(group1, group2)),]
-tab <- tab[c(13:84, 1:12),]
+tab <- tab[c(5:nrow(tab), 1:4),]
 tab <- tab[,-1]
 
-colnames(tab) <- c('Tier', 'Etnicity', 'N', 'Mean', 'SD')
+colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
 
-tab %>%
-  kable(digits = 2, row.names = FALSE) %>%
-  kable_styling(full_width = F) %>%
-  pack_rows('Grade 3', 1, 12) %>%
-  pack_rows('Grade 4', 13, 24) %>%
-  pack_rows('Grade 5', 25, 36) %>%
-  pack_rows('Grade 6', 37, 48) %>%
-  pack_rows('Grade 7', 49, 60) %>%
-  pack_rows('Grade 8', 61, 72) %>%
-  pack_rows('Grade 11', 73, 84)
+
+eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:14){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+  colnames(eff)[3]="Cohen's D (No - Yes)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
+
 ```
 
-## Grade x Tier x LEP
+### Appendix (LEP)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -288,7 +466,96 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
-## Grade x Tier x Disability
+## Free Reduced Lunch
+
+Text summarizing the No - Yes difference for FRL (effect sizes can be used)...
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$fr_lunch), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
+
+eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:14){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+  colnames(eff)[3]="Cohen's D (No - Yes)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
+```
+
+
+### Appendix (FRL)
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$fr_lunch), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:28, 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 4) %>%
+  pack_rows('Grade 4', 5, 8) %>%
+  pack_rows('Grade 5', 9, 12) %>%
+  pack_rows('Grade 6', 13, 16) %>%
+  pack_rows('Grade 7', 17, 20) %>%
+  pack_rows('Grade 8', 21, 24) %>%
+  pack_rows('Grade 11', 25, 28)
+```
+
+
+## Ethnicity
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$ethnicity), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(13:84, 1:12),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Etnicity', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2, row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 3', 1, 12) %>%
+  pack_rows('Grade 4', 13, 24) %>%
+  pack_rows('Grade 5', 25, 36) %>%
+  pack_rows('Grade 6', 37, 48) %>%
+  pack_rows('Grade 7', 49, 60) %>%
+  pack_rows('Grade 8', 61, 72) %>%
+  pack_rows('Grade 11', 73, 84)
+```
+
+## Disability
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -313,33 +580,53 @@ tab %>%
   pack_rows('Grade 11', 145, 168)
 ```
 
-## Grade x Tier x FRL
-
-```{r, eval = TRUE, echo = FALSE, results = 'asis'}
-
-tab <- describeBy(math3$Scaled.Score, list(math3$Grade, math3$Tier, math3$fr_lunch), mat = T)
-tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
-tab <- tab[with(tab, order(group1, group2)),]
-tab <- tab[c(5:28, 1:4),]
-tab <- tab[,-1]
-
-colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
-
-tab %>%
-  kable(digits = 2, row.names = FALSE) %>%
-  kable_styling(full_width = F) %>%
-  pack_rows('Grade 3', 1, 4) %>%
-  pack_rows('Grade 4', 5, 8) %>%
-  pack_rows('Grade 5', 9, 12) %>%
-  pack_rows('Grade 6', 13, 16) %>%
-  pack_rows('Grade 7', 17, 20) %>%
-  pack_rows('Grade 8', 21, 24) %>%
-  pack_rows('Grade 11', 25, 28)
-```
 
 # Science
 
-## Grade x Tier x Sex
+## Sex
+
+Text summarizing the Female - Male difference (effect sizes can be used)...
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(science3$Scaled.Score,
+                  list(science3$Grade,
+                       science3$Tier,
+                       science3$Gender), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:nrow(tab), 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
+
+eff <- data.frame(Grade = c(4,4,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:6){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+  colnames(eff)[3]="Cohen's D (Female - Male)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
+  
+```
+
+### Appendix (Sex)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -362,8 +649,67 @@ tab %>%
   pack_rows('Grade 11', 9, 12)
 ```
 
+## Limited English Proficiency
 
-## Grade x Tier x Ethnicity
+Text summarizing the No - Yes difference for LEP (effect sizes can be used)...
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(science3$Scaled.Score, list(science3$Grade, science3$Tier, science3$lep), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:nrow(tab), 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
+
+eff <- data.frame(Grade = c(4,4,8,8,11,11), 
+                  Tier  = c(1,2,1,2,1,2),
+                  Cohen.d=NA)
+
+for(i in 1:6){
+  
+  n1 = tab[2*i-1,]$N
+  m1 = tab[2*i-1,]$Mean
+  s1 = tab[2*i-1,]$SD
+  
+  
+  n2 = tab[2*i,]$N
+  m2 = tab[2*i,]$Mean
+  s2 = tab[2*i,]$SD
+  
+  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+}
+
+  colnames(eff)[3]="Cohen's D (No - Yes)"
+  
+  eff %>%
+  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable_styling(full_width = F)
+
+```
+
+### Appendix (LEP)
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis'}
+
+tab <- describeBy(science3$Scaled.Score, list(science3$Grade, science3$Tier, science3$lep), mat = T)
+tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
+tab <- tab[with(tab, order(group1, group2)),]
+tab <- tab[c(5:nrow(tab), 1:4),]
+tab <- tab[,-1]
+
+colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
+
+tab %>%
+  kable(digits = 2,row.names = FALSE) %>%
+  kable_styling(full_width = F) %>%
+  pack_rows('Grade 4', 1, 4) %>%
+  pack_rows('Grade 8', 5, 8) %>%
+  pack_rows('Grade 11', 9, 12)
+```
+
+## Ethnicity
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
 
@@ -408,27 +754,8 @@ tab %>%
   pack_rows('Grade 11', 25, 36)
 ```
 
-## Grade x Tier x LEP
 
-```{r, eval = TRUE, echo = FALSE, results = 'asis'}
-
-tab <- describeBy(science3$Scaled.Score, list(science3$Grade, science3$Tier, science3$lep), mat = T)
-tab <- tab[,c('group1', 'group2', 'group3', 'n', 'mean', 'sd')]
-tab <- tab[with(tab, order(group1, group2)),]
-tab <- tab[c(5:nrow(tab), 1:4),]
-tab <- tab[,-1]
-
-colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
-
-tab %>%
-  kable(digits = 2,row.names = FALSE) %>%
-  kable_styling(full_width = F) %>%
-  pack_rows('Grade 4', 1, 4) %>%
-  pack_rows('Grade 8', 5, 8) %>%
-  pack_rows('Grade 11', 9, 12)
-```
-
-## Grade x Tier x Disability
+## Disability
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
 
