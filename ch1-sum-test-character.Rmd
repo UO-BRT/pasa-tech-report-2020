@@ -2,7 +2,12 @@
 title: 'Chapter 1: Summary of Test Characteristics'
 author: "BRT"
 date: "8/14/2020"
-output: html_document
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: 
+      collapsed: false
 ---
 
 ```{r setup, include=FALSE}

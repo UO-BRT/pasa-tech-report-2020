@@ -2,7 +2,12 @@
 title: "ch4"
 author: "BRT"
 date: "8/19/2020"
-output: html_document
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: 
+      collapsed: false
 ---
 
 ```{r setup, include=FALSE}
@@ -15,7 +20,7 @@ A number of dimensions are considered in the content covered across AECs. First,
 **Summary of Alternate Eligible Content (AECs) by Item Code, Content Category, and Tier**  
 In English Language Arts, four categories of content are included: Literature, Information, Writing, and language. In Mathematics, four content categories are included: numbers and operations, operations and algebra, geometry, and measurement and data. In Science, four categories of content are included: natural science, biology. Physics, and earth-space. In all grades, these items are one of four types (Anchor, LT1, LT2, and Unique) and used in either Tier 1 and/or Tier 2.
 
-See [Appendix 1.7](appendix/App1.7_AEC_By_ItemCodeCntCatELA.pdf), [Appendix 1.8](appendix/App1.8_AEC_By_ItemCodeCntCatMath.pdf), [Appendix 1.9](appendix/App1.9_AEC_By_ItemCodeCntCatSci.pdf)
+See [Appendix 1.7 (ELA)](appendix/App1.7_AEC_By_ItemCodeCntCatELA.pdf), [Appendix 1.8 (Math)](appendix/App1.8_AEC_By_ItemCodeCntCatMath.pdf), [Appendix 1.9 (Science)](appendix/App1.9_AEC_By_ItemCodeCntCatSci.pdf)
 
 **Summary of Appendices/Findings.**  The PASA tests are systematically organized to reflect not only a broad range of Alternate Eligible Content (AECs) in English Language Arts (ELA), Mathematics, and Science) but also a number of content categories to appropriately distinguish these complex constructs. Furthermore, this range is considered across both tiers and four types of items (anchor [A], linking to Tier 1 [LT1], linking to Tier 2 [LT2], and unique [U]). Two problems, however, result in stretching the item bank across so many dimensions: (a) many cells have no or few items, and (b) distinguishing anchor-linking items was unfruitful as both a- and b-parameters were missing where they should have been (A, LT1, and LT2) and present where they should not have been present U). Therefore, to connect the scale to that used last year (2019), all items with a- and b-parameters were used irrespective of designation.
 
