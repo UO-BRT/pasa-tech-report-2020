@@ -1,5 +1,5 @@
 ---
-title: "Chapter 5: Item Fit"
+title: "Item Parameters and Item Fit"
 author: "BRT"
 date: "`r Sys.Date()`"
 output:
@@ -13,7 +13,14 @@ require(knitr)
 require(kableExtra)
 require(here)
 
-#data required to run this chapter is found in /data/ifit
+# Two folders needed under 'data' folder
+
+# /data/ifit, this can be found at this link 
+# /datastore/2020PASA_ScalingAnalysis/ifit
+
+# /data/item-estimates, thi can be found at this link 
+# /datastore/2020PASA_ScalingAnalysis/par-estimates-2020/item-estimates
+
 
 p <- fs::dir_ls(here::here("data", "ifit"))
 
@@ -27,13 +34,24 @@ science <- names[grep('science',names)]
 science <- science[c(3:6,1:2)]
 ```
 
-# Summary of Findings about Item Fit
+# IRT Models for Scaling
 
-Text...
+## Two-parameter Logistic IRT Model for ELA and Mathematics
+
+$$P(Y=1)=\frac{e^{a_j(\theta_i - b_j)}}{1+e^{a_j(\theta_i - b_j)}}$$
+
+## 1-Parameter Logistic IRT Model with Guessing for Science
+
+$$P(Y=1|\theta_i,a, b_j,c_j)=c_j + (1-c_j)\left (\frac{e^{a(\theta_i - b_j)}}{1+e^{a(\theta_i - b_j)}}  \right )$$
 
 
+# Summary of Findings about Item Parameters and Item Fit
 
-# ELA
+
+# APPENDICES
+
+
+## ELA
 
 
 ```{r, eval=TRUE,echo=FALSE, results='asis'}
@@ -45,6 +63,14 @@ for (i in 1:length(ela)) {
   ifit_e[[i]][,4] = round(ifit_e[[i]][,4],3)
   ifit_e[[i]][which(ifit_e[[i]][,4] < .002),4] <- 'p<.002'
   ifit_e[[i]][,5] = round(ifit_e[[i]][,5],3)
+  
+  ipar <- read.csv(here::here("data","item-estimates",ela[[i]]))
+  ipar[,1] <- gsub("-",".",ipar[,1])
+  colnames(ipar)[1] = "Item Label"
+  ifit_e[[i]] = merge(ifit_e[[i]],ipar[,c("Item Label","anchor","a_estimate","b_estimate","g_estimate")])
+  ifit_e[[i]] = ifit_e[[i]][,c(1,6,7,8,9,2,3,4,5)]
+  
+  colnames(ifit_e[[i]])[c(2,3,4,5)] = c("Anchor","Discrimination","Difficulty","Guessing") 
 }
 
 
@@ -61,7 +87,7 @@ for (i in 1:length(ela)) {
 }
 ```
 
-# Math
+## Math
 
 ```{r, eval=TRUE,echo=FALSE, results='asis'}
 
@@ -77,6 +103,15 @@ for (i in 1:length(math)) {
   ifit_m[[i]][,4] = round(ifit_m[[i]][,4],3)
   ifit_m[[i]][which(ifit_m[[i]][,4] < .002),4] <- 'p<.002'
   ifit_m[[i]][,5] = round(ifit_m[[i]][,5],3)
+  
+  ipar <- read.csv(here::here("data","item-estimates",math[[i]]))
+  ipar[,1] <- gsub("-",".",ipar[,1])
+  colnames(ipar)[1] = "Item Label"
+  ifit_m[[i]] = merge(ifit_m[[i]],ipar[,c("Item Label","anchor","a_estimate","b_estimate","g_estimate")])
+  ifit_m[[i]] = ifit_m[[i]][,c(1,6,7,8,9,2,3,4,5)]
+  
+  colnames(ifit_m[[i]])[c(2,3,4,5)] = c("Anchor","Discrimination","Difficulty","Guessing") 
+
 }
 
 
@@ -94,7 +129,7 @@ for (i in 1:length(math)) {
 ```
 
 
-# Science
+## Science
 
 ```{r, eval=TRUE,echo=FALSE, results='asis'}
 
@@ -109,6 +144,16 @@ for (i in 1:length(science)) {
   ifit_s[[i]][,4] = round(ifit_s[[i]][,4],3)
   ifit_s[[i]][which(ifit_s[[i]][,4] < .002),4] <- 'p<.002'
   ifit_s[[i]][,5] = round(ifit_s[[i]][,5],3)
+  
+  
+  ipar <- read.csv(here::here("data","item-estimates",science[[i]]))
+  ipar[,1] <- gsub("-",".",ipar[,1])
+  colnames(ipar)[1] = "Item Label"
+  ifit_s[[i]] = merge(ifit_s[[i]],ipar[,c("Item Label","anchor","a_estimate","b_estimate","g_estimate")])
+  ifit_s[[i]] = ifit_s[[i]][,c(1,6,7,8,9,2,3,4,5)]
+  
+  colnames(ifit_s[[i]])[c(2,3,4,5)] = c("Anchor","Discrimination","Difficulty","Guessing") 
+
 }
 
 
