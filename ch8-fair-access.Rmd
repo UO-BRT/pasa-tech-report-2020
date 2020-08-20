@@ -86,11 +86,14 @@ ela3$fr_lunch <- ifelse(ela3$fr_lunch == 0,'NO', 'YES')
 math3$fr_lunch <- ifelse(math3$fr_lunch == 0,'NO', 'YES')
 ```
 
-# ELA
+As noted in the Standards for Educational and Psychological Testing, Standard 3.3 specifies that “Those responsible for test development should include relevant subgroups in validity, reliability/precision, and other preliminary studies used when constructing the test” (p. 64). This argument is expanded to include reporting outcomes by relevant subgroups, noting however, that “subgroup differences do not in and of themselves indicate lack of fairness, but such differences should trigger follow-up studies, where feasible, to identify the potential causes of such differences” (p. 65). American Educational Research Association, American Psychological Association, National Council on Measurement in Education (2014). Standards for Educational and Psychological Testing. Washington, DC: Authors. This evaluation was completed by comparing the performance (by subject area, grade level, and Tier) for the following student groups: (a) sex, (b) race-ethnicity, (c) (Limited) English Proficiency, (d) disability, and (e) free-reduced price lunch. This evaluation involved comparing student counts and average differences (using the mean relative to the standard deviation). The tables are displayed in an appendix.  
+
+
+# English Language Arts
 
 ## Sex
 
-Text summarizing the female-male difference (effect sizes can be used)...
+Few differences were reported by sex. Most of the student counts, averages, and standard deviations were similar for males and females. In Tier 2, slight difference (half a standard deviation) were present in the earlier (elementary) grades.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -104,29 +107,26 @@ colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:14){
+for (i in 1:14) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
-  
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-
-  colnames(eff)[3]="Cohen's D (Female - Male)"
+  colnames(eff)[3] = "Cohen's D (Female - Male)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
-
 ```
 
 ### Appendix (SEX)
@@ -152,11 +152,9 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
-
 ## Limited English Proficiency
 
-Text summarizing the No - Yes difference for LEP (effect sizes can be used)...
-
+With Limited English Proficiency (coded as No versus Yes) within Tiers and grade levels, few differences were apparent in averages and standard deviations. On the other hand, as expected, great differences were present in the number of students (count) in these two groups.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -170,26 +168,25 @@ colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:14){
+for (i in 1:14) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
-  
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-  colnames(eff)[3]="Cohen's D (No - Yes)"
+  colnames(eff)[3] = "Cohen's D (No - Yes)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
 ```
 
@@ -219,7 +216,7 @@ tab %>%
 
 ## Free Reduced Lunch
 
-Text summarizing the No - Yes difference for FRL (effect sizes can be used)...
+For the analyses comparing students receiving free and reduced price lunch, slightly higher performances were present for those not receiving such support; this was true across grades and as well as Tiers.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -233,26 +230,25 @@ colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:14){
+for (i in 1:14) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
-  
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-  colnames(eff)[3]="Cohen's D (No - Yes)"
+  colnames(eff)[3] = "Cohen's D (No - Yes)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
   
 ```
@@ -281,8 +277,9 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
-
 ## Disability
+
+Like race-ethnicity (which had many different coded values), the analysis by disability resulted in great variation in counts, averages, and standard deviations. The two most present disabilities were Autism and Intellectual Disabilities, with Multiple Disabilities also quite prominent. This was true for both Tiers and across grade levels.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -306,8 +303,9 @@ tab %>%
   pack_rows('Grade 11', 145, 168)
 ```
 
-
 ## Ethnicity
+
+When comparing the performance of students from different racial and ethnic groups, across the grade levels and Tiers, considerable variation was present in all aspects of count (number of students), averages, and standard deviations.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -332,13 +330,11 @@ tab %>%
 ```
 
 
-# Math
-
+# Mathematics
 
 ## Sex
 
-
-Text summarizing the Female - Male difference (effect sizes can be used)...
+We found more males participating in the PASA than females, sometimes double the number. This was true across grades and Tiers. Furthermore, performance differences were slightly greater for males than females, across grades and Tiers. Both males and females had similar variance (standard deviations).
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -352,26 +348,26 @@ colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:14){
+for (i in 1:14) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-  colnames(eff)[3]="Cohen's D (Female - Male)"
+  colnames(eff)[3] = "Cohen's D (Female - Male)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
 ```
 
@@ -397,13 +393,11 @@ tab %>%
   pack_rows('Grade 7', 17, 20) %>%
   pack_rows('Grade 8', 21, 24) %>%
   pack_rows('Grade 11', 25, 28)
-
 ```
-
 
 ## Limited English Proficiency
 
-Text summarizing the No - Yes difference for LEP (effect sizes can be used)...
+Limited English Proficient students, though fewer than the number of students deemed proficient, performed equally as well to those proficient, in all grades and Tiers; the variance in these two groups was comparable.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -418,28 +412,27 @@ colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:14){
+for (i in 1:14) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-  colnames(eff)[3]="Cohen's D (No - Yes)"
+  colnames(eff)[3] = "Cohen's D (No - Yes)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
-
 ```
 
 ### Appendix (LEP)
@@ -468,7 +461,7 @@ tab %>%
 
 ## Free Reduced Lunch
 
-Text summarizing the No - Yes difference for FRL (effect sizes can be used)...
+Students receiving free and reduced price lunch performed comparably to students who did not receive such support. The count of students in both groups was much greater in Tier 1. Though fewer in number (by half), the averages and standard deviations were quite similar with those receiving support often a bit higher (by a half standard deviation).
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -482,29 +475,28 @@ colnames(tab) <- c('Tier', 'FRL', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(3,3,4,4,5,5,6,6,7,7,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2,1,2,1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:14){
+for (i in 1:14) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-  colnames(eff)[3]="Cohen's D (No - Yes)"
+  colnames(eff)[3] = "Cohen's D (No - Yes)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
 ```
-
 
 ### Appendix (FRL)
 
@@ -530,8 +522,9 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
-
 ## Ethnicity
+
+The largest group of students were White, followed by Black/African American, and finally Hispanic students. This was true for all grades and Tiers. Wide variation existed in both the averages and standard deviations.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -556,6 +549,8 @@ tab %>%
 ```
 
 ## Disability
+
+The largest group of students were with Intellectual Disabilities or Autism, followed by Multiple Disabilities. Great variation was present in averages and standard divisions. Many disabilities had very few students participating in the PASA.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -585,7 +580,7 @@ tab %>%
 
 ## Sex
 
-Text summarizing the Female - Male difference (effect sizes can be used)...
+In most grades and Tiers, far more males than females participated in the Science PASA and for both groups, more students took Tier 2 than Tier 1. Their performance (averages and standard deviations) were comparable.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -602,26 +597,26 @@ colnames(tab) <- c('Tier', 'Sex', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(4,4,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:6){
+for (i in 1:6) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-  colnames(eff)[3]="Cohen's D (Female - Male)"
+  colnames(eff)[3] = "Cohen's D (Female - Male)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
   
 ```
@@ -651,7 +646,7 @@ tab %>%
 
 ## Limited English Proficiency
 
-Text summarizing the No - Yes difference for LEP (effect sizes can be used)...
+The number of students with Limited English Proficiency was fairly small and much less than those with English proficiency. Both groups performed comparably (in averages and standard deviations) across the grades and Tiers.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -665,28 +660,26 @@ colnames(tab) <- c('Tier', 'LEP', 'N', 'Mean', 'SD')
 
 eff <- data.frame(Grade = c(4,4,8,8,11,11), 
                   Tier  = c(1,2,1,2,1,2),
-                  Cohen.d=NA)
+                  Cohen.d = NA)
 
-for(i in 1:6){
+for (i in 1:6) {
   
-  n1 = tab[2*i-1,]$N
-  m1 = tab[2*i-1,]$Mean
-  s1 = tab[2*i-1,]$SD
-  
+  n1 = tab[2*i - 1,]$N
+  m1 = tab[2*i - 1,]$Mean
+  s1 = tab[2*i - 1,]$SD
   
   n2 = tab[2*i,]$N
   m2 = tab[2*i,]$Mean
   s2 = tab[2*i,]$SD
   
-  eff[i,3] = (m1-m2)/sqrt((s1^2 + s2^2)/2)
+  eff[i,3] = (m1 - m2)/sqrt((s1^2 + s2^2)/2)
 }
 
-  colnames(eff)[3]="Cohen's D (No - Yes)"
+  colnames(eff)[3] = "Cohen's D (No - Yes)"
   
   eff %>%
-  kable(digits = 2, row.names = FALSE,align='c') %>%
+  kable(digits = 2, row.names = FALSE,align = 'c') %>%
   kable_styling(full_width = F)
-
 ```
 
 ### Appendix (LEP)
@@ -710,6 +703,8 @@ tab %>%
 ```
 
 ## Ethnicity
+
+The count was greatest with White, then Black-African American, and Hispanic students. Values (averages and standard deviations) were slightly varied across the grades and Tiers but not as much as in ELA and Mathematics.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
 
@@ -754,8 +749,9 @@ tab %>%
   pack_rows('Grade 11', 25, 36)
 ```
 
-
 ## Disability
+
+As in ELA and Mathematics, the count of students was greatest with Autism and Intellectual Disabilities. Performance was somewhat varied (in averaged and standard deviations) across the grades and Tiers. Some disability areas were represented with only a few students, making it difficult to generalize.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
 
