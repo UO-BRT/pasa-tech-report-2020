@@ -779,7 +779,7 @@ tab %>%
 
 The table below shows the participation in the 2019-2020 PASA ELA, Math, and Science content areas by school district.  
 
-```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
+```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
 
 enroll_raw <- rio::import(here("data", "score", "PASA Enrollment final 2020.csv")) %>%
   as_tibble() %>%
