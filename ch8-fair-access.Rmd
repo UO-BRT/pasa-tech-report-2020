@@ -420,7 +420,7 @@ tab %>%
 
 ## Grade x Tier x Disability
 
-```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE}
+```{r, eval = TRUE, include = FALSE, echo = TRUE, results = 'asis', warning = FALSE}
 
 tab <- describeBy(science3$Scaled.Score, list(science3$Grade, science3$Tier, science3$Disability), mat = T)
 tab <- tab[,c('group1','group2','group3','n','mean','sd')]
