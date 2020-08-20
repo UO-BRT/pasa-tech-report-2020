@@ -17,10 +17,13 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -106,33 +109,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 61px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 66px;
+  margin-top: -66px;
 }
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 66px;
+  margin-top: -66px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 66px;
+  margin-top: -66px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 66px;
+  margin-top: -66px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 66px;
+  margin-top: -66px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 66px;
+  margin-top: -66px;
 }
 .dropdown-submenu {
   position: relative;
@@ -252,6 +255,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -259,6 +331,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -335,27 +417,40 @@ $(document).ready(function () {
 </div>
 
 
-<div id="irt-models-for-scaling" class="section level1">
-<h1>IRT Models for Scaling</h1>
-<div id="two-parameter-logistic-irt-model-for-ela-and-mathematics" class="section level2">
-<h2>Two-parameter Logistic IRT Model for ELA and Mathematics</h2>
+<div id="irt-models-for-scaling" class="section level2">
+<h2>IRT Models for Scaling</h2>
+<div id="ela-mathematics-2pl-irt" class="section level3">
+<h3>ELA &amp; Mathematics: 2PL IRT</h3>
 <p><span class="math display">\[P(Y=1)=\frac{e^{a_j(\theta_i - b_j)}}{1+e^{a_j(\theta_i - b_j)}}\]</span></p>
 </div>
-<div id="parameter-logistic-irt-model-with-guessing-for-science" class="section level2">
-<h2>1-Parameter Logistic IRT Model with Guessing for Science</h2>
+<div id="science-1pl-irt-w-guessing" class="section level3">
+<h3>Science: 1PL IRT w/ Guessing</h3>
 <p><span class="math display">\[P(Y=1|\theta_i,a, b_j,c_j)=c_j + (1-c_j)\left (\frac{e^{a(\theta_i - b_j)}}{1+e^{a(\theta_i - b_j)}}  \right )\]</span></p>
 </div>
 </div>
-<div id="summary-of-findings-about-item-parameters-and-item-fit" class="section level1">
-<h1>Summary of Findings about Item Parameters and Item Fit</h1>
-</div>
-<div id="appendices" class="section level1">
-<h1>APPENDICES</h1>
-<div id="ela" class="section level2">
-<h2>ELA</h2>
-</div>
-<div id="grade-3---tier-1" class="section level2">
-<h2>Grade 3 - Tier 1</h2>
+<div id="item-parameter-and-fit-summary" class="section level2">
+<h2>Item Parameter and Fit Summary</h2>
+<div id="ela" class="section level3">
+<h3>ELA</h3>
+<p>Item parameters and fit statistics are summariazed by content area, grade, and tier for all PASA tests in the tables, below. RMSEA, the root mean square error of approximation, offers an indication of item fit to the two-parameter logistic (2PL) IRT models used in scaling ELA and Math, and the one-parameter logistic (2PL) IRT model with guessing parameter used in scaling Science. For RMSEA, values of 0.01, 0.05 and 0.08 indicate excellent, good, and mediocre fit, respectively. RMSEA item fit statistics are summariazed for each ELA test as follows:</p>
+<ul>
+<li><strong>Grade 3, Tier 1:</strong> <em>Range</em> = 0.00 to 0.06; <em>M</em> = 0.017</li>
+<li><strong>Grade 3, Tier 2:</strong> <em>Range</em> = 0.00 to 0.14; <em>M</em> = 0.045; items E03AV4.1.1a.10, E03AV4.1.1b.4, and E03AV4.1.2a.7 exhibited poor fit, RMSEA ≥ 0.13; the fit of item E03C1.3.1a.2 was not estimable</li>
+<li><strong>Grade 4, Tier 1:</strong> <em>Range</em> = 0.00 to 0.04; <em>M</em> = 0.015</li>
+<li><strong>Grade 4, Tier 2:</strong> <em>Range</em> = 0.00 to 0.06; <em>M</em> = 0.017</li>
+<li><strong>Grade 5, Tier 1:</strong> <em>Range</em> = 0.00 to 0.08; <em>M</em> = 0.014</li>
+<li><strong>Grade 5, Tier 2:</strong> <em>Range</em> = 0.00 to 0.05; <em>M</em> = 0.012</li>
+<li><strong>Grade 6, Tier 1:</strong> <em>Range</em> = 0.00 to 0.07; <em>M</em> = 0.019</li>
+<li><strong>Grade 6, Tier 2:</strong> <em>Range</em> = 0.00 to 0.04; <em>M</em> = 0.014</li>
+<li><strong>Grade 7, Tier 1:</strong> <em>Range</em> = 0.00 to 0.13; <em>M</em> = 0.025; item E07AK1.1.1c.3 exhibited poor fit, RMSEA = 0.13</li>
+<li><strong>Grade 7, Tier 2:</strong> <em>Range</em> = 0.00 to 0.09; <em>M</em> = 0.025; items E07AK1.1.1a.8 and E07AV4.1.1a.9 exhibited poor fit, RMSEA = 0.09</li>
+<li><strong>Grade 8, Tier 1:</strong> <em>Range</em> = 0.00 to 0.08; <em>M</em> = 0.020</li>
+<li><strong>Grade 8, Tier 2:</strong> <em>Range</em> = 0.00 to 0.04; <em>M</em> = 0.016</li>
+<li><strong>Grade 11, Tier 1:</strong> <em>Range</em> = 0.00 to 0.04; <em>M</em> = 0.013</li>
+<li><strong>Grade 11, Tier 2:</strong> <em>Range</em> = 0.00 to 0.05; <em>M</em> = 0.013</li>
+</ul>
+<div id="grade-3---tier-1" class="section level4">
+<h4>Grade 3 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1262,8 +1357,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-3---tier-2" class="section level2">
-<h2>Grade 3 - Tier 2</h2>
+<div id="grade-3---tier-2" class="section level4">
+<h4>Grade 3 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2170,8 +2265,8 @@ TRUE
 </tbody>
 </table>
 </div>
-<div id="grade-4---tier-1" class="section level2">
-<h2>Grade 4 - Tier 1</h2>
+<div id="grade-4---tier-1" class="section level4">
+<h4>Grade 4 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3078,8 +3173,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-4---tier-2" class="section level2">
-<h2>Grade 4 - Tier 2</h2>
+<div id="grade-4---tier-2" class="section level4">
+<h4>Grade 4 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -3986,8 +4081,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-5---tier-1" class="section level2">
-<h2>Grade 5 - Tier 1</h2>
+<div id="grade-5---tier-1" class="section level4">
+<h4>Grade 5 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -4076,7 +4171,7 @@ FALSE
 0.036
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -4250,7 +4345,7 @@ FALSE
 0.036
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -4685,7 +4780,7 @@ FALSE
 0.034
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -4894,8 +4989,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-5---tier-2" class="section level2">
-<h2>Grade 5 - Tier 2</h2>
+<div id="grade-5---tier-2" class="section level4">
+<h4>Grade 5 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -5216,7 +5311,7 @@ FALSE
 0.331
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -5802,8 +5897,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-6---tier-1" class="section level2">
-<h2>Grade 6 - Tier 1</h2>
+<div id="grade-6---tier-1" class="section level4">
+<h4>Grade 6 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6710,8 +6805,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-6---tier-2" class="section level2">
-<h2>Grade 6 - Tier 2</h2>
+<div id="grade-6---tier-2" class="section level4">
+<h4>Grade 6 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -6916,7 +7011,7 @@ FALSE
 0.16
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -7029,7 +7124,7 @@ TRUE
 19
 </td>
 <td style="text-align:right;">
-0.17
+0.18
 </td>
 <td style="text-align:right;">
 0.02
@@ -7406,7 +7501,7 @@ TRUE
 20
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 <td style="text-align:right;">
 0.04
@@ -7618,8 +7713,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-7---tier-1" class="section level2">
-<h2>Grade 7 - Tier 1</h2>
+<div id="grade-7---tier-1" class="section level4">
+<h4>Grade 7 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -8491,7 +8586,7 @@ FALSE
 0.066
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -8526,8 +8621,8 @@ p&lt;.002
 </tbody>
 </table>
 </div>
-<div id="grade-7---tier-2" class="section level2">
-<h2>Grade 7 - Tier 2</h2>
+<div id="grade-7---tier-2" class="section level4">
+<h4>Grade 7 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -9434,8 +9529,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-8---tier-1" class="section level2">
-<h2>Grade 8 - Tier 1</h2>
+<div id="grade-8---tier-1" class="section level4">
+<h4>Grade 8 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -10342,8 +10437,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-8---tier-2" class="section level2">
-<h2>Grade 8 - Tier 2</h2>
+<div id="grade-8---tier-2" class="section level4">
+<h4>Grade 8 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -11250,8 +11345,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-11---tier-1" class="section level2">
-<h2>Grade 11 - Tier 1</h2>
+<div id="grade-11---tier-1" class="section level4">
+<h4>Grade 11 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -11427,7 +11522,7 @@ FALSE
 0.12
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -11627,7 +11722,7 @@ FALSE
 21
 </td>
 <td style="text-align:right;">
-0.09
+0.08
 </td>
 <td style="text-align:right;">
 0.03
@@ -11804,7 +11899,7 @@ FALSE
 0.30
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -12158,8 +12253,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-11---tier-2" class="section level2">
-<h2>Grade 11 - Tier 2</h2>
+<div id="grade-11---tier-2" class="section level4">
+<h4>Grade 11 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -12712,7 +12807,7 @@ FALSE
 0.21
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -13066,11 +13161,28 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="math" class="section level2">
-<h2>Math</h2>
 </div>
-<div id="grade-3---tier-1-1" class="section level2">
-<h2>Grade 3 - Tier 1</h2>
+<div id="math" class="section level3">
+<h3>Math</h3>
+<p>RMSEA item fit statistics are summariazed for each Math test as follows:</p>
+<ul>
+<li><strong>Grade 3, Tier 1:</strong> <em>Range</em> = 0.00 to 0.04; <em>M</em> = 0.018</li>
+<li><strong>Grade 3, Tier 2:</strong> <em>Range</em> = 0.00 to 0.09; <em>M</em> = 0.037; item EM03DM1.2.1a.5 exhibited poor fit, RMSEA = 0.09</li>
+<li><strong>Grade 4, Tier 1:</strong> <em>Range</em> = 0.00 to 0.04; <em>M</em> = 0.017</li>
+<li><strong>Grade 4, Tier 2:</strong> <em>Range</em> = 0.00 to 0.18; <em>M</em> = 0.038; items M04AT1.1.3a.2 and M04CG1.1.2a.6 exhibited poor fit, RMSEA = 0.18 and 0.11, respectively</li>
+<li><strong>Grade 5, Tier 1:</strong> <em>Range</em> = 0.00 to 0.04; <em>M</em> = 0.020</li>
+<li><strong>Grade 5, Tier 2:</strong> <em>Range</em> = 0.00 to 0.06; <em>M</em> = 0.024</li>
+<li><strong>Grade 6, Tier 1:</strong> <em>Range</em> = 0.00 to 0.06; <em>M</em> = 0.020</li>
+<li><strong>Grade 6, Tier 2:</strong> <em>Range</em> = 0.00 to 0.12; <em>M</em> = 0.026; item M06AR112a_2019.1 exhibited poor fit</li>
+<li><strong>Grade 7, Tier 1:</strong> <em>Range</em> = 0.00 to 0.07; <em>M</em> = 0.027</li>
+<li><strong>Grade 7, Tier 2:</strong> <em>Range</em> = 0.00 to 0.07; <em>M</em> = 0.020</li>
+<li><strong>Grade 8, Tier 1:</strong> <em>Range</em> = 0.00 to 0.12; <em>M</em> = 0.028; item M08BF2.1.1a.22 exhibited poor fit</li>
+<li><strong>Grade 8, Tier 2:</strong> <em>Range</em> = 0.00 to 0.05; <em>M</em> = 0.015</li>
+<li><strong>Grade 11, Tier 1:</strong> <em>Range</em> = 0.00 to 0.08; <em>M</em> = 0.027</li>
+<li><strong>Grade 11, Tier 2:</strong> <em>Range</em> = 0.00 to 0.07; <em>M</em> = 0.013; the fit of items CC.2.3.HSA13a.15 and CC23HSA13a_2019.1 were not estimable</li>
+</ul>
+<div id="grade-3---tier-1-1" class="section level4">
+<h4>Grade 3 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -13478,7 +13590,7 @@ FALSE
 0.016
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -13570,6 +13682,35 @@ FALSE
 </tr>
 <tr>
 <td style="text-align:left;">
+M03CG111a_2019.3
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:right;">
+2.32
+</td>
+<td style="text-align:right;">
+-1.02
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+29.22
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+0.033
+</td>
+<td style="text-align:right;">
+0.02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 M03CG111a.2020.1.1
 </td>
 <td style="text-align:left;">
@@ -13595,35 +13736,6 @@ FALSE
 </td>
 <td style="text-align:right;">
 0.00
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-M03CG111a_2019.3
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-2.32
-</td>
-<td style="text-align:right;">
--1.02
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-29.22
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:left;">
-0.033
-</td>
-<td style="text-align:right;">
-0.03
 </td>
 </tr>
 <tr>
@@ -13826,7 +13938,7 @@ FALSE
 0.024
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -13977,8 +14089,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-3---tier-2-1" class="section level2">
-<h2>Grade 3 - Tier 2</h2>
+<div id="grade-3---tier-2-1" class="section level4">
+<h4>Grade 3 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -14885,8 +14997,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-4---tier-1-1" class="section level2">
-<h2>Grade 4 - Tier 1</h2>
+<div id="grade-4---tier-1-1" class="section level4">
+<h4>Grade 4 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -15671,7 +15783,7 @@ FALSE
 0.199
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -15793,8 +15905,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-4---tier-2-1" class="section level2">
-<h2>Grade 4 - Tier 2</h2>
+<div id="grade-4---tier-2-1" class="section level4">
+<h4>Grade 4 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -15999,7 +16111,7 @@ FALSE
 0.002
 </td>
 <td style="text-align:right;">
-0.17
+0.18
 </td>
 </tr>
 <tr>
@@ -16701,8 +16813,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-5---tier-1-1" class="section level2">
-<h2>Grade 5 - Tier 1</h2>
+<div id="grade-5---tier-1-1" class="section level4">
+<h4>Grade 5 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -16849,7 +16961,7 @@ FALSE
 0.246
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -17023,7 +17135,7 @@ FALSE
 0.041
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -17609,8 +17721,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-5---tier-2-1" class="section level2">
-<h2>Grade 5 - Tier 2</h2>
+<div id="grade-5---tier-2-1" class="section level4">
+<h4>Grade 5 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -18517,8 +18629,8 @@ p&lt;.002
 </tbody>
 </table>
 </div>
-<div id="grade-6---tier-1-1" class="section level2">
-<h2>Grade 6 - Tier 1</h2>
+<div id="grade-6---tier-1-1" class="section level4">
+<h4>Grade 6 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -19332,7 +19444,7 @@ FALSE
 0.249
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -19425,8 +19537,8 @@ TRUE
 </tbody>
 </table>
 </div>
-<div id="grade-6---tier-2-1" class="section level2">
-<h2>Grade 6 - Tier 2</h2>
+<div id="grade-6---tier-2-1" class="section level4">
+<h4>Grade 6 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -19631,7 +19743,7 @@ FALSE
 0.19
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -20211,7 +20323,7 @@ TRUE
 0.173
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -20333,8 +20445,8 @@ TRUE
 </tbody>
 </table>
 </div>
-<div id="grade-7---tier-1-1" class="section level2">
-<h2>Grade 7 - Tier 1</h2>
+<div id="grade-7---tier-1-1" class="section level4">
+<h4>Grade 7 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -20368,6 +20480,35 @@ RMSEA
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+M07AN1.1.1a_2019_T1.1
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:right;">
+1.34
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+31.30
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:left;">
+0.018
+</td>
+<td style="text-align:right;">
+0.03
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 M07AN1.1.1a.13
@@ -20486,35 +20627,6 @@ FALSE
 </tr>
 <tr>
 <td style="text-align:left;">
-M07AN1.1.1a_2019_T1.1
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-<td style="text-align:right;">
-1.34
-</td>
-<td style="text-align:right;">
-0.21
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-31.30
-</td>
-<td style="text-align:right;">
-17
-</td>
-<td style="text-align:left;">
-0.018
-</td>
-<td style="text-align:right;">
-0.03
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 M07AN1112a_2019.1
 </td>
 <td style="text-align:left;">
@@ -20597,7 +20709,7 @@ FALSE
 0.07
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -20742,7 +20854,7 @@ FALSE
 0.07
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -21241,8 +21353,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-7---tier-2-1" class="section level2">
-<h2>Grade 7 - Tier 2</h2>
+<div id="grade-7---tier-2-1" class="section level4">
+<h4>Grade 7 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -22149,8 +22261,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-8---tier-1-1" class="section level2">
-<h2>Grade 8 - Tier 1</h2>
+<div id="grade-8---tier-1-1" class="section level4">
+<h4>Grade 8 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -22877,7 +22989,7 @@ FALSE
 0.139
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -23057,8 +23169,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-8---tier-2-1" class="section level2">
-<h2>Grade 8 - Tier 2</h2>
+<div id="grade-8---tier-2-1" class="section level4">
+<h4>Grade 8 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -23495,7 +23607,7 @@ FALSE
 0.12
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -23965,8 +24077,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-11---tier-1-1" class="section level2">
-<h2>Grade 11 - Tier 1</h2>
+<div id="grade-11---tier-1-1" class="section level4">
+<h4>Grade 11 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -24055,7 +24167,7 @@ FALSE
 0.34
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -24873,8 +24985,8 @@ p&lt;.002
 </tbody>
 </table>
 </div>
-<div id="grade-11---tier-2-1" class="section level2">
-<h2>Grade 11 - Tier 2</h2>
+<div id="grade-11---tier-2-1" class="section level4">
+<h4>Grade 11 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -24992,7 +25104,7 @@ FALSE
 0.364
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -25781,11 +25893,20 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="science" class="section level2">
-<h2>Science</h2>
 </div>
-<div id="grade-4---tier-1-2" class="section level2">
-<h2>Grade 4 - Tier 1</h2>
+<div id="science" class="section level3">
+<h3>Science</h3>
+<p>RMSEA item fit statistics are summariazed for each Science test as follows:</p>
+<ul>
+<li><strong>Grade 4, Tier 1:</strong> <em>Range</em> = 0.00 to 0.10; <em>M</em> = 0.039; item S4.B.1.1.4.4 exhibited poor fit, RMSEA = 0.10</li>
+<li><strong>Grade 4, Tier 2:</strong> <em>Range</em> = 0.00 to 0.15; <em>M</em> = 0.033; items S4.A.2.2.1.4 and S4.D.1.2.2.3 exhibited poor fit, RMSEA = 0.10 and 0.15, respectively</li>
+<li><strong>Grade 8, Tier 1:</strong> <em>Range</em> = 0.00 to 0.08; <em>M</em> = 0.035</li>
+<li><strong>Grade 8, Tier 2:</strong> <em>Range</em> = 0.00 to 0.12; <em>M</em> = 0.032; items S8.A.2.2.1.6, S8.B.1.1.3.5, and S8.C.2.2.3.6 exhibited poor fit, RMSEA = 0.10, 0.10, and 0.12, respectively</li>
+<li><strong>Grade 11, Tier 1:</strong> <em>Range</em> = 0.00 to 0.12; <em>M</em> = 0.049; items S11.A.2.1.3.6, S11.B.3.1.4a.2, S11.B.3.1.4b.11, and S11.B.3.1.4b.9 exhibited poor fit, RMSEA = ≥ 0.09</li>
+<li><strong>Grade 11, Tier 2:</strong> <em>Range</em> = 0.00 to 0.06; <em>M</em> = 0.023; the fit of item S11.B.1.1.2.6 was not estimable</li>
+</ul>
+<div id="grade-4---tier-1-2" class="section level4">
+<h4>Grade 4 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -26692,8 +26813,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-4---tier-2-2" class="section level2">
-<h2>Grade 4 - Tier 2</h2>
+<div id="grade-4---tier-2-2" class="section level4">
+<h4>Grade 4 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -27188,7 +27309,7 @@ TRUE
 0.103
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -27600,8 +27721,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-8---tier-1-2" class="section level2">
-<h2>Grade 8 - Tier 1</h2>
+<div id="grade-8---tier-1-2" class="section level4">
+<h4>Grade 8 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -28508,8 +28629,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-8---tier-2-2" class="section level2">
-<h2>Grade 8 - Tier 2</h2>
+<div id="grade-8---tier-2-2" class="section level4">
+<h4>Grade 8 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -29416,8 +29537,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-11---tier-1-2" class="section level2">
-<h2>Grade 11 - Tier 1</h2>
+<div id="grade-11---tier-1-2" class="section level4">
+<h4>Grade 11 - Tier 1</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -30324,8 +30445,8 @@ FALSE
 </tbody>
 </table>
 </div>
-<div id="grade-11---tier-2-2" class="section level2">
-<h2>Grade 11 - Tier 2</h2>
+<div id="grade-11---tier-2-2" class="section level4">
+<h4>Grade 11 - Tier 2</h4>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -30646,7 +30767,7 @@ FALSE
 0.317
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -30791,7 +30912,7 @@ FALSE
 0.142
 </td>
 <td style="text-align:right;">
-0.03
+0.02
 </td>
 </tr>
 <tr>
@@ -30849,7 +30970,7 @@ FALSE
 0.313
 </td>
 <td style="text-align:right;">
-0.01
+0.02
 </td>
 </tr>
 <tr>
@@ -31233,9 +31354,12 @@ FALSE
 </table>
 </div>
 </div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -31268,6 +31392,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
