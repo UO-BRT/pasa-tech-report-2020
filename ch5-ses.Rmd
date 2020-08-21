@@ -126,7 +126,7 @@ walk2(se_table,
 
 # theta and SE from p_files
 
-i_files <- fs::dir_ls("W:datastore/2020PASA_ScalingAnalysis/par-estimates-2020/item-estimates")
+i_files <- fs::dir_ls(here::here("data", "item-estimates"))
 
  
 i <- map_df(i_files, read_csv, .id = "file") %>%
