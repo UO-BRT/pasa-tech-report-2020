@@ -86,7 +86,6 @@ for (i in 1:length(ela)) {
   colnames(ifit_e[[i]])[c(2,3,4,5)] = c("Anchor","Discrimination","Difficulty","Guessing") 
 }
 
-
 ind1 <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
 ind2 <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
 
@@ -121,7 +120,6 @@ RMSEA item fit statistics are summarized, with the range, mean, and potentially 
 
 ```{r, eval=TRUE,echo=FALSE, results='asis'}
 
-
 # setwd('B:/Outside Consulting/PASA/pasa-analyses-2020/data/ifit')
 
 ifit_m <- vector('list',length(math)) 
@@ -143,7 +141,6 @@ for (i in 1:length(math)) {
   colnames(ifit_m[[i]])[c(2,3,4,5)] = c("Anchor","Discrimination","Difficulty","Guessing") 
 
 }
-
 
 ind1 <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
 ind2 <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
@@ -184,7 +181,6 @@ for (i in 1:length(science)) {
   ifit_s[[i]][which(ifit_s[[i]][,4] < .002),4] <- 'p<.002'
   ifit_s[[i]][,5] = round(ifit_s[[i]][,5],3)
   
-  
   ipar <- read.csv(here::here("data","item-estimates",science[[i]]))
   ipar[,1] <- gsub("-",".",ipar[,1])
   colnames(ipar)[1] = "Item Label"
@@ -194,7 +190,6 @@ for (i in 1:length(science)) {
   colnames(ifit_s[[i]])[c(2,3,4,5)] = c("Anchor","Discrimination","Difficulty","Guessing") 
 
 }
-
 
 ind1 <- c(4,4,8,8,11,11)
 ind2 <- c(1,2,1,2,1,2)

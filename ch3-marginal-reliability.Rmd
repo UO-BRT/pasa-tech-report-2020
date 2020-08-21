@@ -67,4 +67,3 @@ mr <- persons_by_test %>%
 names(mr)[1:3] <- stringr::str_to_title(names(mr)[1:3])
 knitr::kable(mr, digits = 2)
 ```
-

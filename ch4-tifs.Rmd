@@ -115,7 +115,6 @@ pwalk(list(ela$grade, ela$tier, ela$plot), ~{
       sep = "\n")
   print(..3)
 })
-      
 ```
 
 
@@ -130,7 +129,6 @@ pwalk(list(math$grade, math$tier, math$plot), ~{
       sep = "\n")
   print(..3)
 })
-      
 ```
 
 
@@ -145,9 +143,7 @@ pwalk(list(sci$grade, sci$tier, sci$plot), ~{
       sep = "\n")
   print(..3)
 })
-      
 ```
-
 
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

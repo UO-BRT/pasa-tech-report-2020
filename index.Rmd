@@ -2,13 +2,13 @@
 title: "Pennsylvania Alternate Assessment Technical Report: 2020"
 ---
 
-This website houses all the technical documentation for the Pennsylvania Alternate Assessment, 2020. The table below provides a brief overview of the website contents. Following the table is a brief description of the test design and development
+This website houses all the technical documentation for the Pennsylvania Alternate Assessment, 2020. The table below provides a brief overview of the website contents. Following the table is a brief description of the test design and development.
 
 
 
 
 # Chapter 1: Test Design and Development 
-PASA is designed to reflect appropriate adaptations of PA content standards (alternate eligible content – AEC) that allow students to show what they know and can do using scaled performance scores (with anchor items providing comparable forms from year to year). Across various reporting categories, the eligible content is articulated with task specifications that are then applied to two forms: (a) Tier 1 for very performing students and (b) Tier 2 for higher performing students.
+PASA is designed to reflect appropriate adaptations of PA content standards (alternate eligible content – AEC) that allow students to show what they know and can do using scaled performance scores (with anchor items providing comparable forms from year to year). Across various reporting categories, the eligible content is articulated with task specifications that are then applied to two forms: (a) Tier 1 for very low performing students and (b) Tier 2 for higher performing students.
 
 ![](image/table_reading.png)
 
@@ -16,7 +16,7 @@ PASA is designed to reflect appropriate adaptations of PA content standards (alt
 
 In each of these files, the PASA test specifications are summarized for each subject area, including the purpose of the test, the content depicted, a description of two tiers used for very low performing students (Tier 1) and higher performing students (Tier 2), articulation of four performance categories (emerging, novice, proficient, and advanced), the test format and student response, the scoring system, and finally tables (for each grade) showing the number of items with various AECs.
 
-See [Appendix 1.1 (ELA)](appendix/App1.1_PASA_ELA1prompt.pdf), [Apendix 1.2 (Math)](appendix/App1.2_PASAMath_1prompt.pdf), and [Apendix 1.3 (Science)](appendix/App1.3_PASA_Science_1prompt.pdf)
+See [Appendix 1.1 (ELA)](appendix/App1.1_PASA_ELA1prompt.pdf), [Appendix 1.2 (Math)](appendix/App1.2_PASAMath_1prompt.pdf), and [Appendix 1.3 (Science)](appendix/App1.3_PASA_Science_1prompt.pdf)
 
 **Summary of Appendices/Findings:**  All three tests were consistently designed with a number of key features that addressed alternate eligible content (AECs) reflecting academic standards: (a) accessibility (through tiers of scaffold), (b) sensitivity to a range of performance across proficiency categories, (c) layout and administration, and (d) breadth across all grades (3-9 and 11). Importantly, the tests include a wide range of AECs with items distributed throughout them.
 
