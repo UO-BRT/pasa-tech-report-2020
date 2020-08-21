@@ -12,7 +12,7 @@
 <meta name="author" content="BRT" />
 
 
-<title>Chapter 2: Item-Person Distributions</title>
+<title>Chapter 4: Test information functions</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -421,188 +421,157 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Chapter 2: Item-Person Distributions</h1>
+<h1 class="title toc-ignore">Chapter 4: Test information functions</h1>
 <h4 class="author">BRT</h4>
 <h4 class="date">8/10/2020</h4>
 
 </div>
 
 
-<p>The PASA is designed to sample Alternate Eligible Content (AEC) in reading, writing, mathematics, and science in a purposeful and validated manner. AEC represent a reduction in breadth, depth, and level of complexity of the Eligible Content (EC) so that academic standards are both rigorous and appropriate for the students with the most severe cognitive disabilities while still ensuring access to the general education curriculum. PASA items, for both Tier 1 (less academically complex relative to AEC) and Tier 2 (more academically complex relative to AEC) PASA assessment-types, were scored dichotomously on a 2-point scale: 1 point awarded for a correct response and 0 points awarded for an incorrect response.</p>
-<p>In this chapter, plots of PASA item difficulty and person ability (theta) are paired and shown by grade, content area, and tier. In general, the smaller the number of correct responses for a given item on an operational test, the higher its difficulty, and thus, the higher the item’s location on the calibrated scale (as displayed in each plot). Once item locations are calibrated, the person ability estimates are measured on the same scale, and thus, can be compared to item difficulties as an indicator of how closely item difficulties match test-taker abilities for each test administered. A greater proportion of overlap between the two indicates a closer match between item difficulty and person ability, whereas less overlap indicates the opposite.</p>
-<p>Generally, the plots shown suggest that most tests had an appropriate range of item difficulties represented, from easy to difficult, with item difficulties typically ranging between -4.0 and +4.0 on the calibrated scale, and that these ranges overlapped appropriately with person ability distributions. However, two general exceptions are notable: (1) some tests showed a mismatch in item difficulty-person ability whereby the two distributions have substantial areas of non-overlap, while (2) other tests contained “outlier items” with have an estimated difficulty far below or far above the estimated person distributions.</p>
-<div id="non-overlap-in-item-person-distrbutions" class="section level2">
-<h2>Non-Overlap in Item-Person Distrbutions</h2>
-<p>Grade 3, ELA, Tier 1 is an example of the first exception to the generally appropriate ranges and overlap observed. All but a single item ranges between about -1.0 and 0.0 on the calibrated scale as compared to the person ability distribution plotted just below that ranges from approximately -2.5 to 2.0 on the same scale. In this example, about half of the students who took the Grade 3, ELA, Tier 1 test had an ability above all estimated item difficulties (except for a single outlier item at the far-high-end of the observed range in difficulty). Tests in which items were generally <em>too easy</em> relative to person ability include:</p>
-<ul>
-<li>Grade 3, ELA, Tier 1 <br></li>
-<li>Grade 3, ELA, Tier 2 <br></li>
-<li>Grade 4, Math, Tier 2 <br></li>
-<li>Grade 6, ELA, Tier 2 <br></li>
-<li>Grade 7, ELA, Tier 2 <br></li>
-<li>Grade 8, ELA, Tier 2 <br></li>
-<li>Grade 11, ELA, Tier 2</li>
-</ul>
-<p>Tests in which items were generally <em>too difficult</em> relative to person ability include:</p>
-<ul>
-<li>Grade 4, Science, Tier 1 <br></li>
-<li>Grade 8, Science Tier 1 <br></li>
-<li>Grade 11, Science, Tier 1</li>
-</ul>
-<p><strong>Recommendation:</strong> For future test administrations, these tests, and any others showing substantial non-overlap between item difficulty and person ability ranges, should likely be examined with items removed/replaced to bring the distributions closer in line with one another relative to the calibrated scale.</p>
-</div>
-<div id="outlier-items-in-item-person-distrbutions" class="section level2">
-<h2>Outlier Items in Item-Person Distrbutions</h2>
-<p>With respect to the second exception, some tests had one or more “outlier items” with an estimated difficulty far below or far above the estimated person distributions. Grade 11 Math, Tier 2 and Grade 11, ELA, Tier 1 is an example of former, in which two items have estimated item difficulties far <em>above</em> the estimated person ability range of about -2.5 to 2.5 on the calibrated scale. Grade 11, Math, Tier 2 is an example of the latter, in which two items have estimated item difficulties far <em>below</em> the estimated person ability range of about -1.75 to 1.75, For the 2019-20 academic year, some items were so far above or below the estimated person ability ranges there were eliminated from these analyses, including:</p>
-<ul>
-<li>Item E06BV4.1.1b-5 (estimated difficulty of -730.74 on the Grade 6, ELA, Tier 1 test)</li>
-<li>Item M05AT2.1.3a-9 (estimated difficulty of 24.44 on the Grade 5, Math, Tier 1 test)</li>
-</ul>
-<p><strong>Recommendation:</strong> For future test administrations, the two items removed for analyses, and other items with similarly out-of-range estimated difficulties, should likely be examined and either revised to bring them closer in line with typical person ability ranges, or discarded/replaced.</p>
-</div>
+<p>Below, TIFs are plotted by content area, grade and PASA test tier. The peak (or highest point) in the TIF is the point at which test information is maximized for a given theta (or person ability) estimate. Each plot shows the theta ranges for which marginal reliability is equal to or greater than 0.80 (darker blue area under the TIF) and 0.70 (lighter blue area under the TIF) for the calibrated scale. While many PASA tests provide precise information, with a marginal reliability of at least 0.80, on either side of average person ability (theta = 0; e.g., ELA, Grade 3, Tier 1, and Math, Grade 3, Tier 1), some PASA tests provide more precise information for lower person ability ranges (theta &lt; 0), with less information provided at the higher end of the person ability distribution (e.g., ELA, Grade 3, Tier 2, and Math, Grade 3, Tier 2).</p>
 <div id="englishlanguage-arts" class="section level2">
 <h2>English/Language Arts</h2>
 <div id="grade-3-tier-1" class="section level3">
 <h3>Grade 3 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-1.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-1.png" width="672" /></p>
 </div>
 <div id="grade-3-tier-2" class="section level3">
 <h3>Grade 3 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-2.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-2.png" width="672" /></p>
 </div>
 <div id="grade-4-tier-1" class="section level3">
 <h3>Grade 4 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-3.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-3.png" width="672" /></p>
 </div>
 <div id="grade-4-tier-2" class="section level3">
 <h3>Grade 4 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-4.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-4.png" width="672" /></p>
 </div>
 <div id="grade-5-tier-1" class="section level3">
 <h3>Grade 5 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-5.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-5.png" width="672" /></p>
 </div>
 <div id="grade-5-tier-2" class="section level3">
 <h3>Grade 5 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-6.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-6.png" width="672" /></p>
 </div>
 <div id="grade-6-tier-1" class="section level3">
 <h3>Grade 6 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-7.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-7.png" width="672" /></p>
 </div>
 <div id="grade-6-tier-2" class="section level3">
 <h3>Grade 6 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-8.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-8.png" width="672" /></p>
 </div>
 <div id="grade-7-tier-1" class="section level3">
 <h3>Grade 7 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-9.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-9.png" width="672" /></p>
 </div>
 <div id="grade-7-tier-2" class="section level3">
 <h3>Grade 7 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-10.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-10.png" width="672" /></p>
 </div>
 <div id="grade-8-tier-1" class="section level3">
 <h3>Grade 8 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-11.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-11.png" width="672" /></p>
 </div>
 <div id="grade-8-tier-2" class="section level3">
 <h3>Grade 8 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-12.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-12.png" width="672" /></p>
 </div>
 <div id="grade-11-tier-1" class="section level3">
 <h3>Grade 11 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-13.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-13.png" width="672" /></p>
 </div>
 <div id="grade-11-tier-2" class="section level3">
 <h3>Grade 11 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/ela-tables-14.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/ela-plots-14.png" width="672" /></p>
 </div>
 </div>
 <div id="mathematics" class="section level2">
 <h2>Mathematics</h2>
 <div id="grade-3-tier-1-1" class="section level3">
 <h3>Grade 3 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-1.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-1.png" width="672" /></p>
 </div>
 <div id="grade-3-tier-2-1" class="section level3">
 <h3>Grade 3 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-2.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-2.png" width="672" /></p>
 </div>
 <div id="grade-4-tier-1-1" class="section level3">
 <h3>Grade 4 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-3.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-3.png" width="672" /></p>
 </div>
 <div id="grade-4-tier-2-1" class="section level3">
 <h3>Grade 4 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-4.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-4.png" width="672" /></p>
 </div>
 <div id="grade-5-tier-1-1" class="section level3">
 <h3>Grade 5 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-5.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-5.png" width="672" /></p>
 </div>
 <div id="grade-5-tier-2-1" class="section level3">
 <h3>Grade 5 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-6.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-6.png" width="672" /></p>
 </div>
 <div id="grade-6-tier-1-1" class="section level3">
 <h3>Grade 6 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-7.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-7.png" width="672" /></p>
 </div>
 <div id="grade-6-tier-2-1" class="section level3">
 <h3>Grade 6 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-8.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-8.png" width="672" /></p>
 </div>
 <div id="grade-7-tier-1-1" class="section level3">
 <h3>Grade 7 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-9.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-9.png" width="672" /></p>
 </div>
 <div id="grade-7-tier-2-1" class="section level3">
 <h3>Grade 7 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-10.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-10.png" width="672" /></p>
 </div>
 <div id="grade-8-tier-1-1" class="section level3">
 <h3>Grade 8 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-11.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-11.png" width="672" /></p>
 </div>
 <div id="grade-8-tier-2-1" class="section level3">
 <h3>Grade 8 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-12.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-12.png" width="672" /></p>
 </div>
 <div id="grade-11-tier-1-1" class="section level3">
 <h3>Grade 11 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-13.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-13.png" width="672" /></p>
 </div>
 <div id="grade-11-tier-2-1" class="section level3">
 <h3>Grade 11 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/math-tables-14.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/math-plots-14.png" width="672" /></p>
 </div>
 </div>
 <div id="science" class="section level2">
 <h2>Science</h2>
 <div id="grade-4-tier-1-2" class="section level3">
 <h3>Grade 4 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/sci-tables-1.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/sci-plots-1.png" width="672" /></p>
 </div>
 <div id="grade-4-tier-2-2" class="section level3">
 <h3>Grade 4 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/sci-tables-2.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/sci-plots-2.png" width="672" /></p>
 </div>
 <div id="grade-8-tier-1-2" class="section level3">
 <h3>Grade 8 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/sci-tables-3.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/sci-plots-3.png" width="672" /></p>
 </div>
 <div id="grade-8-tier-2-2" class="section level3">
 <h3>Grade 8 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/sci-tables-4.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/sci-plots-4.png" width="672" /></p>
 </div>
 <div id="grade-11-tier-1-2" class="section level3">
 <h3>Grade 11 Tier 1</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/sci-tables-5.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/sci-plots-5.png" width="672" /></p>
 </div>
 <div id="grade-11-tier-2-2" class="section level3">
 <h3>Grade 11 Tier 2</h3>
-<p><img src="ch2-perf-continuum_files/figure-html/sci-tables-6.png" width="672" /></p>
+<p><img src="ch4-tifs_files/figure-html/sci-plots-6.png" width="672" /></p>
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
 
 </div>

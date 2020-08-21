@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="BRT" />
 
 
-<title>License</title>
+<title>Chapter 3: Marginal reliability</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +23,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -342,12 +345,234 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">License</h1>
+<h1 class="title toc-ignore">Chapter 3: Marginal reliability</h1>
+<h4 class="author">BRT</h4>
+<h4 class="date">8/10/2020</h4>
 
 </div>
 
 
-<p>Copyright (C) 2020 Pennsylvania Department of Education</p>
+<p>Marginal reliability is a measure of the overall reliability of a test, within an item response theory (IRT) framework, based on the average standard error conditioned on the range in person ability (or theta). The test information function (or TIF) conveys the precision of the test at any point in the person distribution, with the inverse representing the standard error in measurement. Thus, give this inverse relation, the larger the measurement error at a given theta value, the less information a test yields, typically, at the margins of the person distribution (e.g., extremely low or high scores on a test). The opposite is also true, the smaller the measurement error, the more information a test yields, typically, toward the center of the person distribution. Because measurement error varies across the range in theta based on the TIF, marginal reliability is calculated conditional on both theta and associated standard errors across the range in the calibrated scale. In this chapter, marginal reliability estimates are presented followed by plots of TIF by grade, content area, and tier for all tests comprising the PASA.</p>
+<div id="marginal-reliability-by-content-area-grade-and-tier" class="section level2">
+<h2>Marginal Reliability by Content Area, Grade, and Tier</h2>
+<p>Marginal reliability estimates are generally within acceptable ranges for drawing test-based inferences, with ELA and Math more reliable, on average, than Science. Overall, marginal reliability values range from 0.59 to 0.86 across all content areas, grades, and tiers. For ELA, marginal reliability ranges from 0.78 to 0.86. For Math, marginal reliability ranges from 0.71 to 0.86. And for Science, marginal reliability ranges from 0.59 to 0.74, with the lowest reliability estimated for the Grade 8, Tier 1 (0.59) and Grade 11, Tier 1 (0.64) Science tests.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Grade</th>
+<th align="right">Tier</th>
+<th align="left">Content</th>
+<th align="right">Marginal Reliability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.87</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.83</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.75</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="left">science</td>
+<td align="right">0.65</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.77</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="left">science</td>
+<td align="right">0.68</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.82</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.84</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.75</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.86</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.86</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.73</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.73</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.73</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.76</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.83</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.79</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="left">science</td>
+<td align="right">0.59</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.73</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.73</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="left">science</td>
+<td align="right">0.74</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="left">ela</td>
+<td align="right">0.83</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="left">math</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="left">science</td>
+<td align="right">0.64</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="left">ela</td>
+<td align="right">0.75</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="left">math</td>
+<td align="right">0.71</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">2</td>
+<td align="left">science</td>
+<td align="right">0.73</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 
 

@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="BRT" />
+
+<meta name="date" content="2020-08-20" />
+
+<title>Chapter 8: Proficiency Level Frequencies and Percentages</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PASA 2020 TR</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reliability
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ch2-perf-continuum.html">Person-item distributions</a>
+    </li>
+    <li>
+      <a href="ch3-marginal-reliability.html">Marginal Reliability</a>
+    </li>
+    <li>
+      <a href="ch4-tifs.html">Test information functions</a>
+    </li>
+    <li>
+      <a href="ch5-ses.html">SE and classification accuracy</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Validity
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ch6-valid-content.html">Content</a>
+    </li>
+    <li>
+      <a href="ch7-item-fit.html">Item Fit</a>
+    </li>
+    <li>
+      <a href="ch8-conv-div.html">Convergent/Divergent</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Fairness, Access, &amp; Descriptives
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ch9-fair-access.html">Fairness/accessibility</a>
+    </li>
+    <li>
+      <a href="ch10-pl.html">Proficiency levels</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/datalorax/pasa-tech-report-2020">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Chapter 8: Proficiency Level Frequencies and Percentages</h1>
+<h4 class="author">BRT</h4>
+<h4 class="date">2020-08-20</h4>
+
+</div>
+
+
+<div id="ela" class="section level1">
+<h1>ELA</h1>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Grade
+</th>
+<th style="text-align:center;">
+Tier
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+Emerging
+</th>
+<th style="text-align:right;">
+Novice
+</th>
+<th style="text-align:right;">
+Proficient
+</th>
+<th style="text-align:center;">
+Advanced
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+1344
+</td>
+<td style="text-align:right;">
+553 (41.1%)
+</td>
+<td style="text-align:right;">
+220 (16.4%)
+</td>
+<td style="text-align:right;">
+483 (35.9%)
+</td>
+<td style="text-align:center;">
+88 (6.5%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+201
+</td>
+<td style="text-align:right;">
+6 (3.0%)
+</td>
+<td style="text-align:right;">
+37 (18.4%)
+</td>
+<td style="text-align:right;">
+52 (25.9%)
+</td>
+<td style="text-align:center;">
+106 (52.7%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+1331
+</td>
+<td style="text-align:right;">
+396 (29.8%)
+</td>
+<td style="text-align:right;">
+210 (15.8%)
+</td>
+<td style="text-align:right;">
+297 (22.3%)
+</td>
+<td style="text-align:center;">
+428 (32.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+276
+</td>
+<td style="text-align:right;">
+5 (1.8%)
+</td>
+<td style="text-align:right;">
+8 (2.9%)
+</td>
+<td style="text-align:right;">
+122 (44.2%)
+</td>
+<td style="text-align:center;">
+141 (51.1%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+1077
+</td>
+<td style="text-align:right;">
+353 (32.8%)
+</td>
+<td style="text-align:right;">
+276 (25.6%)
+</td>
+<td style="text-align:right;">
+390 (36.2%)
+</td>
+<td style="text-align:center;">
+58 (5.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+500
+</td>
+<td style="text-align:right;">
+29 (5.8%)
+</td>
+<td style="text-align:right;">
+111 (22.2%)
+</td>
+<td style="text-align:right;">
+218 (43.6%)
+</td>
+<td style="text-align:center;">
+142 (28.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+985
+</td>
+<td style="text-align:right;">
+345 (35.0%)
+</td>
+<td style="text-align:right;">
+141 (14.3%)
+</td>
+<td style="text-align:right;">
+147 (14.9%)
+</td>
+<td style="text-align:center;">
+352 (35.7%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+576
+</td>
+<td style="text-align:right;">
+14 (2.4%)
+</td>
+<td style="text-align:right;">
+78 (13.5%)
+</td>
+<td style="text-align:right;">
+350 (60.8%)
+</td>
+<td style="text-align:center;">
+134 (23.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+878
+</td>
+<td style="text-align:right;">
+237 (27.0%)
+</td>
+<td style="text-align:right;">
+200 (22.8%)
+</td>
+<td style="text-align:right;">
+214 (24.4%)
+</td>
+<td style="text-align:center;">
+227 (25.9%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+751
+</td>
+<td style="text-align:right;">
+30 (4.0%)
+</td>
+<td style="text-align:right;">
+84 (11.2%)
+</td>
+<td style="text-align:right;">
+233 (31.0%)
+</td>
+<td style="text-align:center;">
+404 (53.8%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+758
+</td>
+<td style="text-align:right;">
+135 (17.8%)
+</td>
+<td style="text-align:right;">
+265 (35.0%)
+</td>
+<td style="text-align:right;">
+191 (25.2%)
+</td>
+<td style="text-align:center;">
+167 (22.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+743
+</td>
+<td style="text-align:right;">
+97 (13.1%)
+</td>
+<td style="text-align:right;">
+155 (20.9%)
+</td>
+<td style="text-align:right;">
+263 (35.4%)
+</td>
+<td style="text-align:center;">
+228 (30.7%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+634
+</td>
+<td style="text-align:right;">
+309 (48.7%)
+</td>
+<td style="text-align:right;">
+68 (10.7%)
+</td>
+<td style="text-align:right;">
+82 (12.9%)
+</td>
+<td style="text-align:center;">
+175 (27.6%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+472
+</td>
+<td style="text-align:right;">
+41 (8.7%)
+</td>
+<td style="text-align:right;">
+28 (5.9%)
+</td>
+<td style="text-align:right;">
+98 (20.8%)
+</td>
+<td style="text-align:center;">
+305 (64.6%)
+</td>
+</tr>
+</tbody>
+</table>
+<div id="tier-1" class="section level2">
+<h2>Tier 1</h2>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tier-2" class="section level2">
+<h2>Tier 2</h2>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="math" class="section level1">
+<h1>Math</h1>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Grade
+</th>
+<th style="text-align:center;">
+Tier
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+Emerging
+</th>
+<th style="text-align:right;">
+Novice
+</th>
+<th style="text-align:right;">
+Proficient
+</th>
+<th style="text-align:center;">
+Advanced
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+1248
+</td>
+<td style="text-align:right;">
+0 (0.0%)
+</td>
+<td style="text-align:right;">
+0 (0.0%)
+</td>
+<td style="text-align:right;">
+170 (13.6%)
+</td>
+<td style="text-align:center;">
+1078 (86.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+191
+</td>
+<td style="text-align:right;">
+7 (3.7%)
+</td>
+<td style="text-align:right;">
+41 (21.5%)
+</td>
+<td style="text-align:right;">
+88 (46.1%)
+</td>
+<td style="text-align:center;">
+55 (28.8%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+1227
+</td>
+<td style="text-align:right;">
+294 (24.0%)
+</td>
+<td style="text-align:right;">
+265 (21.6%)
+</td>
+<td style="text-align:right;">
+472 (38.5%)
+</td>
+<td style="text-align:center;">
+196 (16.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+276
+</td>
+<td style="text-align:right;">
+16 (5.8%)
+</td>
+<td style="text-align:right;">
+36 (13.0%)
+</td>
+<td style="text-align:right;">
+120 (43.5%)
+</td>
+<td style="text-align:center;">
+104 (37.7%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+1015
+</td>
+<td style="text-align:right;">
+327 (32.2%)
+</td>
+<td style="text-align:right;">
+243 (23.9%)
+</td>
+<td style="text-align:right;">
+269 (26.5%)
+</td>
+<td style="text-align:center;">
+176 (17.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+442
+</td>
+<td style="text-align:right;">
+96 (21.7%)
+</td>
+<td style="text-align:right;">
+107 (24.2%)
+</td>
+<td style="text-align:right;">
+155 (35.1%)
+</td>
+<td style="text-align:center;">
+84 (19.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+922
+</td>
+<td style="text-align:right;">
+362 (39.3%)
+</td>
+<td style="text-align:right;">
+175 (19.0%)
+</td>
+<td style="text-align:right;">
+254 (27.5%)
+</td>
+<td style="text-align:center;">
+131 (14.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+507
+</td>
+<td style="text-align:right;">
+35 (6.9%)
+</td>
+<td style="text-align:right;">
+87 (17.2%)
+</td>
+<td style="text-align:right;">
+165 (32.5%)
+</td>
+<td style="text-align:center;">
+220 (43.4%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+878
+</td>
+<td style="text-align:right;">
+330 (37.6%)
+</td>
+<td style="text-align:right;">
+209 (23.8%)
+</td>
+<td style="text-align:right;">
+164 (18.7%)
+</td>
+<td style="text-align:center;">
+175 (19.9%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+628
+</td>
+<td style="text-align:right;">
+9 (1.4%)
+</td>
+<td style="text-align:right;">
+163 (26.0%)
+</td>
+<td style="text-align:right;">
+247 (39.3%)
+</td>
+<td style="text-align:center;">
+209 (33.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+709
+</td>
+<td style="text-align:right;">
+0 (0.0%)
+</td>
+<td style="text-align:right;">
+0 (0.0%)
+</td>
+<td style="text-align:right;">
+179 (25.2%)
+</td>
+<td style="text-align:center;">
+530 (74.8%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+660
+</td>
+<td style="text-align:right;">
+129 (19.5%)
+</td>
+<td style="text-align:right;">
+197 (29.8%)
+</td>
+<td style="text-align:right;">
+312 (47.3%)
+</td>
+<td style="text-align:center;">
+22 (3.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+609
+</td>
+<td style="text-align:right;">
+0 (0.0%)
+</td>
+<td style="text-align:right;">
+0 (0.0%)
+</td>
+<td style="text-align:right;">
+559 (91.8%)
+</td>
+<td style="text-align:center;">
+50 (8.2%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+428
+</td>
+<td style="text-align:right;">
+2 (0.5%)
+</td>
+<td style="text-align:right;">
+54 (12.6%)
+</td>
+<td style="text-align:right;">
+69 (16.1%)
+</td>
+<td style="text-align:center;">
+303 (70.8%)
+</td>
+</tr>
+</tbody>
+</table>
+<div id="tier-1-1" class="section level2">
+<h2>Tier 1</h2>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tier-2-1" class="section level2">
+<h2>Tier 2</h2>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="science" class="section level1">
+<h1>Science</h1>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Grade
+</th>
+<th style="text-align:center;">
+Tier
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+Emerging
+</th>
+<th style="text-align:right;">
+Novice
+</th>
+<th style="text-align:right;">
+Proficient
+</th>
+<th style="text-align:center;">
+Advanced
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+571
+</td>
+<td style="text-align:right;">
+101 (17.7%)
+</td>
+<td style="text-align:right;">
+311 (54.5%)
+</td>
+<td style="text-align:right;">
+159 (27.8%)
+</td>
+<td style="text-align:center;">
+0 (0.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+841
+</td>
+<td style="text-align:right;">
+9 (1.1%)
+</td>
+<td style="text-align:right;">
+449 (53.4%)
+</td>
+<td style="text-align:right;">
+383 (45.5%)
+</td>
+<td style="text-align:center;">
+0 (0.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+415
+</td>
+<td style="text-align:right;">
+200 (48.2%)
+</td>
+<td style="text-align:right;">
+143 (34.5%)
+</td>
+<td style="text-align:right;">
+72 (17.3%)
+</td>
+<td style="text-align:center;">
+0 (0.0%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+893
+</td>
+<td style="text-align:right;">
+35 (3.9%)
+</td>
+<td style="text-align:right;">
+372 (41.7%)
+</td>
+<td style="text-align:right;">
+433 (48.5%)
+</td>
+<td style="text-align:center;">
+53 (5.9%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:right;">
+308
+</td>
+<td style="text-align:right;">
+54 (17.5%)
+</td>
+<td style="text-align:right;">
+88 (28.6%)
+</td>
+<td style="text-align:right;">
+165 (53.6%)
+</td>
+<td style="text-align:center;">
+1 (0.3%)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:right;">
+706
+</td>
+<td style="text-align:right;">
+5 (0.7%)
+</td>
+<td style="text-align:right;">
+261 (37.0%)
+</td>
+<td style="text-align:right;">
+396 (56.1%)
+</td>
+<td style="text-align:center;">
+44 (6.2%)
+</td>
+</tr>
+</tbody>
+</table>
+<div id="tier-1-2" class="section level2">
+<h2>Tier 1</h2>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="tier-2-2" class="section level2">
+<h2>Tier 2</h2>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
+
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

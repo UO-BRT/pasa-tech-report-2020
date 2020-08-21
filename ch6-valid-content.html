@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="BRT" />
 
 
-<title>License</title>
+<title>Chapter 6: Content Validity</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +20,14 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -248,6 +254,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -255,6 +330,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -342,15 +427,41 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">License</h1>
+<h1 class="title toc-ignore">Chapter 6: Content Validity</h1>
+<h4 class="author">BRT</h4>
+<h4 class="date">8/19/2020</h4>
 
 </div>
 
 
-<p>Copyright (C) 2020 Pennsylvania Department of Education</p>
+<div id="summary-of-validity-based-on-content" class="section level2">
+<h2>Summary of Validity Based on Content</h2>
+<p>A number of dimensions are considered in the content covered across AECs. First, the type of item is organized into (a) anchor items, that facilitate form comparability from year to year, (b) Linking Tier 1 items (LT1) for low performing students assigned to this Tier, (c) Linking Tier 2 (LT2) for higher performing students assigned to this Tier, and (d) unique items (d) that are being field tested for eventual placement on the test in future years. Note that the test for each Tier includes LT1 and LT2 so that students not placed in that Tier can perform not only on the items in their assigned Tier but also take items in the Tier where they are not placed. This cross walk of items with students is important linking the two Tiers with both populations.</p>
+<p><strong>Summary of Alternate Eligible Content (AECs) by Item Code, Content Category, and Tier</strong><br />
+In English Language Arts, four categories of content are included: Literature, Information, Writing, and language. In Mathematics, four content categories are included: numbers and operations, operations and algebra, geometry, and measurement and data. In Science, four categories of content are included: natural science, biology. Physics, and earth-space. In all grades, these items are one of four types (Anchor, LT1, LT2, and Unique) and used in either Tier 1 and/or Tier 2.</p>
+<p>See <a href="appendix/App1.7_AEC_By_ItemCodeCntCatELA.pdf">Appendix 1.7 (ELA)</a>, <a href="appendix/App1.8_AEC_By_ItemCodeCntCatMath.pdf">Appendix 1.8 (Math)</a>, <a href="appendix/App1.9_AEC_By_ItemCodeCntCatSci.pdf">Appendix 1.9 (Science)</a></p>
+<p><strong>Summary of Appendices/Findings.</strong> The PASA tests are systematically organized to reflect not only a broad range of Alternate Eligible Content (AECs) in English Language Arts (ELA), Mathematics, and Science) but also a number of content categories to appropriately distinguish these complex constructs. Furthermore, this range is considered across both tiers and four types of items (anchor [A], linking to Tier 1 [LT1], linking to Tier 2 [LT2], and unique [U]). Two problems, however, result in stretching the item bank across so many dimensions: (a) many cells have no or few items, and (b) distinguishing anchor-linking items was unfruitful as both a- and b-parameters were missing where they should have been (A, LT1, and LT2) and present where they should not have been present U). Therefore, to connect the scale to that used last year (2019), all items with a- and b-parameters were used irrespective of designation.</p>
+<div id="item-quality-iq-reports-for-ela-math-and-science" class="section level3">
+<h3>Item Quality (IQ) Reports for ELA-Math and Science</h3>
+<p>In the fall of 2019, all items in all subject areas, grades, and tier were revised in the number of prompts allowed, from multiple (2+) prompts to only 1. At the same time, errors were corrected and the language of the prompts clarified and reduced in verbiage. Each item was reviewed and revised by personnel in Behavioral Research and Teaching (BRT), then reviewed by personnel from the Bureau of Special Education, and finally reviewed by teachers in PA. Using the Distributed Item Review (DIR) process, teachers were assigned by grade band and subject area to respond to a number of statements reflecting item-standards alignment and bias. Two reports were published that document the entire process and the item quality.</p>
+<p>See <a href="appendix/App1.10_ItemQualityReport_ELAandMath.pdf">Appendix 1.10 (ELA and Mathematics)</a> and <a href="appendix/App1.11_ItemQualityReport_Science.pdf">Appendix 1.11 (Science)</a></p>
+<p><strong>Summary of Appendices/Findings</strong> The reports reflect positive reactions from teachers across all subject areas, grades, and tiers. They generally approved of the (a) correctness of the items, (b) the use of a single prompt, and (c) the structure/format of the item in line with the presentation of the main stimulus and options. As expected, some variation existed among the teacher teams and individual judges.</p>
+</div>
+<div id="identification-of-standards-with-common-items-across-tiers-pivot-tables-with-item-map-files" class="section level3">
+<h3>Identification of Standards with Common Items Across Tiers – Pivot Tables with Item Map files</h3>
+<p>In the summer of 2020, researchers at Behavioral Research and Teaching (BRT) used item maps to fix the scale to be the same as used in 2019, allowing comparisons to be made over time. In the end, after discovering that all items were used with a-parameters and b-parameters (irrespective of their code A, LT1, LT2, or U). In this appendix, tables present the number of items used within content categories.</p>
+<p>See <a href="appendix/App1.12_ItemParameterSummary.xlsx">Appendix 1.12 (ELA, Mathematics, and Science)</a></p>
+<p><strong>Summary of Appendices/Findings.</strong> The content covered across tiers is sufficient in the number of items to allow the 2019 scale to be used.</p>
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
+
+</div>
+</div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -383,6 +494,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -1,0 +1,226 @@
+---
+title: "Chapter 5: Conditional Standard Errors and Classification Accuracy & Consistency"
+author: "BRT"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+
+library(tidyverse)
+library("readxl")
+library(cacIRT)
+library(kableExtra)
+library(janitor)
+library(knitr)
+library(here)
+
+# This chapter requires the following data files:
+# datastore/2020PASA_ScalingAnalysis/par-estimates-2020/person-estimates
+# datastore/2020PASA_ScalingAnalysis/par-estimates-2020/item-estimates
+# datastore/2020PASA_ScalingAnalysis/cut-scores/plc-cuts.xlsx
+# datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_ELA_Final_2020.csv
+# datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Math_Final_2020.csv
+# datastore/2020PASA_ScalingAnalysis/scoring-files-2020/Scoring_Science_Final_2020.csv
+
+p_files <- fs::dir_ls(here::here("data", "person-estimates"))
+
+p <- map_df(p_files, read_csv, .id = "file") %>%
+  mutate(file = gsub(here::here("data", "person-estimates"), "", file),
+         grade = as.numeric(gsub(".+g(\\d?\\d).+", "\\1", file)),
+         tier = as.numeric(gsub(".+\\dt(\\d).+", "\\1", file)),
+         content = gsub(".+-(.+)\\..+", "\\1", file)) %>%
+  select(student_id, grade, tier, content, TotalScore:SEM)
+
+cuts <- read_excel(here::here("data", "cut", "plc-cuts.xlsx"))
+
+ela <- read_csv(here::here("data", "score", "Scoring_ELA_Final_2020.csv")) %>%
+  clean_names()
+
+math <- read_csv(here::here("data", "score", "Scoring_Math_Final_2020.csv")) %>%
+  clean_names()
+
+science <- read_csv(here::here("data", "score", "Scoring_Science_Final_2020.csv")) %>%
+  clean_names()
+```
+
+# 7.1 Conditional Standard Errors 
+
+The average standard error of measurement (SEM) associated with each proficiency
+level cut score for 2019-20 student data are presented in the tables below. 
+
+```{r stand_error_measure, results="asis"}
+
+cutoff <- p %>%
+  mutate(ScaleScore = round(ScaleScore)) %>%
+  group_by(tier, grade, content) %>%
+  nest() %>%
+  left_join(cuts)
+
+compute_sem <- function(model, c1, c2, c3) {
+  l <- list(c1, c2, c3)
+  sems <- map_dbl(l, ~predict(model, newdata = data.frame(ScaleScore = .x)))
+  data.frame(cut1_se = sems[1],
+             cut2_se = sems[2],
+             cut3_se = sems[3])
+}
+
+cut_score <- cutoff %>%
+  mutate(m = map(data, ~lm(SEM ~ poly(ScaleScore, 7), na.omit(.x))),
+         sem = pmap(list(m, cut1, cut2, cut3), compute_sem))
+
+# Present as table (round SE)
+se_table <- cut_score %>%
+  select(grade:content, starts_with("cut"), sem) %>%
+  unnest(sem) %>%
+  rename(cut1_cut = cut1,
+         cut2_cut = cut2,
+         cut3_cut = cut3) %>%
+  pivot_longer(starts_with("cut"),
+               names_to = c("cutt", "var"),
+               names_sep = "_",
+               values_to = "val") %>%
+  mutate(
+    cutt = recode(cutt,
+                  cut1 = "Novice - Emerging",
+                  cut2 = "Emerging - Proficient",
+                  cut3 = "Proficient - Advanced"),
+    cutt = fct_relevel(cutt, "Novice - Emerging", "Emerging - Proficient"),
+    content = recode(content,
+                     ela = "ELA",
+                     math = "Math",
+                     science = "Science")) %>% 
+  pivot_wider(names_from = var, values_from = val) %>%
+  select(content, grade, tier, cutt, cut, se) %>% 
+  mutate(se = round(se, 0)) %>% 
+  rename(Grade = grade,
+         Tier = tier,
+         `Proficency Level Cut`   = cutt,
+         `Cut Score` = cut,
+         SE = se) %>% 
+  arrange(content, Grade, Tier, `Proficency Level Cut`) %>% 
+  split(.$content) %>%
+  map(~ungroup(.) %>% select(-content))
+
+walk2(se_table,
+      paste0(c("ELA", "Math", "Science"),
+             " Conditional Standard Errors"),
+      ~knitr::kable(.x, 
+                    caption = .y) %>%
+        kable_styling(full_width = TRUE,
+                      latex_options = "hold_position") %>%
+        print())
+
+```
+
+# 7.2 Accuracy & Consistency
+
+```{r classification_accuracy}
+# p_files <- fs::dir_ls(here::here("data", "item-estimates"))
+
+# theta and SE from p_files
+
+i_files <- fs::dir_ls(here::here("data", "item-estimates"))
+
+ 
+i <- map_df(i_files, read_csv, .id = "file") %>%
+  mutate(file = gsub(here::here("data", "item-estimates"), "", file),
+         grade = as.numeric(gsub(".+g(\\d?\\d).+", "\\1", file)),
+         tier = as.numeric(gsub(".+\\dt(\\d).+", "\\1", file)),
+         content = gsub(".+-(.+)\\..+", "\\1", file)) %>%
+  select(item, grade, tier, content, a_estimate, b_estimate, g_estimate)
+
+cuts_theta <- ela %>% 
+  select(student_id, grade, tier, ela = plc) %>% 
+  left_join(select(math, student_id, math = plc)) %>% 
+  left_join(select(science, student_id, science = plc)) %>% 
+  pivot_longer(
+    cols = c(ela, math, science),
+    names_to = "content",
+    values_to = "amo_lvl"
+  ) %>% 
+  left_join(select(p, student_id, grade, tier, content, Theta)) %>% 
+  group_by(grade, tier, content, amo_lvl) %>% 
+  summarize(cutscore = min(Theta, na.rm = TRUE)) %>% 
+  filter(amo_lvl != "Novice") 
+
+cuts_i <- i %>%
+  select(content, grade, a_estimate, b_estimate, g_estimate) %>% 
+  nest(-content, -grade) %>%
+  mutate(ip = map(data, 
+                  ~as.matrix(data.frame(.x$a_estimate, .x$b_estimate, .x$g_estimate))),
+         content = tolower(content)) %>%
+  left_join(cuts_theta)
+
+abils <- p %>%
+  drop_na(Theta) %>% #added this line to remove NA to compute marginal below
+  nest(-content, -grade) %>%
+  rename(persons = data)
+
+cuts_join <- left_join(cuts_i, abils)
+
+
+acc_con <- cuts_join %>%
+  filter(!is.infinite(cutscore)) %>% 
+  mutate(theta = map(persons, "Theta"),
+         se    = map(persons, "SE"),
+         marginal = pmap(list(cutscore, ip, theta, se),
+                         function(cutscore, ip, theta, se)
+                           class.Rud(cutscore, ip, theta, se, D = 1)$Marginal),
+         accuracy = map_dbl(marginal, 1),
+         consistency = map_dbl(marginal, 2)) %>% 
+  select(content, grade, tier, amo_lvl, accuracy, consistency) %>%
+  mutate(content = recode(content,
+                     ela = "ELA",
+                     math = "Math",
+                     science = "Science"),
+         amo_lvl = recode(amo_lvl,
+                  Emerging = "Novice - Emerging",
+                  Proficient = "Emerging - Proficient",
+                  Advanced = "Proficient - Advanced"),
+         amo_lvl = fct_relevel(amo_lvl, "Novice - Emerging", "Emerging - Proficient")) %>% 
+  rename(Grade = grade,
+         Tier = tier,
+         `Proficency Level Cut`   = amo_lvl,
+         Accuracy = accuracy,
+         Consistency = consistency) %>% 
+  arrange(content, Grade, Tier, `Proficency Level Cut`)
+  
+acc_con_tbls <- acc_con %>%   
+  split(.$content) %>%
+  map(~ungroup(.) %>% select(-content))
+```
+
+Results from the 2019-20 PASA test administration were analyzed using Rudner's
+classification index (Rudner, 2005). Results closer to 1.0 indicate the
+likelihood that a student was appropriately classified as proficient (Performance level of Proficient or Advanced) or not proficient (Performance Level of Novice or Emerging) and the
+likelihood that the student would be classified in the same Performance level category given an additional test administration (Accuracy and Consistency, respectively). The
+calculation utilizes item difficulty and (student ability) theta value
+distributions, as well as related standard errors of measurement (SEM), to
+generate probabilistic estimates based on one test administration. Complete
+results for each content area and grade, generated from the `cacIRT` package in R,
+are provided below. Please not that in cases in which there were no students in a proficiency level in a grade/tier, results cannot be reported.
+
+Results indicate moderate to high levels of classification Accuracy (`r format(round(max(acc_con$Accuracy), 2), nsmall = 1)` to `r round(max(acc_con$Accuracy), 2)`) and Consistency (`r round(min(acc_con$Consistency), 2)` to `r format(round(max(acc_con$Consistency), 2), nsmall = 1)`).
+
+```{r classification_accuracy_table, results="asis"}
+walk2(acc_con_tbls,
+      paste0(c("ELA", "Math", "Science"),
+             " Accuracy & Consistency"),
+      ~knitr::kable(.x, 
+                    caption = .y,
+                    digits = 2) %>%
+        kable_styling(full_width = TRUE,
+                      latex_options = "hold_position") %>%
+        print())
+
+```
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

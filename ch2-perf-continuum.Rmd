@@ -1,13 +1,12 @@
 ---
-title: 'Chapter 2: Full Performance Continuum'
+title: 'Chapter 2: Item-Person Distributions'
 author: "BRT"
-date: "8/10/2020"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output: 
   html_document:
     toc: yes
     toc_depth: 5
-    toc_float: 
-      collapsed: false
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -30,14 +29,13 @@ theme_set(theme_minimal(base_size = 15) +
 # e.g., g6t1-ela.csv, g3t2-math.csv, etc.
 ```
 
-## Item-Person Distributions
 The PASA is designed to sample Alternate Eligible Content (AEC) in reading, writing, mathematics, and science in a purposeful and validated manner. AEC represent a reduction in breadth, depth, and level of complexity of the Eligible Content (EC) so that academic standards are both rigorous and appropriate for the students with the most severe cognitive disabilities while still ensuring access to the general education curriculum. PASA items, for both Tier 1 (less academically complex relative to AEC) and Tier 2 (more academically complex relative to AEC) PASA assessment-types, were scored dichotomously on a 2-point scale: 1 point awarded for a correct response and 0 points awarded for an incorrect response.
 
 In this chapter, plots of PASA item difficulty and person ability (theta) are paired and shown by grade, content area, and tier. In general, the smaller the number of correct responses for a given item on an operational test, the higher its difficulty, and thus, the higher the item's location on the calibrated scale (as displayed in each plot). Once item locations are calibrated, the person ability estimates are measured on the same scale, and thus, can be compared to item difficulties as an indicator of how closely item difficulties match test-taker abilities for each test administered. A greater proportion of overlap between the two indicates a closer match between item difficulty and person ability, whereas less overlap indicates the opposite.
 
 Generally, the plots shown suggest that most tests had an appropriate range of item difficulties represented, from easy to difficult, with item difficulties typically ranging between -4.0 and +4.0 on the calibrated scale, and that these ranges overlapped appropriately with person ability distributions. However, two general exceptions are notable: (1) some tests showed a mismatch in item difficulty-person ability whereby the two distributions have substantial areas of non-overlap, while (2) other tests contained "outlier items" with have an estimated difficulty far below or far above the estimated person distributions. 
 
-### Non-Overlap in Item-Person Distrbutions
+## Non-Overlap in Item-Person Distrbutions
 Grade 3, ELA, Tier 1 is an example of the first exception to the generally appropriate ranges and overlap observed. All but a single item ranges between about -1.0 and 0.0 on the calibrated scale as compared to the person ability distribution plotted just below that ranges from approximately -2.5 to 2.0 on the same scale. In this example, about half of the students who took the Grade 3, ELA, Tier 1 test had an ability above all estimated item difficulties (except for a single outlier item at the far-high-end of the observed range in difficulty). Tests in which items were generally *too easy* relative to person ability include: 
 
 - Grade 3, ELA, Tier 1 <br>
@@ -56,7 +54,7 @@ Tests in which items were generally *too difficult* relative to person ability i
 
 **Recommendation:** For future test administrations, these tests, and any others showing substantial non-overlap between item difficulty and person ability ranges, should likely be examined with items removed/replaced to bring the distributions closer in line with one another relative to the calibrated scale.
 
-### Outlier Items in Item-Person Distrbutions
+## Outlier Items in Item-Person Distrbutions
 With respect to the second exception, some tests had one or more "outlier items" with an estimated difficulty far below or far above the estimated person distributions. Grade 11 Math, Tier 2 and Grade 11, ELA, Tier 1 is an example of former, in which two items have estimated item difficulties far *above* the estimated person ability range of about -2.5 to 2.5 on the calibrated scale. Grade 11, Math, Tier 2 is an example of the latter, in which two items have estimated item difficulties far *below* the estimated person ability range of about -1.75 to 1.75, For the 2019-20 academic year, some items were so far above or below the estimated person ability ranges there were eliminated from these analyses, including:
 
 - Item E06BV4.1.1b-5 (estimated difficulty of -730.74 on the Grade 6, ELA, Tier 1 test)
@@ -107,9 +105,9 @@ create_pi_plot <- function(d, grade, tier, content) {
                   "science" = "#53ea7d")
   
   content <- ifelse(content == "ela", "ELA", stringr::str_to_title(content))
-  
-  d %>% 
-    mutate(role = stringr::str_to_title(role)) %>% 
+
+  d %>%
+    mutate(role = stringr::str_to_title(role)) %>%
   ggplot(aes(theta)) +
   # geom_density(aes(fill = role),
   #              color = "white",
@@ -121,14 +119,58 @@ create_pi_plot <- function(d, grade, tier, content) {
   scale_fill_manual(values = c(color, colorspace::lighten(color, 0.7))) +
   guides(fill = "none") +
   labs(x = "Theta",
-       y = "Counts",
-       title = glue::glue("Grade {grade} {content}: Tier {tier}"))
+       y = "Counts")
 }
 
 pd <- pd %>% 
   mutate(plot = pmap(list(data, grade, tier, content), 
-                     create_pi_plot))
-
-walk(pd$plot, print)
-
+                     create_pi_plot)) %>% 
+  arrange(content, grade, tier)
 ```
+
+
+## English/Language Arts
+
+```{r ela-tables, results = "asis"}
+ela <- filter(pd, content == "ela")
+
+pwalk(list(ela$grade, ela$tier, ela$plot), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+      
+```
+
+
+## Mathematics
+
+```{r math-tables, results = "asis"}
+math <- filter(pd, content == "math")
+
+pwalk(list(math$grade, math$tier, math$plot), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+      
+```
+
+
+## Science
+
+```{r sci-tables, results = "asis"}
+sci <- filter(pd, content == "science")
+
+pwalk(list(sci$grade, sci$tier, sci$plot), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+      
+```
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
