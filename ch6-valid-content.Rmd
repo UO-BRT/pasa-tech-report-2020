@@ -1,7 +1,7 @@
 ---
 title: "Chapter 6: Content Validity"
 author: "BRT"
-date: "8/19/2020"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output: 
   html_document:
     toc: yes
@@ -37,3 +37,6 @@ In the summer of 2020, researchers at Behavioral Research and Teaching (BRT) use
 See [Appendix 1.12 (ELA, Mathematics, and Science)](appendix/App1.12_ItemParameterSummary.xlsx)
 
 **Summary of Appendices/Findings.**  The content covered across tiers is sufficient in the number of items to allow the 2019 scale to be used.
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

@@ -1,13 +1,12 @@
 ---
 title: "Chapter 7: Item Parameters and Item Fit"
 author: "BRT"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output:
   html_document:
     toc: yes
     toc_depth: 5
-    toc_float: 
-      collapsed: false
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -211,3 +210,6 @@ for (i in 1:length(science)) {
 ```
 
 Steiger, J. H. (2007), Understanding the limitations of global fit assessment in structural equation modeling. *Personality and Individual Differences*, *42*, 893-98.
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

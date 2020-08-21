@@ -1,13 +1,12 @@
 ---
 title: 'Chapter 4: Test information functions'
 author: "BRT"
-date: "8/10/2020"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output: 
   html_document:
     toc: yes
     toc_depth: 5
-    toc_float: 
-      collapsed: false
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -50,9 +49,6 @@ persons_by_test <- p %>%
   nest()
 ```
 
-
-
-## Test Information Functions by Content Area, Grade, and Tier
 
 Below, TIFs are plotted by content area, grade and PASA test tier. The peak (or highest point) in the TIF is the point at which test information is maximized for a given theta (or person ability) estimate. Each plot shows the theta ranges for which marginal reliability is equal to or greater than 0.80 (darker blue area under the TIF) and 0.70 (lighter blue area under the TIF) for the calibrated scale. While many PASA tests provide precise information, with a marginal reliability of at least 0.80, on either side of average person ability (theta = 0; e.g., ELA, Grade 3, Tier 1, and Math, Grade 3, Tier 1), some PASA tests provide more precise information for lower person ability ranges (theta < 0), with less information provided at the higher end of the person ability distribution (e.g., ELA, Grade 3, Tier 2, and Math, Grade 3, Tier 2).
 
@@ -98,14 +94,60 @@ plot_information <- function(tif_df, grade, tier, content) {
                       values = c("#b2cdf0", "#4f8dde")) +
     labs(x = "Theta",
          y = "Information",
-         title = "Test Information Function",
-         subtitle = glue::glue("{content}: Grade {grade}, Tier {tier}"))
+         subtitle = glue::glue("{content}"))
 }
   
 items_by_test <- items_by_test %>% 
   mutate(tif = map(data, ~tif(.x, "a_estimate", "b_estimate")),
          plot = pmap(list(tif, grade, tier, content), plot_information)) %>% 
   arrange(grade, tier, content)
-
-walk(items_by_test$plot, print)
 ```
+
+
+## English/Language Arts
+
+```{r ela-plots, results = "asis"}
+ela <- filter(items_by_test, content == "ela")
+
+pwalk(list(ela$grade, ela$tier, ela$plot), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+      
+```
+
+
+## Mathematics
+
+```{r math-plots, results = "asis"}
+math <- filter(items_by_test, content == "math")
+
+pwalk(list(math$grade, math$tier, math$plot), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+      
+```
+
+
+## Science
+
+```{r sci-plots, results = "asis"}
+sci <- filter(items_by_test, content == "science")
+
+pwalk(list(sci$grade, sci$tier, sci$plot), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+      
+```
+
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

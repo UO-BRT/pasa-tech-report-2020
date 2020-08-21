@@ -1,7 +1,7 @@
 ---
 title: "Chapter 5: Conditional Standard Errors and Classification Accuracy & Consistency"
 author: "BRT"
-date: "8/20/2020"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output:
   html_document:
     toc: true
@@ -221,3 +221,6 @@ walk2(acc_con_tbls,
         print())
 
 ```
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

@@ -2,7 +2,7 @@
 title: "Chapter 8"
 subtitle: "Convergent/Divergent Validity"
 author: "BRT"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output: html_document
 ---
 
@@ -332,3 +332,4 @@ walk(figs_final$figures, print)
 
 ```
 
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
