@@ -1,5 +1,5 @@
 ---
-title: "Chapter 8: Fairness and Accessibility"
+title: "Chapter 9: Fairness and Accessibility"
 author: "BRT"
 date: "`r Sys.Date()`"
 output: 

@@ -1,5 +1,5 @@
 ---
-title: "ch4"
+title: "Chapter 6: Content Validity"
 author: "BRT"
 date: "8/19/2020"
 output: 
@@ -14,7 +14,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Summary of Validity Based on Content (Formerly Chapter 4)
+## Summary of Validity Based on Content 
 A number of dimensions are considered in the content covered across AECs. First, the type of item is organized into (a) anchor items, that facilitate form comparability from year to year, (b) Linking Tier 1 items (LT1) for low performing students assigned to this Tier, (c) Linking Tier 2 (LT2) for higher performing students assigned to this Tier, and (d) unique items (d) that are being field tested for eventual placement on the test in future years. Note that the test for each Tier includes LT1 and LT2 so that students not placed in that Tier can perform not only on the items in their assigned Tier but also take items in the Tier where they are not placed. This cross walk of items with students is important linking the two Tiers with both populations.
 
 **Summary of Alternate Eligible Content (AECs) by Item Code, Content Category, and Tier**  

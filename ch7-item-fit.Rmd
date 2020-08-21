@@ -1,5 +1,5 @@
 ---
-title: "Item Parameters and Item Fit"
+title: "Chapter 7: Item Parameters and Item Fit"
 author: "BRT"
 date: "`r Sys.Date()`"
 output:

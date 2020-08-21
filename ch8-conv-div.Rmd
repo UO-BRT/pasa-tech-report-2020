@@ -1,6 +1,6 @@
 ---
-title: "Chapter 6"
-subtitle: "Validity Based on Relations Among Content Areas"
+title: "Chapter 8"
+subtitle: "Convergent/Divergent Validity"
 author: "BRT"
 date: "`r Sys.Date()`"
 output: html_document

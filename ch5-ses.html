@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="BRT" />
 
 
-<title>License</title>
+<title>Chapter 5: Standard Errors and Classification Accuracy</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +23,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -342,12 +345,129 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">License</h1>
+<h1 class="title toc-ignore">Chapter 5: Standard Errors and Classification Accuracy</h1>
+<h4 class="author">BRT</h4>
+<h4 class="date">8/10/2020</h4>
 
 </div>
 
 
-<p>Copyright (C) 2020 Pennsylvania Department of Education</p>
+<pre class="r"><code>cutoff &lt;- p %&gt;%
+  mutate(ScaleScore = round(ScaleScore)) %&gt;%
+  group_by(tier, grade, content) %&gt;%
+  nest() %&gt;%
+  left_join(cuts)</code></pre>
+<pre><code>## Joining, by = c(&quot;grade&quot;, &quot;tier&quot;, &quot;content&quot;)</code></pre>
+<pre class="r"><code>compute_sem &lt;- function(model, c1, c2, c3) {
+  l &lt;- list(c1, c2, c3)
+  sems &lt;- map_dbl(l, ~predict(model, newdata = data.frame(ScaleScore = .x)))
+  data.frame(cut1_se = sems[1],
+             cut2_se = sems[2],
+             cut3_se = sems[3])
+}
+
+cut_score &lt;- cutoff %&gt;%
+  mutate(m = map(data, ~lm(SEM ~ poly(ScaleScore, 7), na.omit(.x))),
+         sem = pmap(list(m, cut1, cut2, cut3), compute_sem))
+
+cut_score %&gt;%
+  select(grade:content, cut1:cut3, sem) %&gt;%
+  unnest(sem) %&gt;%
+  rename(cut1_cut = cut1,
+         cut2_cut = cut2,
+         cut3_cut = cut3) %&gt;%
+  pivot_longer(starts_with(&quot;cut&quot;),
+               names_to = c(&quot;cutt&quot;, &quot;var&quot;),
+               names_sep = &quot;_&quot;,
+               values_to = &quot;val&quot;) %&gt;%
+  pivot_wider(names_from = var, values_from = val) %&gt;%
+  select(-cutt)</code></pre>
+<pre><code>## # A tibble: 102 x 5
+## # Groups:   grade, tier, content [34]
+##    grade  tier content   cut       se
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1    11     1 ela       286 17.99467
+##  2    11     1 ela       300 18.92275
+##  3    11     1 ela       323 21.23091
+##  4    11     1 math      285 19.48722
+##  5    11     1 math      300 20.87010
+##  6    11     1 math      357 27.58068
+##  7    11     1 science   267 32.11191
+##  8    11     1 science   300 28.23959
+##  9    11     1 science   374 22.02517
+## 10    11     2 ela       484 18.76597
+## # … with 92 more rows</code></pre>
+<pre class="r"><code>    # data = pmap(list(data, cut1, cut2, cut3),
+    #                  ~filter(..1,
+    #                         ScaleScore == ..2 |
+    #                         ScaleScore == ..3 |
+    #                         ScaleScore == ..4))
+
+tmp &lt;- p %&gt;%
+  filter(grade == 3 &amp; tier == 1 &amp; content == &quot;ela&quot;)
+
+ggplot(tmp, aes(ScaleScore, SEM)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth(method = &quot;lm&quot;,
+              formula = y ~ poly(x, 7))</code></pre>
+<pre><code>## Warning: Removed 106 rows containing non-finite values
+## (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 106 rows containing missing values
+## (geom_point).</code></pre>
+<pre><code>## Warning: Removed 106 row(s) containing missing values
+## (geom_path).</code></pre>
+<p><img src="ch5-ses_files/figure-html/stand_error_measure-1.png" width="672" /></p>
+<pre class="r"><code>m &lt;- lm(SEM ~ poly(ScaleScore, 7), na.omit(tmp))
+predict(m, newdata = data.frame(ScaleScore = 286))</code></pre>
+<pre><code>##        1 
+## 14.60247</code></pre>
+<pre class="r"><code># p_files &lt;- fs::dir_ls(here::here(&quot;data&quot;, &quot;item-estimates&quot;))
+# 
+# p &lt;- map_df(p_files, read_csv, .id = &quot;file&quot;) %&gt;%
+#   mutate(file = gsub(here::here(&quot;data&quot;, &quot;item-estimates&quot;), &quot;&quot;, file),
+#          grade = as.numeric(gsub(&quot;.+g(\\d?\\d).+&quot;, &quot;\\1&quot;, file)),
+#          tier = as.numeric(gsub(&quot;.+\\dt(\\d).+&quot;, &quot;\\1&quot;, file)),
+#          content = gsub(&quot;.+-(.+)\\..+&quot;, &quot;\\1&quot;, file)) %&gt;%
+#   select(item, grade, tier, content, b_estimate)
+# 
+# cuts &lt;- read_excel(here::here(&quot;data&quot;, &quot;cut&quot;, &quot;plc-cuts.xlsx&quot;))
+# 
+# cuts &lt;- p %&gt;%
+#   select(content, grade, b_estimate) %&gt;%
+#   nest(-content, -grade) %&gt;%
+#   mutate(ip = map(data, ~as.matrix(data.frame(1, $b_estimate, 0))),
+#          content = tolower(content)) %&gt;%
+#   left_join(cuts)
+# 
+# abils &lt;- p %&gt;%
+#   nest(-content, -grade) %&gt;%
+#   rename(persons = data)
+# cuts &lt;- left_join(cuts, abils)
+# acc_con_tbls &lt;- cuts %&gt;%
+#   mutate(theta = map(persons, &quot;theta&quot;),
+#          se    = map(persons, &quot;se&quot;),
+#          marginal = pmap(list(cut, ip, theta, se),
+#                          function(cut, ip, theta, se)
+#                            class.Rud(cut, ip, theta, se, D = 1)$Marginal),
+#          accuracy = map_dbl(marginal, 1),
+#          consistency = map_dbl(marginal, 2)) %&gt;%
+#   select(content_area, grade, amo_lvl, accuracy, consistency) %&gt;%
+#   rename(Grade = grade,
+#          AMO   = amo_lvl,
+#          Accuracy = accuracy,
+#          Consistency = consistency) %&gt;%
+#   split(.$content_area) %&gt;%
+#   map(~ungroup(.) %&gt;% select(-content_area))
+# walk2(acc_con_tbls,
+#       paste0(c(&quot;ELA&quot;, &quot;Math&quot;, &quot;Science&quot;),
+#              &quot; Accuracy/Consistency&quot;),
+#       ~knitr::kable(.x, &quot;latex&quot;, booktabs = TRUE,
+#                     caption = .y,
+#                     digits = 2) %&gt;%
+#         kable_styling(full_width = TRUE,
+#                       latex_options = &quot;hold_position&quot;) %&gt;%
+#         print())</code></pre>
 
 
 

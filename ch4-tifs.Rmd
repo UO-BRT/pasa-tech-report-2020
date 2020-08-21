@@ -1,5 +1,5 @@
 ---
-title: 'Chapter 3: Reliability'
+title: 'Chapter 4: Test information functions'
 author: "BRT"
 date: "8/10/2020"
 output: 
@@ -49,26 +49,8 @@ persons_by_test <- p %>%
   group_by(grade, tier, content) %>% 
   nest()
 ```
-Marginal reliability is a measure of the overall reliability of a test, within an item response theory (IRT) framework, based on the average standard error conditioned on the range in person ability (or theta). The test information function (or TIF) conveys the precision of the test at any point in the person distribution, with the inverse representing the standard error in measurement. Thus, give this inverse relation, the larger the measurement error at a given theta value, the less information a test yields, typically, at the margins of the person distribution (e.g., extremely low or high scores on a test). The opposite is also true, the smaller the measurement error, the more information a test yields, typically, toward the center of the person distribution. Because measurement error varies across the range in theta based on the TIF, marginal reliability is calculated conditional on both theta and associated standard errors across the range in the calibrated scale. In this chapter, marginal reliability estimates are presented followed by plots of TIF by grade, content area, and tier for all tests comprising the PASA.
 
-## Marginal Reliability by Content Area, Grade, and Tier
 
-Marginal reliability estimates are generally within acceptable ranges for drawing test-based inferences, with ELA and Math more reliable, on average, than Science. Overall, marginal reliability values range from 0.59 to 0.86 across all content areas, grades, and tiers. For ELA, marginal reliability ranges from 0.78 to 0.86. For Math, marginal reliability ranges from 0.71 to 0.86. And for Science, marginal reliability ranges from 0.59 to 0.74, with the lowest reliability estimated for the Grade 8, Tier 1 (0.59) and Grade 11, Tier 1 (0.64) Science tests.
-
-```{r marg-rel}
-marg_rel <- function(theta, se) {
-  s <- var(theta, na.rm = TRUE)
-  e <- mean((se)^2, na.rm = TRUE)
-  s/(s+e)
-}
-mr <- persons_by_test %>% 
-  mutate(`Marginal Reliability` = map_dbl(data, ~marg_rel(.x$Theta, .x$SE))) %>% 
-  select(-data) %>% 
-  arrange(grade, tier, content)
-
-names(mr)[1:3] <- stringr::str_to_title(names(mr)[1:3])
-knitr::kable(mr, digits = 2)
-```
 
 ## Test Information Functions by Content Area, Grade, and Tier
 

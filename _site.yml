@@ -3,26 +3,30 @@ output_dir: '.'
 navbar:
   title: PASA 2020 TR
   left:
-  - text: Summary of Test Characteristics
-    href: ch1-sum-test-character.html
-  - text: Full Performance Continuum
-    href: ch2-perf-continuum.html
   - text: Reliability
-    href: ch3-reliability.html
+    menu: 
+      - text: Person-item distributions
+        href: ch2-perf-continuum.html
+      - text: Marginal Reliability
+        href: ch3-marginal-reliability.html
+      - text: Test information functions
+        href: ch4-tifs.html
+      - text: SE and classification accuracy
+        href: ch5-ses.html
   - text: Validity
     menu:
     - text: Content
-      href: ch4-validity-content.html
-    - text: Internal structures
-      href: ch5_item-fit.html
-    - text: Other variables
-      href: chapter6_html.html
-    - text: SE and classification accuracy
-      href: ch7-sem.html
-  - text: Fairness
-    href: ch8-fair-access.html
-  - text: Proficiency levels
-    href: ch8-pl.html
+      href: ch6-valid-content.html
+    - text: Item Fit
+      href: ch7-item-fit.html
+    - text: Convergent/Divergent
+      href: ch8-conv-div.html
+  - text: Fairness, Access, & Descriptives
+    menu: 
+    - text: Fairness/accessibility
+      href: ch9-fair-access.html
+    - text: Proficiency levels
+      href: ch10-pl.html
   right:
   - icon: fa-github
     href: https://github.com/datalorax/pasa-tech-report-2020

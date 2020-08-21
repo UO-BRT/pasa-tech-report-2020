@@ -12,7 +12,7 @@
 <meta name="author" content="BRT" />
 
 
-<title>ch4</title>
+<title>Chapter 6: Content Validity</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -356,14 +356,26 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="ch1-sum-test-character.html">Summary of Test Characteristics</a>
-</li>
-<li>
-  <a href="ch2-perf-continuum.html">Full Performance Continuum</a>
-</li>
-<li>
-  <a href="ch3-reliability.html">Reliability</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Reliability
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ch2-perf-continuum.html">Person-item distributions</a>
+    </li>
+    <li>
+      <a href="ch3-marginal-reliability.html">Marginal Reliability</a>
+    </li>
+    <li>
+      <a href="ch4-tifs.html">Test information functions</a>
+    </li>
+    <li>
+      <a href="ch5-ses.html">SE and classification accuracy</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -373,24 +385,30 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="ch4-validity-content.html">Content</a>
+      <a href="ch6-valid-content.html">Content</a>
     </li>
     <li>
-      <a href="ch5_item-fit.html">Internal structures</a>
+      <a href="ch7-item-fit.html">Item Fit</a>
     </li>
     <li>
-      <a href="chapter6_html.html">Other variables</a>
-    </li>
-    <li>
-      <a href="ch7-sem.html">SE and classification accuracy</a>
+      <a href="ch8-conv-div.html">Convergent/Divergent</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="ch8-fair-access.html">Fairness</a>
-</li>
-<li>
-  <a href="ch8-pl.html">Proficiency levels</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Fairness, Access, &amp; Descriptives
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ch9-fair-access.html">Fairness/accessibility</a>
+    </li>
+    <li>
+      <a href="ch10-pl.html">Proficiency levels</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -409,15 +427,15 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">ch4</h1>
+<h1 class="title toc-ignore">Chapter 6: Content Validity</h1>
 <h4 class="author">BRT</h4>
 <h4 class="date">8/19/2020</h4>
 
 </div>
 
 
-<div id="summary-of-validity-based-on-content-formerly-chapter-4" class="section level2">
-<h2>Summary of Validity Based on Content (Formerly Chapter 4)</h2>
+<div id="summary-of-validity-based-on-content" class="section level2">
+<h2>Summary of Validity Based on Content</h2>
 <p>A number of dimensions are considered in the content covered across AECs. First, the type of item is organized into (a) anchor items, that facilitate form comparability from year to year, (b) Linking Tier 1 items (LT1) for low performing students assigned to this Tier, (c) Linking Tier 2 (LT2) for higher performing students assigned to this Tier, and (d) unique items (d) that are being field tested for eventual placement on the test in future years. Note that the test for each Tier includes LT1 and LT2 so that students not placed in that Tier can perform not only on the items in their assigned Tier but also take items in the Tier where they are not placed. This cross walk of items with students is important linking the two Tiers with both populations.</p>
 <p><strong>Summary of Alternate Eligible Content (AECs) by Item Code, Content Category, and Tier</strong><br />
 In English Language Arts, four categories of content are included: Literature, Information, Writing, and language. In Mathematics, four content categories are included: numbers and operations, operations and algebra, geometry, and measurement and data. In Science, four categories of content are included: natural science, biology. Physics, and earth-space. In all grades, these items are one of four types (Anchor, LT1, LT2, and Unique) and used in either Tier 1 and/or Tier 2.</p>
@@ -487,7 +505,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
