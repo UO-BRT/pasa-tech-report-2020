@@ -5,6 +5,7 @@ date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output:
   html_document:
     toc: true
+    toc_depth: 5
     toc_float: true
 ---
 
@@ -48,9 +49,10 @@ math <- read_csv(here::here("data", "score", "Scoring_Math_Final_2020.csv")) %>%
 
 science <- read_csv(here::here("data", "score", "Scoring_Science_Final_2020.csv")) %>%
   clean_names()
+
 ```
 
-# 7.1 Conditional Standard Errors 
+# Conditional Standard Errors 
 
 The average standard error of measurement (SEM) associated with each proficiency
 level cut score for 2019-20 student data are presented in the tables below. 
@@ -87,12 +89,12 @@ se_table <- cut_score %>%
                names_sep = "_",
                values_to = "val") %>%
   mutate(
-    cutt = recode(cutt,
+    cutt = dplyr::recode(cutt,
                   cut1 = "Novice - Emerging",
                   cut2 = "Emerging - Proficient",
                   cut3 = "Proficient - Advanced"),
     cutt = fct_relevel(cutt, "Novice - Emerging", "Emerging - Proficient"),
-    content = recode(content,
+    content = dplyr::recode(content,
                      ela = "ELA",
                      math = "Math",
                      science = "Science")) %>% 
@@ -105,29 +107,69 @@ se_table <- cut_score %>%
          `Cut Score` = cut,
          SE = se) %>% 
   arrange(content, Grade, Tier, `Proficency Level Cut`) %>% 
-  split(.$content) %>%
-  map(~ungroup(.) %>% select(-content))
 
-walk2(se_table,
-      paste0(c("ELA", "Math", "Science"),
-             " Conditional Standard Errors"),
-      ~knitr::kable(.x, 
-                    caption = .y) %>%
-        kable_styling(full_width = TRUE,
-                      latex_options = "hold_position") %>%
-        print())
+group_by(content, Grade, Tier) %>% 
+  nest() %>% 
+  mutate(tble = map(data, 
+                    ~knitr::kable(.x, booktabs = TRUE) %>% 
+                      kable_styling(full_width = TRUE)))
 ```
 
-# 7.2 Accuracy & Consistency
+## English/Language Arts (ELA)
+
+```{r, results="asis"}
+
+ela_se <- se_table %>% 
+  filter(content == "ELA")
+
+pwalk(list(ela_se$Grade, ela_se$Tier, ela_se$tble), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+
+```
+
+## Mathematics
+
+```{r, results="asis"}
+
+math_se <- se_table %>% 
+  filter(content == "Math")
+
+pwalk(list(math_se$Grade, math_se$Tier, math_se$tble), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+
+```
+
+## Science
+
+```{r, results="asis"}
+
+science_se <- se_table %>% 
+  filter(content == "Science")
+
+pwalk(list(science_se$Grade, science_se$Tier, science_se$tble), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+
+```
+
+# Accuracy & Consistency
 
 ```{r classification_accuracy}
-# p_files <- fs::dir_ls(here::here("data", "item-estimates"))
-
 # theta and SE from p_files
 
 i_files <- fs::dir_ls(here::here("data", "item-estimates"))
 
- 
 i <- map_df(i_files, read_csv, .id = "file") %>%
   mutate(file = gsub(here::here("data", "item-estimates"), "", file),
          grade = as.numeric(gsub(".+g(\\d?\\d).+", "\\1", file)),
@@ -174,11 +216,11 @@ acc_con <- cuts_join %>%
          accuracy = map_dbl(marginal, 1),
          consistency = map_dbl(marginal, 2)) %>% 
   select(content, grade, tier, amo_lvl, accuracy, consistency) %>%
-  mutate(content = recode(content,
+  mutate(content = dplyr::recode(content,
                      ela = "ELA",
                      math = "Math",
                      science = "Science"),
-         amo_lvl = recode(amo_lvl,
+         amo_lvl = dplyr::recode(amo_lvl,
                   Emerging = "Novice - Emerging",
                   Proficient = "Emerging - Proficient",
                   Advanced = "Proficient - Advanced"),
@@ -191,8 +233,11 @@ acc_con <- cuts_join %>%
   arrange(content, Grade, Tier, `Proficency Level Cut`)
   
 acc_con_tbls <- acc_con %>%   
-  split(.$content) %>%
-  map(~ungroup(.) %>% select(-content))
+  group_by(content, Grade, Tier) %>% 
+  nest() %>% 
+  mutate(tble = map(data, 
+                    ~knitr::kable(.x, booktabs = TRUE) %>% 
+                      kable_styling(full_width = TRUE)))
 ```
 
 Results from the 2019-20 PASA test administration were analyzed using Rudner's
@@ -207,17 +252,52 @@ are provided below. Please note that in cases in which there were no students in
 
 Results indicate moderate to high levels of classification Accuracy (`r format(round(max(acc_con$Accuracy), 2), nsmall = 1)` to `r round(max(acc_con$Accuracy), 2)`) and Consistency (`r round(min(acc_con$Consistency), 2)` to `r format(round(max(acc_con$Consistency), 2), nsmall = 1)`).
 
-```{r classification_accuracy_table, results="asis"}
-walk2(acc_con_tbls,
-      paste0(c("ELA", "Math", "Science"),
-             " Accuracy & Consistency"),
-      ~knitr::kable(.x, 
-                    caption = .y,
-                    digits = 2) %>%
-        kable_styling(full_width = TRUE,
-                      latex_options = "hold_position") %>%
-        print())
+## English/Language Arts (ELA)
+
+```{r, results="asis"}
+
+ela_acc <- acc_con_tbls %>% 
+  filter(content == "ELA")
+
+pwalk(list(ela_acc$Grade, ela_acc$Tier, ela_acc$tble), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+
 ```
 
+## Mathematics
+
+```{r, results="asis"}
+
+math_acc <- acc_con_tbls %>% 
+  filter(content == "Math")
+
+pwalk(list(math_acc$Grade, math_acc$Tier, math_acc$tble), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+
+```
+
+## Science
+
+```{r, results="asis"}
+
+science_acc <- acc_con_tbls %>% 
+  filter(content == "Science")
+
+pwalk(list(science_acc$Grade, science_acc$Tier, science_acc$tble), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+
+```
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
