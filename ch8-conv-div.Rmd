@@ -1,14 +1,17 @@
 ---
-title: "Chapter 8"
-subtitle: "Convergent/Divergent Validity"
+title: "Chapter 8: Convergent/Divergent Validity"
 author: "BRT"
 date: "`r format(Sys.Date(), '%m-%d-%Y')`"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
 ---
 
-\captionsetup[table]{labelformat=empty}
-
 ```{r setup, include=FALSE}
+#\captionsetup[table]{labelformat=empty}
+
 knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
                       message = FALSE)
@@ -45,13 +48,14 @@ demos <- rio::import(here("data", "score", "Assessment_Scoring_Data_ELA_final.xl
   as_tibble() %>%
   clean_names() %>%
   select(student_id, disability, gender, ethnicity, lep, fr_lunch)
-```
 
-# Convergent and Divergent Validity Documentation Based on Relations Among Content Areas
+```
 
 To examine convergent and divergent validity evidence, (a) correlations were were conducted to examine the relation between scale scores in the different content areas (ELA with Math, ELA with Science, and Math with Science), and (b) Chi-squared tests of independence were conducted to examine whether performance level scores (i.e., *Advanced*, *Proficient*, *Emerging*, of *Novice*) were independent across content areas at the *p* = .01 significance level. Note that the *p*-values were computed for a Monte Carlo test (Hope, 1968) with 2,000 replicates. 
 
-## 6.1 Correlations Among Content Areas
+We also display histograms of the number of items with no response and the number of items not attempted.
+
+# Correlations Among Content Areas
 
 ```{r, results="asis"}
 
@@ -78,6 +82,8 @@ table_corr <- dta %>%
 
 Correlations for ELA with Math ranged from `r round(min(table_corr$'ELA with Math'), 2)` to `r round(max(table_corr$'ELA with Math'), 2)`, correlations for ELA with Science ranged from `r round(min(table_corr$'ELA with Science', na.rm = TRUE), 2)` to `r round(max(table_corr$'ELA with Science', na.rm = TRUE), 2)`, and correlations for Math with Science ranged from `r round(min(table_corr$'Math with Science', na.rm = TRUE), 2)` to `r round(max(table_corr$'Math with Science', na.rm = TRUE), 2)`. Please see Table 6.1.1. Across grades, correlations are almost always higher for Tier 1 than Tier 2 (except Grades 8 ELA with Math, and all Grade 11 correlations). Across Grades 4, 8 and 11, correlations for ELA with Science were higher than correlations for Math with Science.
 
+## Correlations between Content Areas by Grade and Tier
+
 ```{r, results="asis"}
 
 table_corr %>% 
@@ -85,18 +91,16 @@ table_corr %>%
          Tier = factor(Tier)) %>% 
   mutate_at(vars(contains("with")), ~numform::f_num(., 2)) %>% 
   mutate_at(vars(contains("with")), ~replace_na(., "--")) %>%
-  kable(., digits = 2, #booktabs = TRUE,
-        caption = "Table 6.1.1. Correlations between Content Areas by Grade and Tier") %>% 
+  kable(., digits = 2, booktabs = TRUE) %>% 
    kable_styling(full_width = TRUE)
 ```
 
-## 6.2 Chi-squared Tests of Independence for Performance Levels Among Content Areas
+# Chi-squared Tests of Independence for Performance Levels Among Content Areas
 
-Across grades and tiers, all Chi-squared tests of independence were statistically significant, except Grade 4, Tier 2 ELA - Science. Thus, in general, performance level scores in one content area were not independent of performance level scores in another content area. Please see tables....
+Across grades and tiers, all Chi-squared tests of independence were statistically significant, except Grade 4, Tier 2 ELA - Science. Thus, in general, performance level scores in one content area were not independent of performance level scores in another content area. 
 
 
 ```{r, results="asis"}
-
 contigency_tables <- dta %>%
   nest(data = -c(grade, tier)) %>% 
   arrange(grade) %>% 
@@ -141,6 +145,15 @@ cont_table_MS_fx <- function(mat, title, nocol){
   kable_styling(full_width = TRUE)
 }
 
+<<<<<<< Updated upstream
+=======
+
+```
+
+## English/Language Arts (ELA) - Mathematics
+
+```{r, results="asis"}
+>>>>>>> Stashed changes
 # ELA-Math
 ela_math_contingency <- contigency_tables %>% 
   select(Grade = grade, Tier = tier, `ELA and Math`) %>% 
@@ -155,18 +168,32 @@ ela_math_contingency %>%
   select(Grade, Tier, `Chi-Square` = ELA_Math_chisquare, `p-value` = ELA_Math_pvalue) %>% 
   mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
   kable(., digits = 2, booktabs = TRUE,
-        caption = "Table 6.2.1. ELA - Math Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
+        caption = "ELA - Math Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
   kable_styling(full_width = TRUE)
+```
+
+### Performance Level Matrices
+
+```{r, results="asis"}
 
 ela_math_cont_tables <- ela_math_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(2, length.out = 14, by = 1)),
-         title = glue::glue("Table {t_no}. ELA - Math Performance Matrix for Grade {Grade} Tier {Tier}"),
+         title = glue::glue("ELA - Math Performance Matrix for Grade {Grade} Tier {Tier}"),
          nocol = map_dbl(`ELA and Math`, ~ncol(.) - 1),
          tables = pmap(list(`ELA and Math`, title, nocol),
                        cont_table_EM_fx))
 
-walk(ela_math_cont_tables$tables, print)
+pwalk(list(ela_math_cont_tables$Grade, ela_math_cont_tables$Tier, ela_math_cont_tables$tables), ~{ 
+  cat("\n",
+      paste("#### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+```
 
+## English/Language Arts (ELA) - Science
+
+```{r, results="asis"}
 ## ELA-Science
 ela_science_contingency <- contigency_tables %>%
   select(Grade = grade, Tier = tier, `ELA and Science`) %>%
@@ -183,18 +210,31 @@ ela_science_contingency %>%
   select(Grade, Tier, `Chi-Square` = ELA_Science_chisquare, `p-value` = ELA_Science_pvalue) %>% 
   mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
   kable(., digits = 2, booktabs = TRUE,
-        caption = "Table 6.2.16. ELA - Science Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
+        caption = "ELA - Science Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
   kable_styling(full_width = TRUE)
+```
 
+### Performance Level Matrices
+
+```{r, results="asis"}
 ela_science_cont_tables <- ela_science_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(17, length.out = 6, by = 1)),
-         title = glue::glue("Table {t_no}. ELA - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
+         title = glue::glue("ELA - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
          nocol = map_dbl(`ELA and Science`, ~ncol(.) - 1),
          tables = pmap(list(`ELA and Science`, title, nocol),
                        cont_table_ES_fx))
 
-walk(ela_science_cont_tables$tables, print)
+pwalk(list(ela_science_cont_tables$Grade, ela_science_cont_tables$Tier, ela_science_cont_tables$tables), ~{ 
+  cat("\n",
+      paste("#### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+```
 
+## Mathematics - Science
+
+```{r, results="asis"}
 # Math-Science
 math_science_contingency <- contigency_tables %>%
   select(Grade = grade, Tier = tier, `Math and Science`) %>%
@@ -210,21 +250,31 @@ math_science_contingency %>%
   select(Grade, Tier, `Chi-Square` = Math_Science_chisquare, `p-value` = Math_Science_pvalue) %>% 
   mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
   kable(., digits = 2, booktabs = TRUE,
-        caption = "Table 6.2.23. Math - Science Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
+        caption = "Math - Science Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
   kable_styling(full_width = TRUE)
+```
 
+### Performance Level Matrices
+
+```{r, results="asis"}
 math_science_cont_tables <- math_science_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(24, length.out = 6, by = 1)),
-         title = glue::glue("Table {t_no}. Math - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
+         title = glue::glue("Math - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
          nocol = map_dbl(`Math and Science`, ~ncol(.) - 1),
          tables = pmap(list(`Math and Science`, title, nocol),
                        cont_table_MS_fx))
 
-walk(math_science_cont_tables$tables, print)
+pwalk(list(math_science_cont_tables$Grade, math_science_cont_tables$Tier, math_science_cont_tables$tables), ~{ 
+  cat("\n",
+      paste("#### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
 ```
 
-```{r}
+# Number of Items with No Response or Not Attempted
 
+```{r}
 dens_noresp_fx <- function(data, fillx, tierx, subtitlex){
   data %>% 
     filter(no_resp > 0) %>% 
@@ -312,6 +362,7 @@ figs_final <- figs_all %>%
     names_to = "item",
     names_prefix = "fig_",
     values_to = "figures"
+<<<<<<< Updated upstream
   ) %>%
   ungroup() %>%
   mutate(title = paste0("Figure 6.2.2.", seq(1, length.out = 34, by = 1)),
@@ -320,10 +371,56 @@ figs_final <- figs_all %>%
                          plot_annotation(
                            title = .y
                          )))
+=======
+  ) %>% 
+  mutate(type = ifelse(item == "noresp", "- No Response", "- Not Attempted"))
+```
+>>>>>>> Stashed changes
 
-walk(figs_final$figures, print)
+## English/Language Arts (ELA)
 
+<<<<<<< Updated upstream
 #htmltools::tagList(figs_final$figures)
+=======
+```{r, results="asis"}
+ela_figs <- figs_final %>% 
+  filter(subject == "ELA")
+
+pwalk(list(ela_figs$grade, ela_figs$type, ela_figs$figures), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+```
+
+## Mathematics
+
+```{r, results="asis"}
+math_figs <- figs_final %>% 
+  filter(subject == "Math")
+
+pwalk(list(math_figs$grade, math_figs$type, math_figs$figures), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+```
+
+## Science
+
+```{r, results="asis"}
+science_figs <- figs_final %>% 
+  filter(subject == "Science")
+
+pwalk(list(science_figs$grade, science_figs$type, science_figs$figures), ~{ 
+  cat("\n",
+      paste("### Grade", ..1, "Tier", ..2),
+      sep = "\n")
+  print(..3)
+})
+>>>>>>> Stashed changes
 ```
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
