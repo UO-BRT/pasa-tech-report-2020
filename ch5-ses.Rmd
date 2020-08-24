@@ -89,12 +89,12 @@ se_table <- cut_score %>%
                names_sep = "_",
                values_to = "val") %>%
   mutate(
-    cutt = recode(cutt,
+    cutt = dplyr::recode(cutt,
                   cut1 = "Novice - Emerging",
                   cut2 = "Emerging - Proficient",
                   cut3 = "Proficient - Advanced"),
     cutt = fct_relevel(cutt, "Novice - Emerging", "Emerging - Proficient"),
-    content = recode(content,
+    content = dplyr::recode(content,
                      ela = "ELA",
                      math = "Math",
                      science = "Science")) %>% 
@@ -217,11 +217,11 @@ acc_con <- cuts_join %>%
          accuracy = map_dbl(marginal, 1),
          consistency = map_dbl(marginal, 2)) %>% 
   select(content, grade, tier, amo_lvl, accuracy, consistency) %>%
-  mutate(content = recode(content,
+  mutate(content = dplyr::recode(content,
                      ela = "ELA",
                      math = "Math",
                      science = "Science"),
-         amo_lvl = recode(amo_lvl,
+         amo_lvl = dplyr::recode(amo_lvl,
                   Emerging = "Novice - Emerging",
                   Proficient = "Emerging - Proficient",
                   Advanced = "Proficient - Advanced"),
