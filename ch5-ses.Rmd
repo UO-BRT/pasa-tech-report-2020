@@ -116,7 +116,6 @@ walk2(se_table,
         kable_styling(full_width = TRUE,
                       latex_options = "hold_position") %>%
         print())
-
 ```
 
 # 7.2 Accuracy & Consistency
@@ -165,7 +164,6 @@ abils <- p %>%
 
 cuts_join <- left_join(cuts_i, abils)
 
-
 acc_con <- cuts_join %>%
   filter(!is.infinite(cutscore)) %>% 
   mutate(theta = map(persons, "Theta"),
@@ -205,7 +203,7 @@ calculation utilizes item difficulty and (student ability) theta value
 distributions, as well as related standard errors of measurement (SEM), to
 generate probabilistic estimates based on one test administration. Complete
 results for each content area and grade, generated from the `cacIRT` package in R,
-are provided below. Please not that in cases in which there were no students in a proficiency level in a grade/tier, results cannot be reported.
+are provided below. Please note that in cases in which there were no students in a proficiency level in a grade/tier, results cannot be reported.
 
 Results indicate moderate to high levels of classification Accuracy (`r format(round(max(acc_con$Accuracy), 2), nsmall = 1)` to `r round(max(acc_con$Accuracy), 2)`) and Consistency (`r round(min(acc_con$Consistency), 2)` to `r format(round(max(acc_con$Consistency), 2), nsmall = 1)`).
 
@@ -219,7 +217,6 @@ walk2(acc_con_tbls,
         kable_styling(full_width = TRUE,
                       latex_options = "hold_position") %>%
         print())
-
 ```
 
 

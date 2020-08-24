@@ -35,7 +35,7 @@ In this chapter, plots of PASA item difficulty and person ability (theta) are pa
 
 Generally, the plots shown suggest that most tests had an appropriate range of item difficulties represented, from easy to difficult, with item difficulties typically ranging between -4.0 and +4.0 on the calibrated scale, and that these ranges overlapped appropriately with person ability distributions. However, two general exceptions are notable: (1) some tests showed a mismatch in item difficulty-person ability whereby the two distributions have substantial areas of non-overlap, while (2) other tests contained "outlier items" with have an estimated difficulty far below or far above the estimated person distributions. 
 
-## Non-Overlap in Item-Person Distrbutions
+## Non-Overlap in Item-Person Distributions
 Grade 3, ELA, Tier 1 is an example of the first exception to the generally appropriate ranges and overlap observed. All but a single item ranges between about -1.0 and 0.0 on the calibrated scale as compared to the person ability distribution plotted just below that ranges from approximately -2.5 to 2.0 on the same scale. In this example, about half of the students who took the Grade 3, ELA, Tier 1 test had an ability above all estimated item difficulties (except for a single outlier item at the far-high-end of the observed range in difficulty). Tests in which items were generally *too easy* relative to person ability include: 
 
 - Grade 3, ELA, Tier 1 <br>
@@ -61,7 +61,6 @@ With respect to the second exception, some tests had one or more "outlier items"
 - Item M05AT2.1.3a-9 (estimated difficulty of 24.44 on the Grade 5, Math, Tier 1 test)
 
 **Recommendation:** For future test administrations, the two items removed for analyses, and other items with similarly out-of-range estimated difficulties, should likely be examined and either revised to bring them closer in line with typical person ability ranges, or discarded/replaced.
-
 
 
 ```{r load-data, echo = FALSE}
@@ -140,7 +139,6 @@ pwalk(list(ela$grade, ela$tier, ela$plot), ~{
       sep = "\n")
   print(..3)
 })
-      
 ```
 
 
@@ -155,7 +153,6 @@ pwalk(list(math$grade, math$tier, math$plot), ~{
       sep = "\n")
   print(..3)
 })
-      
 ```
 
 
@@ -170,7 +167,6 @@ pwalk(list(sci$grade, sci$tier, sci$plot), ~{
       sep = "\n")
   print(..3)
 })
-      
 ```
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
