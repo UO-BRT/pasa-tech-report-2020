@@ -91,9 +91,9 @@ As noted in the Standards for Educational and Psychological Testing, Standard 3.
 
 # English Language Arts
 
-## Sex
+## Gender
 
-Few differences were reported by sex. Most of the student counts, averages, and standard deviations were similar for males and females. In Tier 2, slight difference (half a standard deviation) were present in the earlier (elementary) grades.
+Few differences were reported by gender. Most of the student counts, averages, and standard deviations were similar for males and females. In Tier 2, slight difference (half a standard deviation) were present in the earlier (elementary) grades.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -129,7 +129,7 @@ for (i in 1:14) {
   kable_styling(full_width = F)
 ```
 
-### Appendix (SEX)
+### Appendix (Gender)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 tab <- describeBy(ela3$Scaled.Score, list(ela3$Grade, ela3$Tier, ela3$Gender), mat = T)
@@ -214,7 +214,7 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
-## Free Reduced Lunch
+## Economically Disadvantaged
 
 For the analyses comparing students receiving free and reduced price lunch, slightly higher performances were present for those not receiving such support; this was true across grades and as well as Tiers.
 
@@ -253,7 +253,7 @@ for (i in 1:14) {
   
 ```
 
-### Appendix (FRL)
+### Appendix (Economically Disadvantaged)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -332,7 +332,7 @@ tab %>%
 
 # Mathematics
 
-## Sex
+## Gender
 
 We found more males participating in the PASA than females, sometimes double the number. This was true across grades and Tiers. Furthermore, performance differences were slightly greater for males than females, across grades and Tiers. Both males and females had similar variance (standard deviations).
 
@@ -371,7 +371,7 @@ for (i in 1:14) {
   kable_styling(full_width = F)
 ```
 
-### Appendix (Sex)
+### Appendix (Gender)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -459,7 +459,7 @@ tab %>%
   pack_rows('Grade 11', 25, 28)
 ```
 
-## Free Reduced Lunch
+## Economically Disadvantaged
 
 Students receiving free and reduced price lunch performed comparably to students who did not receive such support. The count of students in both groups was much greater in Tier 1. Though fewer in number (by half), the averages and standard deviations were quite similar with those receiving support often a bit higher (by a half standard deviation).
 
@@ -498,7 +498,7 @@ for (i in 1:14) {
   kable_styling(full_width = F)
 ```
 
-### Appendix (FRL)
+### Appendix (Economically Disadvantaged)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -578,7 +578,7 @@ tab %>%
 
 # Science
 
-## Sex
+## Gender
 
 In most grades and Tiers, far more males than females participated in the Science PASA and for both groups, more students took Tier 2 than Tier 1. Their performance (averages and standard deviations) were comparable.
 
@@ -621,7 +621,7 @@ for (i in 1:6) {
   
 ```
 
-### Appendix (Sex)
+### Appendix (Gender)
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 

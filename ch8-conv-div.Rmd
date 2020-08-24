@@ -28,7 +28,6 @@ library(here)
 theme_set(theme_minimal(base_size = 12) +
             theme(plot.title.position = "plot",
                   legend.position = "right"))
-
 ```
 
 ```{r}
@@ -75,7 +74,6 @@ table_corr <- dta %>%
                                 ~cor(.$math_score, .$science_score, use = "pairwise.complete.obs"))) %>% 
   rename(Grade = grade, Tier = tier) %>% 
   select(-data)
-
 ```
 
 Correlations for ELA with Math ranged from `r round(min(table_corr$'ELA with Math'), 2)` to `r round(max(table_corr$'ELA with Math'), 2)`, correlations for ELA with Science ranged from `r round(min(table_corr$'ELA with Science', na.rm = TRUE), 2)` to `r round(max(table_corr$'ELA with Science', na.rm = TRUE), 2)`, and correlations for Math with Science ranged from `r round(min(table_corr$'Math with Science', na.rm = TRUE), 2)` to `r round(max(table_corr$'Math with Science', na.rm = TRUE), 2)`. Please see Table 6.1.1. Across grades, correlations are almost always higher for Tier 1 than Tier 2 (except Grades 8 ELA with Math, and all Grade 11 correlations). Across Grades 4, 8 and 11, correlations for ELA with Science were higher than correlations for Math with Science.
@@ -142,7 +140,6 @@ cont_table_MS_fx <- function(mat, title, nocol){
   add_header_above(c(" " = 1, "Science" = nocol)) %>% 
   kable_styling(full_width = TRUE)
 }
-
 
 # ELA-Math
 ela_math_contingency <- contigency_tables %>% 
@@ -268,7 +265,6 @@ dens_notatt_fx <- function(data, fillx, tierx, subtitlex){
   }
 }
 
-
 figs_all <- ela %>% 
   select(student_id, grade, tier, no_corr:not_attempted) %>% 
   mutate(subject = "ELA") %>% 
@@ -289,7 +285,6 @@ figs_all <- ela %>%
          subtitle_notatt = glue::glue("Showing {n_notatt} of {N} {tier} students\nwith at least one item not attempted."),
          noresp_fig = pmap(list(data, fill, tier, subtitle_noresp), dens_noresp_fx),
          notatt_fig = pmap(list(data, fill, tier, subtitle_notatt), dens_notatt_fx))
-
 
 figs_final <- figs_all %>% 
   select(grade, tier, subject, noresp_fig, notatt_fig) %>% 
@@ -317,8 +312,8 @@ figs_final <- figs_all %>%
     names_to = "item",
     names_prefix = "fig_",
     values_to = "figures"
-  ) %>% 
-  ungroup() %>% 
+  ) %>%
+  ungroup() %>%
   mutate(title = paste0("Figure 6.2.2.", seq(1, length.out = 34, by = 1)),
          figures = map2(figures, title,
                        ~.x +
@@ -329,7 +324,6 @@ figs_final <- figs_all %>%
 walk(figs_final$figures, print)
 
 #htmltools::tagList(figs_final$figures)
-
 ```
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
