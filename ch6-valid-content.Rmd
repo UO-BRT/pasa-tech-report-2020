@@ -1,5 +1,5 @@
 ---
-title: "Chapter 6: Content Validity"
+title: Chapter 6
 author: "BRT"
 date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output: 
@@ -10,8 +10,10 @@ output:
       collapsed: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Content Validity
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Summary of Validity Based on Content 
@@ -38,5 +40,9 @@ See [Appendix 1.12 (ELA, Mathematics, and Science)](appendix/App1.12_ItemParamet
 
 **Summary of Appendices/Findings.**  The content covered across tiers is sufficient in the number of items to allow the 2019 scale to be used.
 
-
+```{r, include=knitr::is_html_output(), results = "asis"}
+cat('
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+'
+)
+```

@@ -1,7 +1,10 @@
 ---
-title: "Chapter 5: Conditional Standard Errors and Classification Accuracy & Consistency"
+title: Chapter 5
 author: "BRT"
 date: "`r format(Sys.Date(), '%m-%d-%Y')`"
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{tabu}
 output:
   html_document:
     toc: true
@@ -9,7 +12,9 @@ output:
     toc_float: true
 ---
 
-```{r setup, include=FALSE}
+# Conditional Standard Errors and Classification Accuracy & Consistency
+
+```{r include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
                       message = FALSE)
@@ -57,8 +62,7 @@ science <- read_csv(here::here("data", "score", "Scoring_Science_Final_2020.csv"
 The average standard error of measurement (SEM) associated with each proficiency
 level cut score for 2019-20 student data are presented in the tables below. 
 
-```{r stand_error_measure, results="asis"}
-
+```{r }
 cutoff <- p %>%
   mutate(ScaleScore = round(ScaleScore)) %>%
   group_by(tier, grade, content) %>%
@@ -106,19 +110,28 @@ se_table <- cut_score %>%
          `Proficency Level Cut`   = cutt,
          `Cut Score` = cut,
          SE = se) %>% 
-  arrange(content, Grade, Tier, `Proficency Level Cut`) %>% 
+  arrange(content, Grade, Tier, `Proficency Level Cut`) %>%
+  group_by(content, Grade, Tier) %>% 
+  nest() 
+```
 
-group_by(content, Grade, Tier) %>% 
-  nest() %>% 
+```{r eval=knitr::is_latex_output()}
+se_table <- se_table %>% 
   mutate(tble = map(data, 
-                    ~knitr::kable(.x, booktabs = TRUE) %>% 
+                    ~knitr::kable(.x, "latex", booktabs = TRUE) %>% 
                       kable_styling(full_width = TRUE)))
+
+```
+
+```{r eval=knitr::is_html_output()}
+se_table <- se_table %>% 
+  mutate(tble = map(data, 
+                    ~gt::gt(.x)))
 ```
 
 ## English/Language Arts (ELA)
 
 ```{r, results="asis"}
-
 ela_se <- se_table %>% 
   filter(content == "ELA")
 
@@ -234,10 +247,22 @@ acc_con <- cuts_join %>%
   
 acc_con_tbls <- acc_con %>%   
   group_by(content, Grade, Tier) %>% 
-  nest() %>% 
+  nest() 
+```
+
+
+```{r eval=knitr::is_latex_output()}
+acc_con_tbls <- acc_con_tbls %>% 
   mutate(tble = map(data, 
-                    ~knitr::kable(.x, booktabs = TRUE) %>% 
+                    ~knitr::kable(.x, "latex", digits = 2, booktabs = TRUE) %>% 
                       kable_styling(full_width = TRUE)))
+
+```
+
+```{r eval=knitr::is_html_output()}
+acc_con_tbls <- acc_con_tbls %>% 
+  mutate(tble = map(data, 
+                    ~gt::gt(.x)))
 ```
 
 Results from the 2019-20 PASA test administration were analyzed using Rudner's
@@ -300,4 +325,10 @@ pwalk(list(science_acc$Grade, science_acc$Tier, science_acc$tble), ~{
 
 ```
 
+
+```{r, include=identical(knitr:::pandoc_to(), "html"), results = "asis"}
+cat('
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+'
+)
+```
