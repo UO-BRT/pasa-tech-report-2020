@@ -27,6 +27,8 @@ navbar:
       href: ch9-fair-access.html
     - text: Proficiency levels
       href: ch10-pl.html
+    - text: District Participation Rates
+      href: ch11-district-participation.html
   right:
   - icon: fa-github
     href: https://github.com/datalorax/pasa-tech-report-2020
