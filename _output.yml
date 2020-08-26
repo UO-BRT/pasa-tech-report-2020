@@ -1,0 +1,13 @@
+bookdown::gitbook:
+  lib_dir: assets
+  split_by: section+number
+  config:
+    toolbar:
+      position: static
+site: bookdown::bookdown_site
+always_allow_html: true
+documentclass: book
+output:
+  bookdown::pdf_book:
+    latex_engine: xelatex
+    toc: true
