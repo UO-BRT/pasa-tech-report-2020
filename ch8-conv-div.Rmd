@@ -1,7 +1,11 @@
 ---
-title: "Chapter 8: Convergent/Divergent Validity"
+title: Chapter 8
 author: "BRT"
 date: "`r format(Sys.Date(), '%m-%d-%Y')`"
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{float}
+  - \usepackage{tabu}
 output:
   html_document:
     toc: true
@@ -9,7 +13,9 @@ output:
     toc_float: true
 ---
 
-```{r setup, include=FALSE}
+# Convergent/Divergent Validity
+
+```{r include=FALSE}
 #\captionsetup[table]{labelformat=empty}
 
 knitr::opts_chunk$set(echo = FALSE,
@@ -22,6 +28,7 @@ library(corrr)
 library(kableExtra)
 library(patchwork)
 library(here)
+library(gt)
 
 # This chapter requires the following data files:
 # Scoring_ELA_Final_2020.csv
@@ -34,7 +41,6 @@ theme_set(theme_minimal(base_size = 12) +
 ```
 
 ```{r}
-
 ela <- read_csv(here("data", "score", "Scoring_ELA_Final_2020.csv")) %>%
   clean_names()
 
@@ -58,14 +64,13 @@ We also display histograms of the number of items with no response and the numbe
 # Correlations Among Content Areas
 
 ```{r, results="asis"}
-
 dta <- ela %>% 
   select(student_id, grade, tier, ela_plc = plc, ela_score = scaled_score) %>% 
   left_join(select(math, student_id, math_plc = plc, math_score = scaled_score)) %>% 
   left_join(select(science, student_id, science_plc = plc, science_score = scaled_score)) %>% 
   left_join(demos) %>% 
   mutate_at(vars(contains("_plc")), ~ifelse(is.na(.), "Missing", .)) %>% 
-  mutate_at(vars(contains("_plc")), ~fct_relevel(., "Advanced", "Proficient", "Emerging", "Novice", "Missing"))
+  mutate_at(vars(contains("_plc")), ~factor(., levels = c("Advanced", "Proficient", "Emerging", "Novice", "Missing")))
 
 table_corr <- dta %>%
   nest(data = -c(grade, tier)) %>% 
@@ -84,15 +89,28 @@ Correlations for ELA with Math ranged from `r round(min(table_corr$'ELA with Mat
 
 ## Correlations between Content Areas by Grade and Tier
 
-```{r, results="asis"}
-
+```{r, eval = knitr::is_latex_output(), results="asis"}
 table_corr %>% 
   mutate(Grade = factor(Grade),
          Tier = factor(Tier)) %>% 
   mutate_at(vars(contains("with")), ~numform::f_num(., 2)) %>% 
   mutate_at(vars(contains("with")), ~replace_na(., "--")) %>%
-  kable(., digits = 2, booktabs = TRUE) %>% 
+  kable(., "latex", digits = 2, booktabs = TRUE) %>% 
    kable_styling(full_width = TRUE)
+```
+
+
+```{r, eval = knitr::is_html_output(), results="asis"}
+table_corr %>% 
+  mutate(Grade = factor(Grade),
+         Tier = factor(Tier)) %>% 
+  mutate_at(vars(contains("with")), ~numform::f_num(., 2)) %>% 
+  mutate_at(vars(contains("with")), ~replace_na(., "--")) %>%
+  gt::gt()
+```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
 ```
 
 # Chi-squared Tests of Independence for Performance Levels Among Content Areas
@@ -104,91 +122,155 @@ Across grades and tiers, all Chi-squared tests of independence were statisticall
 contigency_tables <- dta %>%
   nest(data = -c(grade, tier)) %>% 
   arrange(grade) %>% 
-  mutate(data = map(data,
+  mutate(data_chisq = map(data,
                     ~mutate_at(., vars(contains("_plc")), ~fct_drop(.))),
-         `ELA and Math` = map(data,
-                              ~tabyl(., ela_plc, math_plc)),# %>% 
-#                                rename(ELA = ela_plc, Missing = NA_)),
-         `ELA and Science` = map(data,
-                              ~tabyl(., ela_plc, science_plc)),# %>% 
-#                                rename(ELA = ela_plc, Missing = NA_)),
-         `Math and Science` = map(data,
+         `ELA and Math chisq` = map(data_chisq,
+                              ~tabyl(., ela_plc, math_plc)),
+         `ELA and Science chisq` = map(data_chisq,
+                              ~tabyl(., ela_plc, science_plc)),
+         `Math and Science chisq` = map(data_chisq,
+                              ~tabyl(., math_plc, science_plc)),
+         `ELA and Math cont` = map(data,
+                              ~tabyl(., ela_plc, math_plc)),
+         `ELA and Science cont` = map(data,
+                              ~tabyl(., ela_plc, science_plc)),
+         `Math and Science cont` = map(data,
                               ~tabyl(., math_plc, science_plc))) %>% 
-#                                rename(Math = math_plc, Missing = NA_))) %>% 
   select(-data) 
+```
 
+```{r eval = knitr::is_html_output}
 cont_table_EM_fx <- function(mat, title, nocol){
   mat %>% 
-  as_tibble() %>% 
-  rename(ELA = 1) %>% 
-  kable(., booktabs = TRUE,
-        caption = title) %>% 
-  add_header_above(c(" " = 1, "Math" = nocol)) %>% 
-  kable_styling(full_width = TRUE)
+    as_tibble() %>% 
+    rename(ELA = 1) %>% 
+    gt() %>% 
+    tab_header(title = title) %>% 
+    tab_spanner(label = "Math",
+                columns = vars(Advanced, Proficient, Emerging, Novice, Missing))
 }
 cont_table_ES_fx <- function(mat, title, nocol){
   mat %>% 
-  as_tibble() %>% 
-  rename(ELA = 1) %>% 
-  kable(., booktabs = TRUE,
-        caption = title) %>% 
-  add_header_above(c(" " = 1, "Science" = nocol)) %>% 
-  kable_styling(full_width = TRUE)
+    as_tibble() %>% 
+    rename(ELA = 1) %>% 
+    gt() %>% 
+    tab_header(title = title) %>% 
+    tab_spanner(label = "Science",
+                columns = vars(Advanced, Proficient, Emerging, Novice, Missing))
 }
 cont_table_MS_fx <- function(mat, title, nocol){
   mat %>% 
-  as_tibble() %>% 
-  rename(Math = 1) %>% 
-  kable(., booktabs = TRUE,
-        caption = title) %>% 
-  add_header_above(c(" " = 1, "Science" = nocol)) %>% 
-  kable_styling(full_width = TRUE)
+    as_tibble() %>% 
+    rename(Math = 1) %>% 
+    gt() %>% 
+    tab_header(title = title) %>% 
+    tab_spanner(label = "Science",
+                columns = vars(Advanced, Proficient, Emerging, Novice, Missing))
 }
-
-<<<<<<< Updated upstream
-=======
-
 ```
+
+```{r eval = knitr::is_latex_output()}
+cont_table_EM_fx <- function(mat, title, nocol){
+  mat %>% 
+    as_tibble() %>% 
+    rename(ELA = 1) %>% 
+    kable("latex", booktabs = TRUE) %>% 
+        add_header_above(c(" " = 1, "Math" = nocol)) %>% 
+        kable_styling(full_width = FALSE,
+                      latex_options = c("HOLD_position"))
+}
+cont_table_ES_fx <- function(mat, title, nocol){
+  mat %>% 
+    as_tibble() %>% 
+    rename(ELA = 1) %>% 
+    kable("latex", booktabs = TRUE) %>% 
+        add_header_above(c(" " = 1, "Science" = nocol)) %>% 
+        kable_styling(full_width = FALSE)
+}
+cont_table_MS_fx <- function(mat, title, nocol){
+  mat %>% 
+    as_tibble() %>% 
+    rename(Math = 1) %>% 
+    kable("latex", booktabs = TRUE) %>% 
+        add_header_above(c(" " = 1, "Science" = nocol)) %>% 
+        kable_styling(full_width = FALSE)
+}
+```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
+```
+
 
 ## English/Language Arts (ELA) - Mathematics
 
 ```{r, results="asis"}
->>>>>>> Stashed changes
 # ELA-Math
 ela_math_contingency <- contigency_tables %>% 
-  select(Grade = grade, Tier = tier, `ELA and Math`) %>% 
-  mutate(ELA_Math_test = map(`ELA and Math`,
+  select(Grade = grade, Tier = tier, `ELA and Math chisq`, `ELA and Math cont`) %>% 
+  mutate(ELA_Math_test = map(`ELA and Math chisq`,
                     ~janitor::chisq.test(., simulate.p.value = TRUE)),
          ELA_Math_chisquare = map_dbl(ELA_Math_test,
                              ~unname(.$statistic)),
          ELA_Math_pvalue = map_dbl(ELA_Math_test,
                           ~round(.$p.value, 3)))
 
+```
+
+```{r eval = knitr::is_html_output()}
+ela_math_contingency %>%
+  select(Grade, Tier, `Chi-Square` = ELA_Math_chisquare, `p-value` = ELA_Math_pvalue) %>% 
+  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`),
+         `Chi-Square` = round(`Chi-Square`, 2)) %>% 
+  gt() %>% 
+  tab_header(title = "ELA - Math Performance Levels Chi-squared Test of Independence by Grade and Tier")
+```
+
+```{r eval = knitr::is_latex_output()}
 ela_math_contingency %>%
   select(Grade, Tier, `Chi-Square` = ELA_Math_chisquare, `p-value` = ELA_Math_pvalue) %>% 
   mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
-  kable(., digits = 2, booktabs = TRUE,
-        caption = "ELA - Math Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
+  kable("latex", digits = 2, booktabs = TRUE) %>% 
   kable_styling(full_width = TRUE)
 ```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
+```
+
 
 ### Performance Level Matrices
 
 ```{r, results="asis"}
-
 ela_math_cont_tables <- ela_math_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(2, length.out = 14, by = 1)),
          title = glue::glue("ELA - Math Performance Matrix for Grade {Grade} Tier {Tier}"),
-         nocol = map_dbl(`ELA and Math`, ~ncol(.) - 1),
-         tables = pmap(list(`ELA and Math`, title, nocol),
+         nocol = map_dbl(`ELA and Math cont`, ~ncol(.) - 1),
+         tables = pmap(list(`ELA and Math cont`, title, nocol),
                        cont_table_EM_fx))
 
-pwalk(list(ela_math_cont_tables$Grade, ela_math_cont_tables$Tier, ela_math_cont_tables$tables), ~{ 
+pwalk(list(ela_math_cont_tables$Grade, 
+           ela_math_cont_tables$Tier, 
+           ela_math_cont_tables$tables), ~{
+  cat("<br/>")
+  cat("\\leavevmode")
+  cat("\\newline")
+  cat("\\newline")
+  cat("\\newline")
   cat("\n",
-      paste("#### Grade", ..1, "Tier", ..2),
+      paste("#### Grade", ..1, "Tier", ..2, "\n"),
       sep = "\n")
+  cat("\\leavevmode")
   print(..3)
 })
+```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
+```
+
+```{r eval = knitr::is_latex_output(), results = "asis"}
+cat("\\newpage")
 ```
 
 ## English/Language Arts (ELA) - Science
@@ -196,22 +278,36 @@ pwalk(list(ela_math_cont_tables$Grade, ela_math_cont_tables$Tier, ela_math_cont_
 ```{r, results="asis"}
 ## ELA-Science
 ela_science_contingency <- contigency_tables %>%
-  select(Grade = grade, Tier = tier, `ELA and Science`) %>%
+  select(Grade = grade, Tier = tier, `ELA and Science chisq`, `ELA and Science cont`) %>%
   filter(Grade == 4 | Grade == 8 | Grade == 11) %>%
-  mutate(ELA_Science_test = map(`ELA and Science`,
+  mutate(ELA_Science_test = map(`ELA and Science chisq`,
                     ~janitor::chisq.test(., simulate.p.value = TRUE)),
          ELA_Science_chisquare = map_dbl(ELA_Science_test,
                              ~unname(.$statistic)),
          ELA_Science_pvalue = map_dbl(ELA_Science_test,
                           ~round(.$p.value, 3))) %>%
   select(-ELA_Science_test)
+```
 
+```{r eval = knitr::is_html_output()}
+ela_science_contingency %>%
+  select(Grade, Tier, `Chi-Square` = ELA_Science_chisquare, `p-value` = ELA_Science_pvalue) %>% 
+  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`),
+         `Chi-Square` = round(`Chi-Square`, 2)) %>% 
+  gt() %>% 
+  tab_header(title = "ELA - Science Performance Levels Chi-squared Test of Independence by Grade and Tier")
+```
+
+```{r eval = knitr::is_latex_output()}
 ela_science_contingency %>%
   select(Grade, Tier, `Chi-Square` = ELA_Science_chisquare, `p-value` = ELA_Science_pvalue) %>% 
   mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
-  kable(., digits = 2, booktabs = TRUE,
-        caption = "ELA - Science Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
+  kable("latex", digits = 2, booktabs = TRUE) %>% 
   kable_styling(full_width = TRUE)
+```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
 ```
 
 ### Performance Level Matrices
@@ -220,16 +316,32 @@ ela_science_contingency %>%
 ela_science_cont_tables <- ela_science_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(17, length.out = 6, by = 1)),
          title = glue::glue("ELA - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
-         nocol = map_dbl(`ELA and Science`, ~ncol(.) - 1),
-         tables = pmap(list(`ELA and Science`, title, nocol),
+         nocol = map_dbl(`ELA and Science cont`, ~ncol(.) - 1),
+         tables = pmap(list(`ELA and Science cont`, title, nocol),
                        cont_table_ES_fx))
 
-pwalk(list(ela_science_cont_tables$Grade, ela_science_cont_tables$Tier, ela_science_cont_tables$tables), ~{ 
+pwalk(list(ela_science_cont_tables$Grade, 
+           ela_science_cont_tables$Tier,   
+           ela_science_cont_tables$tables), ~{ 
+  cat("<br/>")
+  cat("\\leavevmode")
+  cat("\\newline")
+  cat("\\newline")
+  cat("\\newline")
   cat("\n",
       paste("#### Grade", ..1, "Tier", ..2),
       sep = "\n")
+  cat("\\leavevmode")
   print(..3)
 })
+```
+
+```{r eval = knitr::is_latex_output(), results = "asis"}
+cat("\\newpage")
+```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
 ```
 
 ## Mathematics - Science
@@ -237,21 +349,35 @@ pwalk(list(ela_science_cont_tables$Grade, ela_science_cont_tables$Tier, ela_scie
 ```{r, results="asis"}
 # Math-Science
 math_science_contingency <- contigency_tables %>%
-  select(Grade = grade, Tier = tier, `Math and Science`) %>%
+  select(Grade = grade, Tier = tier, `Math and Science chisq`, `Math and Science cont`) %>%
   filter(Grade == 4 | Grade == 8 | Grade == 11) %>%
-  mutate(Math_Science_test = map(`Math and Science`,
+  mutate(Math_Science_test = map(`Math and Science chisq`,
                     ~janitor::chisq.test(., simulate.p.value = TRUE)),
          Math_Science_chisquare = map_dbl(Math_Science_test,
                              ~unname(.$statistic)),
          Math_Science_pvalue = map_dbl(Math_Science_test,
                           ~round(.$p.value, 3)))
+```
 
+```{r eval = knitr::is_html_output()}
+math_science_contingency %>%
+  select(Grade, Tier, `Chi-Square` = Math_Science_chisquare, `p-value` = Math_Science_pvalue) %>% 
+  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`),
+         `Chi-Square` = round(`Chi-Square`, 2)) %>% 
+  gt() %>% 
+  tab_header(title = "Math - Science Performance Levels Chi-squared Test of Independence by Grade and Tier")
+```
+
+```{r eval = knitr::is_latex_output()}
 math_science_contingency %>%
   select(Grade, Tier, `Chi-Square` = Math_Science_chisquare, `p-value` = Math_Science_pvalue) %>% 
   mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
-  kable(., digits = 2, booktabs = TRUE,
-        caption = "Math - Science Performance Levels Chi-squared Test of Independence by Grade and Tier") %>% 
+  kable("latex", digits = 2, booktabs = TRUE) %>% 
   kable_styling(full_width = TRUE)
+```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
 ```
 
 ### Performance Level Matrices
@@ -260,17 +386,28 @@ math_science_contingency %>%
 math_science_cont_tables <- math_science_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(24, length.out = 6, by = 1)),
          title = glue::glue("Math - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
-         nocol = map_dbl(`Math and Science`, ~ncol(.) - 1),
-         tables = pmap(list(`Math and Science`, title, nocol),
+         nocol = map_dbl(`Math and Science cont`, ~ncol(.) - 1),
+         tables = pmap(list(`Math and Science cont`, title, nocol),
                        cont_table_MS_fx))
 
 pwalk(list(math_science_cont_tables$Grade, math_science_cont_tables$Tier, math_science_cont_tables$tables), ~{ 
+  cat("<br/>")
+  cat("\\leavevmode")
+  cat("\\newline")
+  cat("\\newline")
+  cat("\\newline")
   cat("\n",
       paste("#### Grade", ..1, "Tier", ..2),
       sep = "\n")
+  cat("\\leavevmode")
   print(..3)
 })
 ```
+
+```{r eval = knitr::is_html_output(), results = "asis"}
+cat("<br/>")
+```
+
 
 # Number of Items with No Response or Not Attempted
 
@@ -362,7 +499,6 @@ figs_final <- figs_all %>%
     names_to = "item",
     names_prefix = "fig_",
     values_to = "figures"
-<<<<<<< Updated upstream
   ) %>%
   ungroup() %>%
   mutate(title = paste0("Figure 6.2.2.", seq(1, length.out = 34, by = 1)),
@@ -370,18 +506,14 @@ figs_final <- figs_all %>%
                        ~.x +
                          plot_annotation(
                            title = .y
-                         )))
-=======
+                         ))
   ) %>% 
   mutate(type = ifelse(item == "noresp", "- No Response", "- Not Attempted"))
 ```
->>>>>>> Stashed changes
+
 
 ## English/Language Arts (ELA)
 
-<<<<<<< Updated upstream
-#htmltools::tagList(figs_final$figures)
-=======
 ```{r, results="asis"}
 ela_figs <- figs_final %>% 
   filter(subject == "ELA")
@@ -420,7 +552,12 @@ pwalk(list(science_figs$grade, science_figs$type, science_figs$figures), ~{
       sep = "\n")
   print(..3)
 })
->>>>>>> Stashed changes
 ```
 
+
+```{r, include=knitr::is_html_output(), results = "asis"}
+cat('
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+'
+)
+```

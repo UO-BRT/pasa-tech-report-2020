@@ -1,0 +1,114 @@
+---
+title: Chapter 11
+author: "BRT"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{float}
+  - \usepackage{tabu}
+  - \usepackage{longtable}
+output:
+  html_document:
+    toc: false
+---
+
+# School District Participation
+
+```{r include = FALSE}
+library(tidyverse)
+library(here)
+library(kableExtra)
+library(reactable)
+library(janitor)
+knitr::opts_chunk$set(results = "asis",
+                      echo = FALSE,
+                      message = FALSE)
+```
+
+The table below shows the participation in the 2019-2020 PASA ELA, Math, and Science content areas by school district. 
+
+```{r include=knitr::is_html_output()}
+cat("You can click on any column to sort it, use the boxes to filter rows, and the search bar to find specific districts.")
+```
+
+
+```{r, eval = TRUE, echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
+
+enroll_raw <- rio::import(here("data", "score", "PASA Enrollment final 2020.csv")) %>%
+  as_tibble() %>%
+  clean_names() %>%
+  select(tested_district_code, tested_school_code, student_id = pasa_student_id)
+
+enroll <- enroll_raw %>%
+  left_join(rio::import(here("data", "score", "districts and auns.xlsx")) %>%
+  as_tibble() %>%
+  clean_names() %>%
+  rename(tested_district_code = service_provider_aun, district_name = district))
+
+ela <- read_csv(here("data", "score", "Scoring_ELA_Final_2020.csv")) %>%
+  clean_names()
+
+math <- read_csv(here("data", "score", "Scoring_Math_Final_2020.csv")) %>%
+  clean_names()
+
+science <- read_csv(here("data", "score", "Scoring_Science_Final_2020.csv")) %>%
+  clean_names()
+
+district_dta <- ela %>%
+  select(student_id, grade, tier, ela_score = scaled_score) %>%
+  left_join(select(math, student_id, math_score = scaled_score)) %>%
+  left_join(select(science, student_id, science_score = scaled_score)) %>%
+  left_join(enroll)
+
+district_table <- district_dta %>%
+  mutate(ela_tot = sum(!is.na(ela_score)),
+         math_tot = sum(!is.na(math_score)),
+         science_tot = sum(!is.na(science_score))) %>%
+  group_by(district_name) %>%
+  summarise(ela_count = sum(!is.na(ela_score)),
+            ela_pct = ela_count/unique(ela_tot)*100,
+            math_count = sum(!is.na(math_score)),
+            math_pct = math_count/unique(math_tot)*100,
+            science_count = sum(!is.na(science_score)),
+            science_pct = science_count/unique(science_tot)*100) %>%
+  janitor::adorn_totals(where = "row")
+```
+
+
+```{r eval = knitr::is_latex_output()}
+kable(district_table,
+      "latex",
+      digits = 2,
+      booktabs = TRUE,
+      longtable = TRUE, 
+      col.names = c("School District", rep(c("Count", "Percent"), 3))) %>%
+  add_header_above(c(" " = 1, "ELA" = 2, "Math" = 2, "Science" = 2)) %>%
+  kable_styling(latex_options = c("hold_position", "repeat_header")) %>% 
+  column_spec(1, width = "20em")
+```
+
+```{r eval = knitr::is_html_output()}
+reactable(district_table,
+          columns = list(district_name = colDef(name = "School District"),
+                         ela_count = colDef(name = "ELA Count"),
+                         ela_pct = colDef(name = "ELA Percent", 
+                                          format = colFormat(digits = 2)),
+                         math_count = colDef(name = "Math Count"),
+                         math_pct = colDef(name = "Math Percent", 
+                                          format = colFormat(digits = 2)),
+                         science_count = colDef(name = "Science Count"),
+                         science_pct = colDef(name = "Science Percent", 
+                                          format = colFormat(digits = 2))
+                         ),
+          searchable = TRUE,
+          filterable = TRUE
+          )
+```
+
+```{r, include=knitr::is_html_output(), results = "asis"}
+cat('
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+'
+)
+```
+

@@ -1,6 +1,15 @@
 ---
-title: "Pennsylvania Alternate Assessment Technical Report: 2020"
+title: Pennsylvania Alternate Assessment Technical Report
+author: "BRT"
+date: "`r format(Sys.Date(), '%m-%d-%Y')`"
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{float}
+  - \usepackage{tabu}
+  - \usepackage{longtable}
 ---
+
+# PASA 2020
 
 This website houses all the technical documentation for the Pennsylvania Alternate Assessment, 2020. The table below provides a brief overview of the website contents. Following the table is a brief description of the test design and development.
 

@@ -11,9 +11,8 @@
 
 <meta name="author" content="BRT" />
 
-<meta name="date" content="2020-08-20" />
 
-<title>Chapter 8: Proficiency Level Frequencies and Percentages</title>
+<title>Chapter 10</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -252,6 +254,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -259,6 +324,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -327,6 +402,9 @@ $(document).ready(function () {
     <li>
       <a href="ch10-pl.html">Proficiency levels</a>
     </li>
+    <li>
+      <a href="ch11-district-participation.html">District Participation Rates</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -346,913 +424,1415 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Chapter 8: Proficiency Level Frequencies and Percentages</h1>
+<h1 class="title toc-ignore">Chapter 10</h1>
 <h4 class="author">BRT</h4>
-<h4 class="date">2020-08-20</h4>
+<h4 class="date">08-26-2020</h4>
 
 </div>
 
 
+<div id="proficiency-level-frequencies-and-percentages" class="section level1">
+<h1>Proficiency Level Frequencies and Percentages</h1>
+</div>
 <div id="ela" class="section level1">
 <h1>ELA</h1>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:center;">
-Grade
-</th>
-<th style="text-align:center;">
-Tier
-</th>
-<th style="text-align:right;">
-Total
-</th>
-<th style="text-align:right;">
-Emerging
-</th>
-<th style="text-align:right;">
-Novice
-</th>
-<th style="text-align:right;">
-Proficient
-</th>
-<th style="text-align:center;">
-Advanced
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-3
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-1344
-</td>
-<td style="text-align:right;">
-553 (41.1%)
-</td>
-<td style="text-align:right;">
-220 (16.4%)
-</td>
-<td style="text-align:right;">
-483 (35.9%)
-</td>
-<td style="text-align:center;">
-88 (6.5%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-3
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-201
-</td>
-<td style="text-align:right;">
-6 (3.0%)
-</td>
-<td style="text-align:right;">
-37 (18.4%)
-</td>
-<td style="text-align:right;">
-52 (25.9%)
-</td>
-<td style="text-align:center;">
-106 (52.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-1331
-</td>
-<td style="text-align:right;">
-396 (29.8%)
-</td>
-<td style="text-align:right;">
-210 (15.8%)
-</td>
-<td style="text-align:right;">
-297 (22.3%)
-</td>
-<td style="text-align:center;">
-428 (32.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-276
-</td>
-<td style="text-align:right;">
-5 (1.8%)
-</td>
-<td style="text-align:right;">
-8 (2.9%)
-</td>
-<td style="text-align:right;">
-122 (44.2%)
-</td>
-<td style="text-align:center;">
-141 (51.1%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-1077
-</td>
-<td style="text-align:right;">
-353 (32.8%)
-</td>
-<td style="text-align:right;">
-276 (25.6%)
-</td>
-<td style="text-align:right;">
-390 (36.2%)
-</td>
-<td style="text-align:center;">
-58 (5.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-500
-</td>
-<td style="text-align:right;">
-29 (5.8%)
-</td>
-<td style="text-align:right;">
-111 (22.2%)
-</td>
-<td style="text-align:right;">
-218 (43.6%)
-</td>
-<td style="text-align:center;">
-142 (28.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-6
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-985
-</td>
-<td style="text-align:right;">
-345 (35.0%)
-</td>
-<td style="text-align:right;">
-141 (14.3%)
-</td>
-<td style="text-align:right;">
-147 (14.9%)
-</td>
-<td style="text-align:center;">
-352 (35.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-6
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-576
-</td>
-<td style="text-align:right;">
-14 (2.4%)
-</td>
-<td style="text-align:right;">
-78 (13.5%)
-</td>
-<td style="text-align:right;">
-350 (60.8%)
-</td>
-<td style="text-align:center;">
-134 (23.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-7
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-878
-</td>
-<td style="text-align:right;">
-237 (27.0%)
-</td>
-<td style="text-align:right;">
-200 (22.8%)
-</td>
-<td style="text-align:right;">
-214 (24.4%)
-</td>
-<td style="text-align:center;">
-227 (25.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-7
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-751
-</td>
-<td style="text-align:right;">
-30 (4.0%)
-</td>
-<td style="text-align:right;">
-84 (11.2%)
-</td>
-<td style="text-align:right;">
-233 (31.0%)
-</td>
-<td style="text-align:center;">
-404 (53.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-8
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-758
-</td>
-<td style="text-align:right;">
-135 (17.8%)
-</td>
-<td style="text-align:right;">
-265 (35.0%)
-</td>
-<td style="text-align:right;">
-191 (25.2%)
-</td>
-<td style="text-align:center;">
-167 (22.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-8
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-743
-</td>
-<td style="text-align:right;">
-97 (13.1%)
-</td>
-<td style="text-align:right;">
-155 (20.9%)
-</td>
-<td style="text-align:right;">
-263 (35.4%)
-</td>
-<td style="text-align:center;">
-228 (30.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-634
-</td>
-<td style="text-align:right;">
-309 (48.7%)
-</td>
-<td style="text-align:right;">
-68 (10.7%)
-</td>
-<td style="text-align:right;">
-82 (12.9%)
-</td>
-<td style="text-align:center;">
-175 (27.6%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-472
-</td>
-<td style="text-align:right;">
-41 (8.7%)
-</td>
-<td style="text-align:right;">
-28 (5.9%)
-</td>
-<td style="text-align:right;">
-98 (20.8%)
-</td>
-<td style="text-align:center;">
-305 (64.6%)
-</td>
-</tr>
-</tbody>
-</table>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#uvhictfchf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uvhictfchf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uvhictfchf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uvhictfchf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uvhictfchf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uvhictfchf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uvhictfchf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uvhictfchf .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uvhictfchf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#uvhictfchf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uvhictfchf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uvhictfchf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uvhictfchf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#uvhictfchf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uvhictfchf .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uvhictfchf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#uvhictfchf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#uvhictfchf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uvhictfchf .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#uvhictfchf .gt_left {
+  text-align: left;
+}
+
+#uvhictfchf .gt_center {
+  text-align: center;
+}
+
+#uvhictfchf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uvhictfchf .gt_font_normal {
+  font-weight: normal;
+}
+
+#uvhictfchf .gt_font_bold {
+  font-weight: bold;
+}
+
+#uvhictfchf .gt_font_italic {
+  font-style: italic;
+}
+
+#uvhictfchf .gt_super {
+  font-size: 65%;
+}
+
+#uvhictfchf .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="uvhictfchf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Grade</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Tier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Total</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Emerging</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Novice</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Proficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Advanced</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1344</td>
+      <td class="gt_row gt_left">553 (41.1%)</td>
+      <td class="gt_row gt_left">220 (16.4%)</td>
+      <td class="gt_row gt_left">483 (35.9%)</td>
+      <td class="gt_row gt_left">88 (6.5%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">201</td>
+      <td class="gt_row gt_left">6 (3.0%)</td>
+      <td class="gt_row gt_left">37 (18.4%)</td>
+      <td class="gt_row gt_left">52 (25.9%)</td>
+      <td class="gt_row gt_left">106 (52.7%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1331</td>
+      <td class="gt_row gt_left">396 (29.8%)</td>
+      <td class="gt_row gt_left">210 (15.8%)</td>
+      <td class="gt_row gt_left">297 (22.3%)</td>
+      <td class="gt_row gt_left">428 (32.2%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">276</td>
+      <td class="gt_row gt_left">5 (1.8%)</td>
+      <td class="gt_row gt_left">8 (2.9%)</td>
+      <td class="gt_row gt_left">122 (44.2%)</td>
+      <td class="gt_row gt_left">141 (51.1%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">5</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1077</td>
+      <td class="gt_row gt_left">353 (32.8%)</td>
+      <td class="gt_row gt_left">276 (25.6%)</td>
+      <td class="gt_row gt_left">390 (36.2%)</td>
+      <td class="gt_row gt_left">58 (5.4%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">5</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">500</td>
+      <td class="gt_row gt_left">29 (5.8%)</td>
+      <td class="gt_row gt_left">111 (22.2%)</td>
+      <td class="gt_row gt_left">218 (43.6%)</td>
+      <td class="gt_row gt_left">142 (28.4%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">6</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">985</td>
+      <td class="gt_row gt_left">345 (35.0%)</td>
+      <td class="gt_row gt_left">141 (14.3%)</td>
+      <td class="gt_row gt_left">147 (14.9%)</td>
+      <td class="gt_row gt_left">352 (35.7%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">6</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">576</td>
+      <td class="gt_row gt_left">14 (2.4%)</td>
+      <td class="gt_row gt_left">78 (13.5%)</td>
+      <td class="gt_row gt_left">350 (60.8%)</td>
+      <td class="gt_row gt_left">134 (23.3%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">7</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">878</td>
+      <td class="gt_row gt_left">237 (27.0%)</td>
+      <td class="gt_row gt_left">200 (22.8%)</td>
+      <td class="gt_row gt_left">214 (24.4%)</td>
+      <td class="gt_row gt_left">227 (25.9%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">7</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">751</td>
+      <td class="gt_row gt_left">30 (4.0%)</td>
+      <td class="gt_row gt_left">84 (11.2%)</td>
+      <td class="gt_row gt_left">233 (31.0%)</td>
+      <td class="gt_row gt_left">404 (53.8%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">758</td>
+      <td class="gt_row gt_left">135 (17.8%)</td>
+      <td class="gt_row gt_left">265 (35.0%)</td>
+      <td class="gt_row gt_left">191 (25.2%)</td>
+      <td class="gt_row gt_left">167 (22.0%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">743</td>
+      <td class="gt_row gt_left">97 (13.1%)</td>
+      <td class="gt_row gt_left">155 (20.9%)</td>
+      <td class="gt_row gt_left">263 (35.4%)</td>
+      <td class="gt_row gt_left">228 (30.7%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">11</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">634</td>
+      <td class="gt_row gt_left">309 (48.7%)</td>
+      <td class="gt_row gt_left">68 (10.7%)</td>
+      <td class="gt_row gt_left">82 (12.9%)</td>
+      <td class="gt_row gt_left">175 (27.6%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">11</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">472</td>
+      <td class="gt_row gt_left">41 (8.7%)</td>
+      <td class="gt_row gt_left">28 (5.9%)</td>
+      <td class="gt_row gt_left">98 (20.8%)</td>
+      <td class="gt_row gt_left">305 (64.6%)</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <div id="tier-1" class="section level2">
 <h2>Tier 1</h2>
-<p><img src="ch10-pl_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="tier-2" class="section level2">
 <h2>Tier 2</h2>
-<p><img src="ch10-pl_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="math" class="section level1">
 <h1>Math</h1>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:center;">
-Grade
-</th>
-<th style="text-align:center;">
-Tier
-</th>
-<th style="text-align:right;">
-Total
-</th>
-<th style="text-align:right;">
-Emerging
-</th>
-<th style="text-align:right;">
-Novice
-</th>
-<th style="text-align:right;">
-Proficient
-</th>
-<th style="text-align:center;">
-Advanced
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-3
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-1248
-</td>
-<td style="text-align:right;">
-0 (0.0%)
-</td>
-<td style="text-align:right;">
-0 (0.0%)
-</td>
-<td style="text-align:right;">
-170 (13.6%)
-</td>
-<td style="text-align:center;">
-1078 (86.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-3
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-191
-</td>
-<td style="text-align:right;">
-7 (3.7%)
-</td>
-<td style="text-align:right;">
-41 (21.5%)
-</td>
-<td style="text-align:right;">
-88 (46.1%)
-</td>
-<td style="text-align:center;">
-55 (28.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-1227
-</td>
-<td style="text-align:right;">
-294 (24.0%)
-</td>
-<td style="text-align:right;">
-265 (21.6%)
-</td>
-<td style="text-align:right;">
-472 (38.5%)
-</td>
-<td style="text-align:center;">
-196 (16.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-276
-</td>
-<td style="text-align:right;">
-16 (5.8%)
-</td>
-<td style="text-align:right;">
-36 (13.0%)
-</td>
-<td style="text-align:right;">
-120 (43.5%)
-</td>
-<td style="text-align:center;">
-104 (37.7%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-1015
-</td>
-<td style="text-align:right;">
-327 (32.2%)
-</td>
-<td style="text-align:right;">
-243 (23.9%)
-</td>
-<td style="text-align:right;">
-269 (26.5%)
-</td>
-<td style="text-align:center;">
-176 (17.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-5
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-442
-</td>
-<td style="text-align:right;">
-96 (21.7%)
-</td>
-<td style="text-align:right;">
-107 (24.2%)
-</td>
-<td style="text-align:right;">
-155 (35.1%)
-</td>
-<td style="text-align:center;">
-84 (19.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-6
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-922
-</td>
-<td style="text-align:right;">
-362 (39.3%)
-</td>
-<td style="text-align:right;">
-175 (19.0%)
-</td>
-<td style="text-align:right;">
-254 (27.5%)
-</td>
-<td style="text-align:center;">
-131 (14.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-6
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-507
-</td>
-<td style="text-align:right;">
-35 (6.9%)
-</td>
-<td style="text-align:right;">
-87 (17.2%)
-</td>
-<td style="text-align:right;">
-165 (32.5%)
-</td>
-<td style="text-align:center;">
-220 (43.4%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-7
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-878
-</td>
-<td style="text-align:right;">
-330 (37.6%)
-</td>
-<td style="text-align:right;">
-209 (23.8%)
-</td>
-<td style="text-align:right;">
-164 (18.7%)
-</td>
-<td style="text-align:center;">
-175 (19.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-7
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-628
-</td>
-<td style="text-align:right;">
-9 (1.4%)
-</td>
-<td style="text-align:right;">
-163 (26.0%)
-</td>
-<td style="text-align:right;">
-247 (39.3%)
-</td>
-<td style="text-align:center;">
-209 (33.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-8
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-709
-</td>
-<td style="text-align:right;">
-0 (0.0%)
-</td>
-<td style="text-align:right;">
-0 (0.0%)
-</td>
-<td style="text-align:right;">
-179 (25.2%)
-</td>
-<td style="text-align:center;">
-530 (74.8%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-8
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-660
-</td>
-<td style="text-align:right;">
-129 (19.5%)
-</td>
-<td style="text-align:right;">
-197 (29.8%)
-</td>
-<td style="text-align:right;">
-312 (47.3%)
-</td>
-<td style="text-align:center;">
-22 (3.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-609
-</td>
-<td style="text-align:right;">
-0 (0.0%)
-</td>
-<td style="text-align:right;">
-0 (0.0%)
-</td>
-<td style="text-align:right;">
-559 (91.8%)
-</td>
-<td style="text-align:center;">
-50 (8.2%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-428
-</td>
-<td style="text-align:right;">
-2 (0.5%)
-</td>
-<td style="text-align:right;">
-54 (12.6%)
-</td>
-<td style="text-align:right;">
-69 (16.1%)
-</td>
-<td style="text-align:center;">
-303 (70.8%)
-</td>
-</tr>
-</tbody>
-</table>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mwntzlpejm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mwntzlpejm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mwntzlpejm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mwntzlpejm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mwntzlpejm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mwntzlpejm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mwntzlpejm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mwntzlpejm .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mwntzlpejm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mwntzlpejm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mwntzlpejm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mwntzlpejm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mwntzlpejm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#mwntzlpejm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwntzlpejm .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mwntzlpejm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mwntzlpejm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mwntzlpejm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mwntzlpejm .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mwntzlpejm .gt_left {
+  text-align: left;
+}
+
+#mwntzlpejm .gt_center {
+  text-align: center;
+}
+
+#mwntzlpejm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mwntzlpejm .gt_font_normal {
+  font-weight: normal;
+}
+
+#mwntzlpejm .gt_font_bold {
+  font-weight: bold;
+}
+
+#mwntzlpejm .gt_font_italic {
+  font-style: italic;
+}
+
+#mwntzlpejm .gt_super {
+  font-size: 65%;
+}
+
+#mwntzlpejm .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="mwntzlpejm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Grade</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Tier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Total</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Emerging</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Novice</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Proficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Advanced</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1248</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+      <td class="gt_row gt_left">170 (13.6%)</td>
+      <td class="gt_row gt_left">1078 (86.4%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">3</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">191</td>
+      <td class="gt_row gt_left">7 (3.7%)</td>
+      <td class="gt_row gt_left">41 (21.5%)</td>
+      <td class="gt_row gt_left">88 (46.1%)</td>
+      <td class="gt_row gt_left">55 (28.8%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1227</td>
+      <td class="gt_row gt_left">294 (24.0%)</td>
+      <td class="gt_row gt_left">265 (21.6%)</td>
+      <td class="gt_row gt_left">472 (38.5%)</td>
+      <td class="gt_row gt_left">196 (16.0%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">276</td>
+      <td class="gt_row gt_left">16 (5.8%)</td>
+      <td class="gt_row gt_left">36 (13.0%)</td>
+      <td class="gt_row gt_left">120 (43.5%)</td>
+      <td class="gt_row gt_left">104 (37.7%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">5</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">1015</td>
+      <td class="gt_row gt_left">327 (32.2%)</td>
+      <td class="gt_row gt_left">243 (23.9%)</td>
+      <td class="gt_row gt_left">269 (26.5%)</td>
+      <td class="gt_row gt_left">176 (17.3%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">5</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">442</td>
+      <td class="gt_row gt_left">96 (21.7%)</td>
+      <td class="gt_row gt_left">107 (24.2%)</td>
+      <td class="gt_row gt_left">155 (35.1%)</td>
+      <td class="gt_row gt_left">84 (19.0%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">6</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">922</td>
+      <td class="gt_row gt_left">362 (39.3%)</td>
+      <td class="gt_row gt_left">175 (19.0%)</td>
+      <td class="gt_row gt_left">254 (27.5%)</td>
+      <td class="gt_row gt_left">131 (14.2%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">6</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">507</td>
+      <td class="gt_row gt_left">35 (6.9%)</td>
+      <td class="gt_row gt_left">87 (17.2%)</td>
+      <td class="gt_row gt_left">165 (32.5%)</td>
+      <td class="gt_row gt_left">220 (43.4%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">7</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">878</td>
+      <td class="gt_row gt_left">330 (37.6%)</td>
+      <td class="gt_row gt_left">209 (23.8%)</td>
+      <td class="gt_row gt_left">164 (18.7%)</td>
+      <td class="gt_row gt_left">175 (19.9%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">7</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">628</td>
+      <td class="gt_row gt_left">9 (1.4%)</td>
+      <td class="gt_row gt_left">163 (26.0%)</td>
+      <td class="gt_row gt_left">247 (39.3%)</td>
+      <td class="gt_row gt_left">209 (33.3%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">709</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+      <td class="gt_row gt_left">179 (25.2%)</td>
+      <td class="gt_row gt_left">530 (74.8%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">660</td>
+      <td class="gt_row gt_left">129 (19.5%)</td>
+      <td class="gt_row gt_left">197 (29.8%)</td>
+      <td class="gt_row gt_left">312 (47.3%)</td>
+      <td class="gt_row gt_left">22 (3.3%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">11</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">609</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+      <td class="gt_row gt_left">559 (91.8%)</td>
+      <td class="gt_row gt_left">50 (8.2%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">11</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">428</td>
+      <td class="gt_row gt_left">2 (0.5%)</td>
+      <td class="gt_row gt_left">54 (12.6%)</td>
+      <td class="gt_row gt_left">69 (16.1%)</td>
+      <td class="gt_row gt_left">303 (70.8%)</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <div id="tier-1-1" class="section level2">
 <h2>Tier 1</h2>
-<p><img src="ch10-pl_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="tier-2-1" class="section level2">
 <h2>Tier 2</h2>
-<p><img src="ch10-pl_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="science" class="section level1">
 <h1>Science</h1>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:center;">
-Grade
-</th>
-<th style="text-align:center;">
-Tier
-</th>
-<th style="text-align:right;">
-Total
-</th>
-<th style="text-align:right;">
-Emerging
-</th>
-<th style="text-align:right;">
-Novice
-</th>
-<th style="text-align:right;">
-Proficient
-</th>
-<th style="text-align:center;">
-Advanced
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-571
-</td>
-<td style="text-align:right;">
-101 (17.7%)
-</td>
-<td style="text-align:right;">
-311 (54.5%)
-</td>
-<td style="text-align:right;">
-159 (27.8%)
-</td>
-<td style="text-align:center;">
-0 (0.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-4
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-841
-</td>
-<td style="text-align:right;">
-9 (1.1%)
-</td>
-<td style="text-align:right;">
-449 (53.4%)
-</td>
-<td style="text-align:right;">
-383 (45.5%)
-</td>
-<td style="text-align:center;">
-0 (0.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-8
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-415
-</td>
-<td style="text-align:right;">
-200 (48.2%)
-</td>
-<td style="text-align:right;">
-143 (34.5%)
-</td>
-<td style="text-align:right;">
-72 (17.3%)
-</td>
-<td style="text-align:center;">
-0 (0.0%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-8
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-893
-</td>
-<td style="text-align:right;">
-35 (3.9%)
-</td>
-<td style="text-align:right;">
-372 (41.7%)
-</td>
-<td style="text-align:right;">
-433 (48.5%)
-</td>
-<td style="text-align:center;">
-53 (5.9%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-1
-</td>
-<td style="text-align:right;">
-308
-</td>
-<td style="text-align:right;">
-54 (17.5%)
-</td>
-<td style="text-align:right;">
-88 (28.6%)
-</td>
-<td style="text-align:right;">
-165 (53.6%)
-</td>
-<td style="text-align:center;">
-1 (0.3%)
-</td>
-</tr>
-<tr>
-<td style="text-align:center;">
-11
-</td>
-<td style="text-align:center;">
-2
-</td>
-<td style="text-align:right;">
-706
-</td>
-<td style="text-align:right;">
-5 (0.7%)
-</td>
-<td style="text-align:right;">
-261 (37.0%)
-</td>
-<td style="text-align:right;">
-396 (56.1%)
-</td>
-<td style="text-align:center;">
-44 (6.2%)
-</td>
-</tr>
-</tbody>
-</table>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mjgftnflsb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mjgftnflsb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mjgftnflsb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mjgftnflsb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mjgftnflsb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mjgftnflsb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mjgftnflsb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mjgftnflsb .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mjgftnflsb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mjgftnflsb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mjgftnflsb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mjgftnflsb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mjgftnflsb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#mjgftnflsb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mjgftnflsb .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mjgftnflsb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mjgftnflsb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mjgftnflsb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mjgftnflsb .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mjgftnflsb .gt_left {
+  text-align: left;
+}
+
+#mjgftnflsb .gt_center {
+  text-align: center;
+}
+
+#mjgftnflsb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mjgftnflsb .gt_font_normal {
+  font-weight: normal;
+}
+
+#mjgftnflsb .gt_font_bold {
+  font-weight: bold;
+}
+
+#mjgftnflsb .gt_font_italic {
+  font-style: italic;
+}
+
+#mjgftnflsb .gt_super {
+  font-size: 65%;
+}
+
+#mjgftnflsb .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="mjgftnflsb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Grade</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Tier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Total</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Emerging</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Novice</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Proficient</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Advanced</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">571</td>
+      <td class="gt_row gt_left">101 (17.7%)</td>
+      <td class="gt_row gt_left">311 (54.5%)</td>
+      <td class="gt_row gt_left">159 (27.8%)</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">4</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">841</td>
+      <td class="gt_row gt_left">9 (1.1%)</td>
+      <td class="gt_row gt_left">449 (53.4%)</td>
+      <td class="gt_row gt_left">383 (45.5%)</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">415</td>
+      <td class="gt_row gt_left">200 (48.2%)</td>
+      <td class="gt_row gt_left">143 (34.5%)</td>
+      <td class="gt_row gt_left">72 (17.3%)</td>
+      <td class="gt_row gt_left">0 (0.0%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">8</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">893</td>
+      <td class="gt_row gt_left">35 (3.9%)</td>
+      <td class="gt_row gt_left">372 (41.7%)</td>
+      <td class="gt_row gt_left">433 (48.5%)</td>
+      <td class="gt_row gt_left">53 (5.9%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">11</td>
+      <td class="gt_row gt_right">1</td>
+      <td class="gt_row gt_right">308</td>
+      <td class="gt_row gt_left">54 (17.5%)</td>
+      <td class="gt_row gt_left">88 (28.6%)</td>
+      <td class="gt_row gt_left">165 (53.6%)</td>
+      <td class="gt_row gt_left">1 (0.3%)</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_right">11</td>
+      <td class="gt_row gt_right">2</td>
+      <td class="gt_row gt_right">706</td>
+      <td class="gt_row gt_left">5 (0.7%)</td>
+      <td class="gt_row gt_left">261 (37.0%)</td>
+      <td class="gt_row gt_left">396 (56.1%)</td>
+      <td class="gt_row gt_left">44 (6.2%)</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <div id="tier-1-2" class="section level2">
 <h2>Tier 1</h2>
-<p><img src="ch10-pl_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="tier-2-2" class="section level2">
 <h2>Tier 2</h2>
-<p><img src="ch10-pl_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="ch10-pl_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
 
 </div>
@@ -1261,6 +1841,8 @@ Advanced
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -1293,6 +1875,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

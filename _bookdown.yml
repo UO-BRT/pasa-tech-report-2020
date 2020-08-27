@@ -1,0 +1,12 @@
+rmd_files: ["index.Rmd", 
+            "ch2-perf-continuum.Rmd", 
+            "ch3-marginal-reliability.Rmd",
+            "ch4-tifs.Rmd",
+            "ch5-ses.Rmd",
+            "ch6-valid-content.Rmd",
+            "ch7-item-fit.Rmd",
+            "ch8-conv-div.Rmd",
+            "ch9-fair-access.Rmd",
+            "ch10-pl.Rmd",
+            "ch11-district-participation.Rmd"
+          ]

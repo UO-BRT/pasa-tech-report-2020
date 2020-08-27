@@ -12,7 +12,7 @@
 <meta name="author" content="BRT" />
 
 
-<title>Chapter 3: Marginal reliability</title>
+<title>Chapter 3</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,9 +20,18 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/core-js-2.5.3/shim.min.js"></script>
+<script src="site_libs/react-16.12.0/react.min.js"></script>
+<script src="site_libs/react-16.12.0/react-dom.min.js"></script>
+<script src="site_libs/reactwidget-1.0.0/react-tools.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/reactable-binding-0.2.0/reactable.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -251,6 +260,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -258,6 +330,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -326,6 +408,9 @@ $(document).ready(function () {
     <li>
       <a href="ch10-pl.html">Proficiency levels</a>
     </li>
+    <li>
+      <a href="ch11-district-participation.html">District Participation Rates</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -345,237 +430,31 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Chapter 3: Marginal reliability</h1>
+<h1 class="title toc-ignore">Chapter 3</h1>
 <h4 class="author">BRT</h4>
-<h4 class="date">8/10/2020</h4>
+<h4 class="date">08-26-2020</h4>
 
 </div>
 
 
+<div id="marginal-reliability" class="section level1">
+<h1>Marginal reliability</h1>
 <p>Marginal reliability is a measure of the overall reliability of a test, within an item response theory (IRT) framework, based on the average standard error conditioned on the range in person ability (or theta). The test information function (or TIF) conveys the precision of the test at any point in the person distribution, with the inverse representing the standard error in measurement. Thus, give this inverse relation, the larger the measurement error at a given theta value, the less information a test yields, typically, at the margins of the person distribution (e.g., extremely low or high scores on a test). The opposite is also true, the smaller the measurement error, the more information a test yields, typically, toward the center of the person distribution. Because measurement error varies across the range in theta based on the TIF, marginal reliability is calculated conditional on both theta and associated standard errors across the range in the calibrated scale. In this chapter, marginal reliability estimates are presented followed by plots of TIF by grade, content area, and tier for all tests comprising the PASA.</p>
 <div id="marginal-reliability-by-content-area-grade-and-tier" class="section level2">
 <h2>Marginal Reliability by Content Area, Grade, and Tier</h2>
 <p>Marginal reliability estimates are generally within acceptable ranges for drawing test-based inferences, with ELA and Math more reliable, on average, than Science. Overall, marginal reliability values range from 0.59 to 0.86 across all content areas, grades, and tiers. For ELA, marginal reliability ranges from 0.78 to 0.86. For Math, marginal reliability ranges from 0.71 to 0.86. And for Science, marginal reliability ranges from 0.59 to 0.74, with the lowest reliability estimated for the Grade 8, Tier 1 (0.59) and Grade 11, Tier 1 (0.64) Science tests.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="right">Grade</th>
-<th align="right">Tier</th>
-<th align="left">Content</th>
-<th align="right">Marginal Reliability</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="left">ela</td>
-<td align="right">0.87</td>
-</tr>
-<tr class="even">
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="left">math</td>
-<td align="right">0.83</td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="right">2</td>
-<td align="left">ela</td>
-<td align="right">0.75</td>
-</tr>
-<tr class="even">
-<td align="right">3</td>
-<td align="right">2</td>
-<td align="left">math</td>
-<td align="right">0.78</td>
-</tr>
-<tr class="odd">
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="left">ela</td>
-<td align="right">0.85</td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="left">math</td>
-<td align="right">0.85</td>
-</tr>
-<tr class="odd">
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="left">science</td>
-<td align="right">0.65</td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">2</td>
-<td align="left">ela</td>
-<td align="right">0.78</td>
-</tr>
-<tr class="odd">
-<td align="right">4</td>
-<td align="right">2</td>
-<td align="left">math</td>
-<td align="right">0.77</td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="right">2</td>
-<td align="left">science</td>
-<td align="right">0.68</td>
-</tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="left">ela</td>
-<td align="right">0.82</td>
-</tr>
-<tr class="even">
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="left">math</td>
-<td align="right">0.84</td>
-</tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="right">2</td>
-<td align="left">ela</td>
-<td align="right">0.75</td>
-</tr>
-<tr class="even">
-<td align="right">5</td>
-<td align="right">2</td>
-<td align="left">math</td>
-<td align="right">0.81</td>
-</tr>
-<tr class="odd">
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="left">ela</td>
-<td align="right">0.86</td>
-</tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="left">math</td>
-<td align="right">0.86</td>
-</tr>
-<tr class="odd">
-<td align="right">6</td>
-<td align="right">2</td>
-<td align="left">ela</td>
-<td align="right">0.73</td>
-</tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="right">2</td>
-<td align="left">math</td>
-<td align="right">0.73</td>
-</tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="left">ela</td>
-<td align="right">0.85</td>
-</tr>
-<tr class="even">
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="left">math</td>
-<td align="right">0.85</td>
-</tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="right">2</td>
-<td align="left">ela</td>
-<td align="right">0.73</td>
-</tr>
-<tr class="even">
-<td align="right">7</td>
-<td align="right">2</td>
-<td align="left">math</td>
-<td align="right">0.76</td>
-</tr>
-<tr class="odd">
-<td align="right">8</td>
-<td align="right">1</td>
-<td align="left">ela</td>
-<td align="right">0.83</td>
-</tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="right">1</td>
-<td align="left">math</td>
-<td align="right">0.79</td>
-</tr>
-<tr class="odd">
-<td align="right">8</td>
-<td align="right">1</td>
-<td align="left">science</td>
-<td align="right">0.59</td>
-</tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="right">2</td>
-<td align="left">ela</td>
-<td align="right">0.73</td>
-</tr>
-<tr class="odd">
-<td align="right">8</td>
-<td align="right">2</td>
-<td align="left">math</td>
-<td align="right">0.73</td>
-</tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="right">2</td>
-<td align="left">science</td>
-<td align="right">0.74</td>
-</tr>
-<tr class="odd">
-<td align="right">11</td>
-<td align="right">1</td>
-<td align="left">ela</td>
-<td align="right">0.83</td>
-</tr>
-<tr class="even">
-<td align="right">11</td>
-<td align="right">1</td>
-<td align="left">math</td>
-<td align="right">0.78</td>
-</tr>
-<tr class="odd">
-<td align="right">11</td>
-<td align="right">1</td>
-<td align="left">science</td>
-<td align="right">0.64</td>
-</tr>
-<tr class="even">
-<td align="right">11</td>
-<td align="right">2</td>
-<td align="left">ela</td>
-<td align="right">0.75</td>
-</tr>
-<tr class="odd">
-<td align="right">11</td>
-<td align="right">2</td>
-<td align="left">math</td>
-<td align="right">0.71</td>
-</tr>
-<tr class="even">
-<td align="right">11</td>
-<td align="right">2</td>
-<td align="left">science</td>
-<td align="right">0.73</td>
-</tr>
-</tbody>
-</table>
+<div id="htmlwidget-e3c152d81f4573a6497f" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-e3c152d81f4573a6497f">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Grade":[3,3,3,3,4,4,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,8,8,11,11,11,11,11,11],"Tier":[1,1,2,2,1,1,1,2,2,2,1,1,2,2,1,1,2,2,1,1,2,2,1,1,1,2,2,2,1,1,1,2,2,2],"Content":["ela","math","ela","math","ela","math","science","ela","math","science","ela","math","ela","math","ela","math","ela","math","ela","math","ela","math","ela","math","science","ela","math","science","ela","math","science","ela","math","science"],"Marginal Reliability":[0.868774752929423,0.834462183432448,0.746653968183836,0.776228905347779,0.845037466903186,0.845421916742493,0.650370705706317,0.777552327376538,0.765074193426583,0.684306718775322,0.823249601525527,0.835043084899514,0.747714152355304,0.812343252937866,0.859323520584491,0.861323060356178,0.732606779353773,0.725994038131975,0.850304269844181,0.845719941138519,0.731139520323036,0.760968333989877,0.834366441853113,0.789810678305093,0.594387147460924,0.726805829721293,0.725618021705994,0.739557965692915,0.828722903556375,0.78025368478708,0.640052035516002,0.746178072107935,0.709212371675113,0.733273860345583]},"columns":[{"accessor":"Grade","name":"Grade","type":"numeric"},{"accessor":"Tier","name":"Tier","type":"numeric"},{"accessor":"Content","name":"Content","type":"character"},{"accessor":"Marginal Reliability","name":"Marginal Reliability","type":"numeric","format":{"cell":{"digits":2},"aggregated":{"digits":2}}}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"a469396326e505ac97a541ffc1445b1d"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;">
+
+</div>
+</div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -608,6 +487,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

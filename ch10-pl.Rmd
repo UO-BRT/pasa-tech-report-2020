@@ -1,12 +1,24 @@
 ---
-title: "Chapter 8: Proficiency Level Frequencies and Percentages"
+title: Chapter 10
 author: "BRT"
 date: "`r format(Sys.Date(), '%m-%d-%Y')`"
-output: html_document
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{float}
+  - \usepackage{tabu}
+output:
+  html_document:
+    toc: yes
+    toc_depth: 5
+    toc_float: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Proficiency Level Frequencies and Percentages
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      results = "asis",
+                      message = FALSE)
 
 require(psych)
 require(knitr)
@@ -14,7 +26,7 @@ require(kableExtra)
 require(car)
 require(here)
 library(ggplot2)
-
+library(gt)
 
 # This chapter requires the following data files in a folder called /score
 
@@ -30,7 +42,7 @@ science <- read.csv(here::here("data", "score", "Scoring_Science_Final_2020.csv"
 
 # ELA
 
-```{r, eval=TRUE,echo=FALSE, results='asis'}
+```{r eval=TRUE, echo=FALSE, results='asis'}
 
 grade <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
 tier  <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
@@ -54,17 +66,22 @@ for (i in 1:nrow(tab)) {
   tab[i,3]   = sum(t)
   tab[i,4:7] = paste0(t,' (',p,')')
 }
-
-
-cat(tab %>% 
-  kable(digits = 2,row.names = FALSE,align = c('c','c','r','r','r','r')) %>%
-    kable_styling(full_width = F) )
 ```
 
 
-```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
+```{r eval = knitr::is_latex_output()}
+tab %>% 
+  kable("latex", booktabs = TRUE, digits = 2, row.names = FALSE,
+        align = c('c','c','r','r','r','r')) %>%
+    kable_styling(full_width = FALSE) 
+```
+
+```{r eval = knitr::is_html_output()}
+gt(tab)
+```
 
 
+```{r eval=TRUE, echo=FALSE, results='asis', message=FALSE, fig.align='center',warning=FALSE}
 grade <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
 tier  <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
 
@@ -126,6 +143,9 @@ ggplot(tab.L[which(tab.L$Tier==2),],
 
 ```
 
+```{r eval = knitr::is_latex_output(), results = "asis"}
+cat("\\newpage")
+```
 
 # Math
 
@@ -153,17 +173,22 @@ for (i in 1:nrow(tab)) {
   tab[i,3]   = sum(t,na.rm=TRUE)
   tab[i,4:7] = paste0(t,' (',p,')')
 }
+```
 
 
-cat(tab %>% 
-  kable(digits = 2,row.names = FALSE,align = c('c','c','r','r','r','r')) %>%
-    kable_styling(full_width = F) )
+```{r eval = knitr::is_latex_output()}
+tab %>% 
+  kable("latex", booktabs = TRUE, digits = 2, row.names = FALSE,
+        align = c('c','c','r','r','r','r')) %>%
+    kable_styling(full_width = FALSE)  
+```
+
+```{r eval = knitr::is_html_output()}
+gt(tab)
 ```
 
 
 ```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
-
-
 grade <- c(3,3,4,4,5,5,6,6,7,7,8,8,11,11)
 tier  <- c(1,2,1,2,1,2,1,2,1,2,1,2,1,2)
 
@@ -226,11 +251,14 @@ ggplot(tab.L[which(tab.L$Tier==2),],
 
 ```
 
+```{r eval = knitr::is_latex_output(), results = "asis"}
+cat("\\newpage")
+```
+
 
 # Science
 
 ```{r, eval=TRUE,echo=FALSE, results='asis'}
-
 grade <- c(4,4,8,8,11,11)
 tier  <- c(1,2,1,2,1,2)
 
@@ -253,17 +281,22 @@ for (i in 1:nrow(tab)) {
   tab[i,3]   = sum(t,na.rm=TRUE)
   tab[i,4:7] = paste0(t,' (',p,')')
 }
+```
 
 
-cat(tab %>% 
-  kable(digits = 2,row.names = FALSE,align = c('c','c','r','r','r','r')) %>%
-    kable_styling(full_width = F) )
+```{r eval = knitr::is_latex_output()}
+tab %>% 
+  kable("latex", booktabs = TRUE, digits = 2, row.names = FALSE,
+        align = c('c','c','r','r','r','r')) %>%
+    kable_styling(full_width = FALSE)  
+```
+
+```{r eval = knitr::is_html_output()}
+gt(tab)
 ```
 
 
 ```{r, eval=TRUE,echo=FALSE, results='asis', message=FALSE,fig.align='center',warning=FALSE}
-
-
 grade <- c(4,4,8,8,11,11)
 tier  <- c(1,2,1,2,1,2)
 
@@ -327,4 +360,9 @@ ggplot(tab.L[which(tab.L$Tier==2),],
 ```
 
 
+```{r, include=knitr::is_html_output(), results = "asis"}
+cat('
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+'
+)
+```

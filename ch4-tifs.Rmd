@@ -1,5 +1,5 @@
 ---
-title: 'Chapter 4: Test information functions'
+title: Chapter 4
 author: "BRT"
 date: "`r format(Sys.Date(), '%m-%d-%Y')`"
 output: 
@@ -9,7 +9,9 @@ output:
     toc_float: true
 ---
 
-```{r setup, include=FALSE}
+# Test information functions
+
+```{r include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       warning = FALSE,
                       message = FALSE)
@@ -21,7 +23,7 @@ theme_set(theme_minimal(base_size = 15) +
                   legend.position = "bottom"))
 ```
 
-```{r load-data}
+```{r}
 p <- here::here("data", "person-estimates") %>% 
   dir_ls() %>% 
   map_df(read_csv, .id = "f") %>% 
@@ -52,7 +54,7 @@ persons_by_test <- p %>%
 
 Below, TIFs are plotted by content area, grade and PASA test tier. The peak (or highest point) in the TIF is the point at which test information is maximized for a given theta (or person ability) estimate. Each plot shows the theta ranges for which marginal reliability is equal to or greater than 0.80 (darker blue area under the TIF) and 0.70 (lighter blue area under the TIF) for the calibrated scale. While many PASA tests provide precise information, with a marginal reliability of at least 0.80, on either side of average person ability (theta = 0; e.g., ELA, Grade 3, Tier 1, and Math, Grade 3, Tier 1), some PASA tests provide more precise information for lower person ability ranges (theta < 0), with less information provided at the higher end of the person ability distribution (e.g., ELA, Grade 3, Tier 2, and Math, Grade 3, Tier 2).
 
-```{r tifs}
+```{r}
 prob <- function(a, b, theta) {
   1 / (1 + exp(-1 * a * (theta - b)))
 } 
@@ -106,7 +108,7 @@ items_by_test <- items_by_test %>%
 
 ## English/Language Arts
 
-```{r ela-plots, results = "asis"}
+```{r results = "asis"}
 ela <- filter(items_by_test, content == "ela")
 
 pwalk(list(ela$grade, ela$tier, ela$plot), ~{ 
@@ -120,7 +122,7 @@ pwalk(list(ela$grade, ela$tier, ela$plot), ~{
 
 ## Mathematics
 
-```{r math-plots, results = "asis"}
+```{r results = "asis"}
 math <- filter(items_by_test, content == "math")
 
 pwalk(list(math$grade, math$tier, math$plot), ~{ 
@@ -134,7 +136,7 @@ pwalk(list(math$grade, math$tier, math$plot), ~{
 
 ## Science
 
-```{r sci-plots, results = "asis"}
+```{r results = "asis"}
 sci <- filter(items_by_test, content == "science")
 
 pwalk(list(sci$grade, sci$tier, sci$plot), ~{ 
@@ -146,4 +148,10 @@ pwalk(list(sci$grade, sci$tier, sci$plot), ~{
 ```
 
 
+
+```{r, include=knitr::is_html_output(), results = "asis"}
+cat('
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+'
+)
+```
