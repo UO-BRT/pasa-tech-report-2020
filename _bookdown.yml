@@ -7,4 +7,6 @@ rmd_files: ["index.Rmd",
             "ch7-item-fit.Rmd",
             "ch8-conv-div.Rmd",
             "ch9-fair-access.Rmd",
-            "ch10-pl.Rmd"]
+            "ch10-pl.Rmd",
+            "ch11-district-participation.Rmd"
+          ]
