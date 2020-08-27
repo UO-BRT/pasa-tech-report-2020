@@ -26,6 +26,7 @@ library(kableExtra)
 library(janitor)
 library(knitr)
 library(here)
+library(gt)
 
 # This chapter requires the following data files:
 # datastore/2020PASA_ScalingAnalysis/par-estimates-2020/person-estimates
@@ -126,7 +127,7 @@ se_table <- se_table %>%
 ```{r eval=knitr::is_html_output()}
 se_table <- se_table %>% 
   mutate(tble = map(data, 
-                    ~gt::gt(.x)))
+                    ~gt(.x)))
 ```
 
 ## English/Language Arts (ELA)
@@ -262,7 +263,9 @@ acc_con_tbls <- acc_con_tbls %>%
 ```{r eval=knitr::is_html_output()}
 acc_con_tbls <- acc_con_tbls %>% 
   mutate(tble = map(data, 
-                    ~gt::gt(.x)))
+                    ~gt(.x) %>% 
+                      fmt_number(columns = vars(Accuracy, Consistency), 
+                                 decimals = 2)))
 ```
 
 Results from the 2019-20 PASA test administration were analyzed using Rudner's

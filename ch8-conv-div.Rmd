@@ -249,6 +249,10 @@ pwalk(list(ela_math_cont_tables$Grade,
            ela_math_cont_tables$Tier, 
            ela_math_cont_tables$tables), ~{
   cat("<br/>")
+  cat("\\leavevmode")
+  cat("\\newline")
+  cat("\\newline")
+  cat("\\newline")
   cat("\n",
       paste("#### Grade", ..1, "Tier", ..2, "\n"),
       sep = "\n")
@@ -259,6 +263,10 @@ pwalk(list(ela_math_cont_tables$Grade,
 
 ```{r eval = knitr::is_html_output(), results = "asis"}
 cat("<br/>")
+```
+
+```{r eval = knitr::is_latex_output(), results = "asis"}
+cat("\\newpage")
 ```
 
 ## English/Language Arts (ELA) - Science
@@ -307,8 +315,14 @@ ela_science_cont_tables <- ela_science_contingency %>%
          tables = pmap(list(`ELA and Science`, title, nocol),
                        cont_table_ES_fx))
 
-pwalk(list(ela_science_cont_tables$Grade, ela_science_cont_tables$Tier, ela_science_cont_tables$tables), ~{ 
+pwalk(list(ela_science_cont_tables$Grade, 
+           ela_science_cont_tables$Tier,   
+           ela_science_cont_tables$tables), ~{ 
   cat("<br/>")
+  cat("\\leavevmode")
+  cat("\\newline")
+  cat("\\newline")
+  cat("\\newline")
   cat("\n",
       paste("#### Grade", ..1, "Tier", ..2),
       sep = "\n")
@@ -372,6 +386,10 @@ math_science_cont_tables <- math_science_contingency %>%
 
 pwalk(list(math_science_cont_tables$Grade, math_science_cont_tables$Tier, math_science_cont_tables$tables), ~{ 
   cat("<br/>")
+  cat("\\leavevmode")
+  cat("\\newline")
+  cat("\\newline")
+  cat("\\newline")
   cat("\n",
       paste("#### Grade", ..1, "Tier", ..2),
       sep = "\n")

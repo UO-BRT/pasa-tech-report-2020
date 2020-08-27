@@ -22,6 +22,7 @@ require(knitr)
 require(kableExtra)
 require(here)
 library(purrr)
+library(gt)
 # Two folders needed under 'data' folder
 
 # /data/ifit, this can be found at this link 
@@ -118,7 +119,9 @@ pwalk(list(ind1, ind2, ifit_e), ~{
       paste("### Grade", ..1, "Tier", ..2),
       sep = "\n")
   
-  print(gt::gt(..3))
+  print(gt(..3) %>% 
+          fmt_number(columns = vars(Discrimination, Difficulty, S_X2), 
+                     decimals = 3))
 })
 ```
 
@@ -194,7 +197,9 @@ pwalk(list(ind1, ind2, ifit_m), ~{
       paste("### Grade", ..1, "Tier", ..2),
       sep = "\n")
   
-  print(gt::gt(..3))
+  print(gt(..3) %>% 
+          fmt_number(columns = vars(Discrimination, Difficulty, S_X2), 
+                     decimals = 3))
 })
 ```
 
@@ -261,7 +266,9 @@ pwalk(list(ind1, ind2, ifit_s), ~{
       paste("### Grade", ..1, "Tier", ..2),
       sep = "\n")
   
-  print(gt::gt(..3))
+  print(gt(..3) %>% 
+          fmt_number(columns = vars(Discrimination, Difficulty, S_X2), 
+                     decimals = 3))
 })
 ```
 
