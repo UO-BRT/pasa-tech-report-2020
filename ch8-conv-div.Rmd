@@ -122,17 +122,20 @@ Across grades and tiers, all Chi-squared tests of independence were statisticall
 contigency_tables <- dta %>%
   nest(data = -c(grade, tier)) %>% 
   arrange(grade) %>% 
-  mutate(#data = map(data,
-          #          ~mutate_at(., vars(contains("_plc")), ~fct_drop(.))),
-         `ELA and Math` = map(data,
-                              ~tabyl(., ela_plc, math_plc)),# %>% 
-#                                rename(ELA = ela_plc, Missing = NA_)),
-         `ELA and Science` = map(data,
-                              ~tabyl(., ela_plc, science_plc)),# %>% 
-#                                rename(ELA = ela_plc, Missing = NA_)),
-         `Math and Science` = map(data,
+  mutate(data_chisq = map(data,
+                    ~mutate_at(., vars(contains("_plc")), ~fct_drop(.))),
+         `ELA and Math chisq` = map(data_chisq,
+                              ~tabyl(., ela_plc, math_plc)),
+         `ELA and Science chisq` = map(data_chisq,
+                              ~tabyl(., ela_plc, science_plc)),
+         `Math and Science chisq` = map(data_chisq,
+                              ~tabyl(., math_plc, science_plc)),
+         `ELA and Math cont` = map(data,
+                              ~tabyl(., ela_plc, math_plc)),
+         `ELA and Science cont` = map(data,
+                              ~tabyl(., ela_plc, science_plc)),
+         `Math and Science cont` = map(data,
                               ~tabyl(., math_plc, science_plc))) %>% 
-#                                rename(Math = math_plc, Missing = NA_))) %>% 
   select(-data) 
 ```
 
@@ -204,8 +207,8 @@ cat("<br/>")
 ```{r, results="asis"}
 # ELA-Math
 ela_math_contingency <- contigency_tables %>% 
-  select(Grade = grade, Tier = tier, `ELA and Math`) %>% 
-  mutate(ELA_Math_test = map(`ELA and Math`,
+  select(Grade = grade, Tier = tier, `ELA and Math chisq`, `ELA and Math cont`) %>% 
+  mutate(ELA_Math_test = map(`ELA and Math chisq`,
                     ~janitor::chisq.test(., simulate.p.value = TRUE)),
          ELA_Math_chisquare = map_dbl(ELA_Math_test,
                              ~unname(.$statistic)),
@@ -217,7 +220,8 @@ ela_math_contingency <- contigency_tables %>%
 ```{r eval = knitr::is_html_output()}
 ela_math_contingency %>%
   select(Grade, Tier, `Chi-Square` = ELA_Math_chisquare, `p-value` = ELA_Math_pvalue) %>% 
-  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
+  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`),
+         `Chi-Square` = round(`Chi-Square`, 2)) %>% 
   gt() %>% 
   tab_header(title = "ELA - Math Performance Levels Chi-squared Test of Independence by Grade and Tier")
 ```
@@ -241,8 +245,8 @@ cat("<br/>")
 ela_math_cont_tables <- ela_math_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(2, length.out = 14, by = 1)),
          title = glue::glue("ELA - Math Performance Matrix for Grade {Grade} Tier {Tier}"),
-         nocol = map_dbl(`ELA and Math`, ~ncol(.) - 1),
-         tables = pmap(list(`ELA and Math`, title, nocol),
+         nocol = map_dbl(`ELA and Math cont`, ~ncol(.) - 1),
+         tables = pmap(list(`ELA and Math cont`, title, nocol),
                        cont_table_EM_fx))
 
 pwalk(list(ela_math_cont_tables$Grade, 
@@ -274,9 +278,9 @@ cat("\\newpage")
 ```{r, results="asis"}
 ## ELA-Science
 ela_science_contingency <- contigency_tables %>%
-  select(Grade = grade, Tier = tier, `ELA and Science`) %>%
+  select(Grade = grade, Tier = tier, `ELA and Science chisq`, `ELA and Science cont`) %>%
   filter(Grade == 4 | Grade == 8 | Grade == 11) %>%
-  mutate(ELA_Science_test = map(`ELA and Science`,
+  mutate(ELA_Science_test = map(`ELA and Science chisq`,
                     ~janitor::chisq.test(., simulate.p.value = TRUE)),
          ELA_Science_chisquare = map_dbl(ELA_Science_test,
                              ~unname(.$statistic)),
@@ -288,7 +292,8 @@ ela_science_contingency <- contigency_tables %>%
 ```{r eval = knitr::is_html_output()}
 ela_science_contingency %>%
   select(Grade, Tier, `Chi-Square` = ELA_Science_chisquare, `p-value` = ELA_Science_pvalue) %>% 
-  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
+  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`),
+         `Chi-Square` = round(`Chi-Square`, 2)) %>% 
   gt() %>% 
   tab_header(title = "ELA - Science Performance Levels Chi-squared Test of Independence by Grade and Tier")
 ```
@@ -311,8 +316,8 @@ cat("<br/>")
 ela_science_cont_tables <- ela_science_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(17, length.out = 6, by = 1)),
          title = glue::glue("ELA - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
-         nocol = map_dbl(`ELA and Science`, ~ncol(.) - 1),
-         tables = pmap(list(`ELA and Science`, title, nocol),
+         nocol = map_dbl(`ELA and Science cont`, ~ncol(.) - 1),
+         tables = pmap(list(`ELA and Science cont`, title, nocol),
                        cont_table_ES_fx))
 
 pwalk(list(ela_science_cont_tables$Grade, 
@@ -344,9 +349,9 @@ cat("<br/>")
 ```{r, results="asis"}
 # Math-Science
 math_science_contingency <- contigency_tables %>%
-  select(Grade = grade, Tier = tier, `Math and Science`) %>%
+  select(Grade = grade, Tier = tier, `Math and Science chisq`, `Math and Science cont`) %>%
   filter(Grade == 4 | Grade == 8 | Grade == 11) %>%
-  mutate(Math_Science_test = map(`Math and Science`,
+  mutate(Math_Science_test = map(`Math and Science chisq`,
                     ~janitor::chisq.test(., simulate.p.value = TRUE)),
          Math_Science_chisquare = map_dbl(Math_Science_test,
                              ~unname(.$statistic)),
@@ -357,7 +362,8 @@ math_science_contingency <- contigency_tables %>%
 ```{r eval = knitr::is_html_output()}
 math_science_contingency %>%
   select(Grade, Tier, `Chi-Square` = Math_Science_chisquare, `p-value` = Math_Science_pvalue) %>% 
-  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`)) %>% 
+  mutate(`p-value` = ifelse(`p-value` < .01, "< .01", `p-value`),
+         `Chi-Square` = round(`Chi-Square`, 2)) %>% 
   gt() %>% 
   tab_header(title = "Math - Science Performance Levels Chi-squared Test of Independence by Grade and Tier")
 ```
@@ -380,8 +386,8 @@ cat("<br/>")
 math_science_cont_tables <- math_science_contingency %>% 
   mutate(t_no = paste0("6.2.", seq(24, length.out = 6, by = 1)),
          title = glue::glue("Math - Science Performance Matrix for Grade {Grade} Tier {Tier}"),
-         nocol = map_dbl(`Math and Science`, ~ncol(.) - 1),
-         tables = pmap(list(`Math and Science`, title, nocol),
+         nocol = map_dbl(`Math and Science cont`, ~ncol(.) - 1),
+         tables = pmap(list(`Math and Science cont`, title, nocol),
                        cont_table_MS_fx))
 
 pwalk(list(math_science_cont_tables$Grade, math_science_cont_tables$Tier, math_science_cont_tables$tables), ~{ 
