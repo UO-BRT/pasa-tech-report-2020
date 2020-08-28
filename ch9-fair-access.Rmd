@@ -94,14 +94,14 @@ ela3$fr_lunch <- ifelse(ela3$fr_lunch == 0,'NO', 'YES')
 math3$fr_lunch <- ifelse(math3$fr_lunch == 0,'NO', 'YES')
 ```
 
-As noted in the Standards for Educational and Psychological Testing, Standard 3.3 specifies that “Those responsible for test development should include relevant subgroups in validity, reliability/precision, and other preliminary studies used when constructing the test” (p. 64). This argument is expanded to include reporting outcomes by relevant subgroups, noting however, that “subgroup differences do not in and of themselves indicate lack of fairness, but such differences should trigger follow-up studies, where feasible, to identify the potential causes of such differences” (p. 65). American Educational Research Association, American Psychological Association, National Council on Measurement in Education (2014). Standards for Educational and Psychological Testing. Washington, DC: Authors. This evaluation was completed by comparing the performance (by subject area, grade level, and Tier) for the following student groups: (a) sex, (b) race-ethnicity, (c) (Limited) English Proficiency, (d) disability, and (e) free-reduced price lunch. This evaluation involved comparing student counts and average differences (using the mean relative to the standard deviation). The tables are displayed in an appendix.  
+As noted in the Standards for Educational and Psychological Testing, Standard 3.3 specifies that “Those responsible for test development should include relevant subgroups in validity, reliability/precision, and other preliminary studies used when constructing the test” (p. 64). This argument is expanded to include reporting outcomes by relevant subgroups, noting however, that “subgroup differences do not in and of themselves indicate lack of fairness, but such differences should trigger follow-up studies, where feasible, to identify the potential causes of such differences” (p. 65). American Educational Research Association, American Psychological Association, National Council on Measurement in Education (2014). Standards for Educational and Psychological Testing. Washington, DC: Authors. This evaluation was completed by comparing the performance (by subject area, grade level, and Tier) for the following student groups: (a) sex, (b) race-ethnicity, (c) Limited English Proficiency, (d) disability, and (e) free-reduced price lunch. This evaluation involved comparing student counts and average differences (using the mean relative to the standard deviation). The tables are displayed in an appendix.  
 
 
 # English Language Arts
 
 ## Gender
 
-Few differences were reported by gender. Most of the student counts, averages, and standard deviations were similar for males and females. In Tier 2, slight difference (half a standard deviation) were present in the earlier (elementary) grades.
+Few differences were reported by gender. Most of the student counts, averages, and standard deviations were similar for males and females. In Tier 2, slight differences (half a standard deviation) were present in the earlier (elementary) grades.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -203,7 +203,7 @@ cat("<br/>")
 
 ## Economically Disadvantaged
 
-For the analyses comparing students receiving free and reduced price lunch, slightly higher performances were present for those not receiving such support; this was true across grades and as well as Tiers.
+For the analyses comparing students receiving free and reduced price lunch, slightly higher performances were present for those not receiving such support; this was true across grades as well as Tiers.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -247,7 +247,7 @@ gt(eff) %>%
   fmt_number(vars(`Cohen's D (No - Yes)`))
 ```
 
-## Disability
+## Primary Disability
 
 Like race-ethnicity (which had many different coded values), the analysis by disability resulted in great variation in counts, averages, and standard deviations. The two most present disabilities were Autism and Intellectual Disabilities, with Multiple Disabilities also quite prominent. This was true for both Tiers and across grade levels. Please see the appendix for descriptive statistics (counts, means, and standard deviations).
 
@@ -312,7 +312,7 @@ cat("<br/>")
 
 ## Limited English Proficiency
 
-Limited English Proficient students, though fewer than the number of students deemed proficient, performed equally as well to those proficient, in all grades and Tiers; the variance in these two groups was comparable.
+Limited English Proficient students, though fewer than the number of students deemed proficient, performed as well to those proficient, in all grades and Tiers; the variance in these two groups was comparable.
 
 ```{r, eval = TRUE, echo = FALSE, results = 'asis'}
 
@@ -415,7 +415,7 @@ gt(eff) %>%
 
 The largest group of students were White, followed by Black/African American, and finally Hispanic students. This was true for all grades and Tiers. Wide variation existed in both the averages and standard deviations. Please see the appendix for descriptive statistics (counts, means, and standard deviations).
 
-## Disability
+## Primary Disability
 
 The largest group of students were with Intellectual Disabilities or Autism, followed by Multiple Disabilities. Great variation was present in averages and standard divisions. Many disabilities had very few students participating in the PASA. Please see the appendix for descriptive statistics (counts, means, and standard deviations).
 
@@ -525,7 +525,7 @@ gt(eff) %>%
 
 The count was greatest with White, then Black-African American, and Hispanic students. Values (averages and standard deviations) were slightly varied across the grades and Tiers but not as much as in ELA and Mathematics. Please see the appendix for descriptive statistics (counts, means, and standard deviations).
 
-## Disability
+## Primary Disability
 
 As in ELA and Mathematics, the count of students was greatest with Autism and Intellectual Disabilities. Performance was somewhat varied (in averaged and standard deviations) across the grades and Tiers. Some disability areas were represented with only a few students, making it difficult to generalize. Please see the appendix for descriptive statistics (counts, means, and standard deviations).
 
@@ -669,7 +669,7 @@ pwalk(list(ela_frl$Grade,
 })
 ```
 
-### Disability
+### Primary Disability
 
 ```{r eval = knitr::is_html_output()}
 pwalk(list(ela_dis$Grade, 
@@ -855,7 +855,7 @@ pwalk(list(math_frl$Grade,
 })
 ```
 
-### Disability
+### Primary Disability
 
 ```{r eval = knitr::is_html_output()}
 pwalk(list(math_dis$Grade, 
@@ -1041,7 +1041,7 @@ pwalk(list(sci_frl$Grade,
 })
 ```
 
-### Disability
+### Primary Disability
 
 ```{r eval = knitr::is_html_output()}
 pwalk(list(sci_dis$Grade, 
